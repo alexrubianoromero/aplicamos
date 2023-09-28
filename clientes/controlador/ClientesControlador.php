@@ -4,7 +4,7 @@ $raiz = dirname(dirname(dirname(__file__)));
 
 // echo $raiz;
 
-// die();
+// die('controlador '.$raiz);
 
 require_once($raiz.'/clientes/vista/ClientesVista.php');
 require_once($raiz.'/clientes/modelo/ClientesModelo.class.php');
@@ -31,7 +31,7 @@ class ClientesControlador{
         $this->conexion = $conexion;
 
         if(!isset($_REQUEST['opcion'])){
-            die('llego aca '); 
+            // die('llego aca '); 
             $this->pantallainicialClientes($conexion = '');
           }
 
@@ -172,7 +172,7 @@ class ClientesControlador{
         //             print_r($vehiculos);
         //             echo '</pre>';
         //             die();
-        // $this->vista->muestreInfoCliente($infoCLiente,$vehiculos);        
+        $this->vista->muestreInfoCliente($infoCLiente);        
         
     }
     

@@ -184,7 +184,7 @@ class CLientesVista extends vista
                   <div id="cuerpoModalClientes" class="modal-body">
                   </div>
                   <div class="modal-footer" id="footerNuevoCliente">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal" onclick = "pantallaClientes();">Cerrar</button>
                       <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                   </div>
                   </div>
@@ -282,7 +282,7 @@ class CLientesVista extends vista
                         <th>IDENTI</th>
                         <th>NOMBRE</th>
                         <th>TELEFONO</th>
-                        <th>WatsApp</th>
+                        <!-- <th>WatsApp</th> -->
                         <!-- <th>DIRECCION</th>
                         <th>EMAIL</th> -->
                     </tr>
@@ -300,7 +300,7 @@ class CLientesVista extends vista
                             echo '</button></td>';
                             echo '<td>'.strtoupper($cli['nombre']).'</td>';
                             echo '<td>'.strtoupper($cli['telefono']).'</td>';
-                            echo '<td><a href="https://web.whatsapp.com/" target="_blank"><img src="../logos/iconowatsapp.jpg" width="25px"></a></td>';
+                            // echo '<td><a href="https://web.whatsapp.com/" target="_blank"><img src="../logos/iconowatsapp.jpg" width="25px"></a></td>';
                             // echo '<td><a href="https://api.whatsapp.com/send?phone=57'.$cli['telefono'].'" target="_blank"><img src="../logos/iconowatsapp.jpg" width="25px">NUevo</a></td>';
                             // echo '<td>'.strtoupper($vehi['direccion']).'</td>';
                             // echo '<td>'.$vehi['email'].'</td>';
@@ -462,7 +462,7 @@ class CLientesVista extends vista
         echo '<div class= "avisoGrabado">La informacion del propietario se guardo de forma exitosa</div>';
     }
 
-    public function muestreInfoCliente($infoCLiente,$vehiculos)
+    public function muestreInfoCliente($infoCLiente)
     {
         ?>
         <div  style="color:black;">
@@ -508,12 +508,8 @@ class CLientesVista extends vista
                 </div>
             </div>
 
-            <div>
-                <label>VEHICULOS CLIENTE</label>
-                <div id="divHistorialVehiculos"></div>
-                <div>
-                        <?php $this->mostrarVehiculosCliente($vehiculos);   ?>
-                </div>
+            <div class="row">
+                
             </div>
 
         </div>

@@ -464,7 +464,7 @@ function buscarClientePorNombre()
         "opcion=buscarClientePorNombre"
         + "&nombre="+nombre
         );
-    }
+}
     
     function busquedaAvanzada()
     {

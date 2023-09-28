@@ -228,7 +228,7 @@ class ClientesModelo extends Conexion
             
   public function buscarClientePorNombre($nombre){
       
-      $sql="select * from cliente0 where nombre like '%".$nombre."%'  "; 
+      $sql="select * from cliente0 where nombre like '%".$nombre."%'  order by idcliente desc"; 
               // echo '<br>'.$sql;
               // die();
       $consulta = mysql_query($sql,$this->connectMysql()); 

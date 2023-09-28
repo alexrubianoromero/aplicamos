@@ -71,8 +71,8 @@ class movilVista{
     <script src="js/bootstrap.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/nuevo.js"></script>
-    <!-- <script src="../orden/js/orden.js"></script>
     <script src="../clientes/js/clientes.js"></script>
+    <!-- <script src="../orden/js/orden.js"></script>
     <script src="../vehiculos/js/vehiculos.js"></script>
     <script src="../inventario_codigos/js/codigosInventario.js"></script>
     <script src="../inventario_codigos/js/movimientos.js"></script>
