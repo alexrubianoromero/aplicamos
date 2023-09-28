@@ -1,10 +1,10 @@
 <?php
 $raiz = dirname(dirname(dirname(__file__)));
 // require_once($raiz.'/hardware/views/hardwareView.php'); 
-require_once($raiz.'/diagnosticoEbAll/models/DiagnosticoEbAllModel.php'); 
+require_once($raiz.'/diagnosticoEbAll/models/diagnosticoEbAllModel.php'); 
 require_once($raiz.'/diagnosticoEbAll/models/ConceptoTableroEbAllModel.php'); 
 require_once($raiz.'/clientes/models/ClienteModel.php'); 
-require_once($raiz.'/diagnosticoEbAll/models/TableroDiagnosticoEbAllModel.php'); 
+require_once($raiz.'/diagnosticoEbAll/models/TablerodiagnosticoEbAllModel.php'); 
 
 class diagnosticoEbAllView
 {
@@ -15,20 +15,20 @@ class diagnosticoEbAllView
 
     public function __construct()
     {
-        $this->model = new DiagnosticoEbAllModel();
+        $this->model = new diagnosticoEbAllModel();
         $this->ClienteModel = new ClienteModel();
         $this->conceptoTableroModel = new ConceptoTableroEbAllModel();
-        $this->tableroDiagnosticoModel = new TableroDiagnosticoEbAllModel();
+        $this->tableroDiagnosticoModel = new TablerodiagnosticoEbAllModel();
     }
 
-    public function pantallaDiagnosticoEbAll()
+    public function pantalladiagnosticoEbAll()
     {
         ?>
-        <div class="row" id="divPantallaDiagEbAll" style="padding:5px;">
-            <div id="botonesDiagEbAll">
+        <div class="row" id="divPantallaDiagEbAp" style="padding:5px;">
+            <div id="botonesDiagEbAp">
                 <div class="row">
                     <div class="col-lg-3 ofset-3">
-                        <button class="btn btn-primary" onclick="formuNuevoDiagnosticoEbAll();">Nuevo Diagnostico </button>  
+                        <button class="btn btn-primary" onclick="formuNuevoDiagnostico();">Nuevo Diagnostico </button>  
                     </div>
                     <div class="col-lg-3 ofset-3">
                         <button class="btn btn-primary" onclick="mostrarDiagnosticos();">Mostrar Diagnosticos </button>  
@@ -36,9 +36,9 @@ class diagnosticoEbAllView
 
                 </div>
             </div>
-            <div class="row mt-3" id="divResultadosDiagEbAll">
+            <div class="row mt-3" id="divResultadosDiagEbAp">
                 <?php
-                     $this->mostrarDiagnosticos();
+                    $this->mostrarDiagnosticos();
                 ?>
             </div>        
 
@@ -63,20 +63,20 @@ class diagnosticoEbAllView
             echo '<td>'.$diagnostico['id'].'</td>';
             echo '<td>'.$diagnostico['fecha'].'</td>';
             echo '<td>'.$infoCLiente['nombre'].'</td>';
-            echo '<td><button class ="btn btn-primary" onclick ="verDiagnosticoEbAll('.$diagnostico['id'].')">Ver</button></td>';
+            echo '<td><button class ="btn btn-primary" onclick ="verDiagnostico('.$diagnostico['id'].')">Ver</button></td>';
             echo '</tr>';    
         }
         echo '</table>';
     }
 
-    
+
     public function formuNuevoDiagnostico()
     {
          $clientes = $this->ClienteModel->traerClientes(); 
        
         ?>
         <div class="row mt-3"  id="div_principal_diagnosticoEbAll">
-            <P>DIAGNOSTICO EQUIPO BOMBEO AGUAS LLUVIAS</P>
+            <P>DIAGNOSTICO EQUIPO BOMBEO AGUA POTABLE</P>
 
             <div class="row">
                 <label for="" class="col-lg-3">
@@ -97,7 +97,7 @@ class diagnosticoEbAllView
             </div>
             <br>
             <div class="row mt-3">
-                <button class ="btn btn-primary" onclick="crearEncabezadoDiagnosticoEbAll();">Continuar</button>
+                <button class ="btn btn-primary" onclick="crearEncabezadodiagnosticoEbAll();">Continuar</button>
             </div>
 
             <!-- <div class="row">
@@ -110,9 +110,9 @@ class diagnosticoEbAllView
         </div>
         <?php
     }
-
     
-    public function mostrarConceptosDiagnosticoEbAll($idDiagnostico)
+    
+    public function mostrarConceptosdiagnosticoEbAll($idDiagnostico)
     {
         $infoDiagnostico = $this->model->traerDiagnosticoId($idDiagnostico); 
         //   echo '<pre>'; 
@@ -137,18 +137,18 @@ class diagnosticoEbAllView
                 <input type="hidden" id="idDiagnostico" name="idDiagnostico" value="<?php echo $idDiagnostico ?>" >
 
                 <?php
-                  $this->formuTablerosEbAll();
+                  $this->formuTablerosEbAp();
                   ?>
             </form>
         </div>
         <div class="row">
-            <!-- <button type="submit" class="btn btn-primary" onclick="grabarDiagnosticoEbAp();">GRABAR DIAGNOSTICO</button> -->
-            <button  class="btn btn-primary" onclick="grabarDiagnosticoEbAll();">GRABAR DIAGNOSTICO</button>
+            <!-- <button type="submit" class="btn btn-primary" onclick="grabardiagnosticoEbAll();">GRABAR DIAGNOSTICO</button> -->
+            <button  class="btn btn-primary" onclick="grabardiagnosticoEbAll();">GRABAR DIAGNOSTICO</button>
         </div>
      <?php               
     }
 
-    public function formuTablerosEbAll()
+    public function formuTablerosEbAp()
     {
         $conceptos = $this->conceptoTableroModel->traerTablerosEbAll()
         ?>
@@ -174,7 +174,7 @@ class diagnosticoEbAllView
                 ?>
                 </table>
         </div>    
-        <!-- <div class="row">
+        <div class="row">
             <div class="col-lg-4">
                 <label>Variador:</label>
                 <input type="checkbox" id="checkVariador" name ="checkVariador">
@@ -214,7 +214,7 @@ class diagnosticoEbAllView
                     <option value="N">No</option>
                 </select>
             </div>
-        </div>       -->
+        </div>      
         <div class="row">
          
             <textarea id="conceptoTecnico" name="conceptoTecnico" class ="form-control" rows="5" placeholder = "   CONCEPTO TECNICO AGUA POTABLE "></textarea>
@@ -222,7 +222,6 @@ class diagnosticoEbAllView
       <?php
     }
 
-    
     public function verDiagnostico($idDiagnostico)
     {
         // echo '<br>NUmero '.$idDiagnostico; 
@@ -255,7 +254,7 @@ class diagnosticoEbAllView
     
        </div>
        <div class="row">
-        DIAGNOSTICO EQUIPO DE BOMBEO AGUA LLUVIA
+        DIAGNOSTICO EQUIPO DE BOMBEO AGUA POTABLE
        </div>
        <div class="row">
             <table class="table table-striped">
@@ -284,7 +283,5 @@ class diagnosticoEbAllView
 
        <?php
     }    
-
-    
 
 }

@@ -3,7 +3,7 @@ $raiz = dirname(dirname(dirname(__file__)));
 
 require_once($raiz.'/conexion/Conexion.php');
 
-class DiagnosticoEbAllModel extends Conexion
+class diagnosticoEbAllModel extends Conexion
 {
     public function traerDiagnosticos()
     {
@@ -21,16 +21,17 @@ class DiagnosticoEbAllModel extends Conexion
         return $diagnostico; 
     }
     
-    public function crearEncabezadoDiagnosticoEbAp($request,$id_usuario)
+    public function crearEncabezadodiagnosticoEbAll($request,$id_usuario)
     {
         $sql = "insert into diagnosticoEbAll (idCliente,idUsuarioCreacion)    
         values ('".$request['idCliente']."','".$id_usuario."') ";
         $consulta = mysql_query($sql,$this->connectMysql()); 
-        $ultimoId = $this->traerUltimoIdDiagnosticoEbAp();
+        $ultimoId = $this->traerUltimoIddiagnosticoEbAll();
         return $ultimoId; 
+
     }
     
-    public function traerUltimoIdDiagnosticoEbAp()
+    public function traerUltimoIddiagnosticoEbAll()
     {
         $sql = "select max(id) as maximo from diagnosticoEbAll";
         $consulta = mysql_query($sql,$this->connectMysql()); 

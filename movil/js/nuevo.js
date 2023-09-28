@@ -388,5 +388,5 @@ function pantallaDiagEbAll()
     };
     http.open("POST",url);
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    http.send('opcion=pantallaDiagEbAll');
+    http.send('opcion=pantallaDiagnosticoEbAll');
 }

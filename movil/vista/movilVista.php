@@ -83,6 +83,7 @@ class movilVista{
     <script src="../ventas/js/ventas.js"></script>
     <script src="../cambiosdeaceite/js/cambiosdeaceite.js"></script> -->
     <script src="../diagnosticoEbAp/js/diagnosticoEbAp.js"></script>
+    <script src="../diagnosticoEbAll/js/diagnosticoEbAll.js"></script>
     <?php
   }
   public function htmlLogueo(){

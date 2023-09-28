@@ -1,1 +1,2 @@
-delete  FROM `diagnosticoEbAll` WHERE 1
+delete  FROM `diagnosticoEbAll` WHERE 
+delete FROM `tablerosDiagnosticosEbAll`
