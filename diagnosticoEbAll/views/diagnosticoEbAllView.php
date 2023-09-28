@@ -31,7 +31,7 @@ class diagnosticoEbAllView
                         <button class="btn btn-primary" onclick="formuNuevoDiagnosticoEbAll();">Nuevo Diagnostico </button>  
                     </div>
                     <div class="col-lg-3 ofset-3">
-                        <button class="btn btn-primary" onclick="mostrarDiagnosticos();">Mostrar Diagnosticos </button>  
+                        <button class="btn btn-primary" onclick="mostrarDiagnosticosEbAll();">Mostrar Diagnosticos </button>  
                     </div>
 
                 </div>

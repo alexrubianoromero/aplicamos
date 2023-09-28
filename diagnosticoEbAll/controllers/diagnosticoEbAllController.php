@@ -29,10 +29,10 @@ class diagnosticoEbAllController
         {
             $this->formuNuevoDiagnostico();
         }
-        // if($_REQUEST['opcion']=='mostrarDiagnosticos')
-        // {
-        //     $this->mostrarDiagnosticos();
-        // }
+        if($_REQUEST['opcion']=='mostrarDiagnosticos')
+        {
+            $this->mostrarDiagnosticos();
+        }
         if($_REQUEST['opcion']=='crearEncabezadoDiagnosticoEbAll')
         {
             $maximoId = $this->model->crearEncabezadoDiagnosticoEbAp($_REQUEST,$_SESSION['id_usuario']);
