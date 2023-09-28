@@ -4,24 +4,27 @@ $raiz = dirname(dirname(dirname(__file__)));
 require_once($raiz.'/diagnosticoEbAp/models/DiagnosticoEbApModel.php'); 
 require_once($raiz.'/diagnosticoEbAp/models/ConceptoTableroEbApModel.php'); 
 require_once($raiz.'/clientes/models/ClienteModel.php'); 
+require_once($raiz.'/diagnosticoEbAp/models/TableroDiagnosticoEbApModel.php'); 
 
 class diagnosticoEbApView
 {
     protected $model; 
     protected $ClienteModel; 
     protected $conceptoTableroModel;
+    protected $tableroDiagnosticoModel;
 
     public function __construct()
     {
         $this->model = new DiagnosticoEbApModel();
         $this->ClienteModel = new ClienteModel();
         $this->conceptoTableroModel = new ConceptoTableroEbApModel();
+        $this->tableroDiagnosticoModel = new TableroDiagnosticoEbApModel();
     }
 
     public function pantallaDiagnosticoEbAp()
     {
         ?>
-        <div id="divPantallaDiagEbAp" style="padding:5px;">
+        <div class="row" id="divPantallaDiagEbAp" style="padding:5px;">
             <div id="botonesDiagEbAp">
                 <div class="row">
                     <div class="col-lg-3 ofset-3">
@@ -33,7 +36,7 @@ class diagnosticoEbApView
 
                 </div>
             </div>
-            <div id="divResultadosDiagEbAp">
+            <div class="row" id="divResultadosDiagEbAp">
                 <?php
                     $this->mostrarDiagnosticos();
                 ?>
@@ -48,18 +51,19 @@ class diagnosticoEbApView
         $diagnosticos = $this->model->traerDiagnosticos();    
         echo '<table class="table">'; 
         echo '<tr>'; 
-        echo '<td>No</td>';
-        echo '<td>Fecha</td>';
-        echo '<td>Cliente</td>';
-        echo '<td>ConcepTecnico</td>';
+        echo '<th>No</th>';
+        echo '<th>Fecha</th>';
+        echo '<th>Cliente</th>';
+        echo '<th>Ver</th>';
         echo '</tr>';
         foreach($diagnosticos as $diagnostico)
         {
+            $infoCLiente = $this->ClienteModel->traerClienteId($diagnostico['idCliente']);             
             echo '<tr>'; 
-            echo '<td>'.$diagnostico['idDiagnosticoEbAp'].'</td>';
+            echo '<td>'.$diagnostico['id'].'</td>';
             echo '<td>'.$diagnostico['fecha'].'</td>';
-            echo '<td>'.$diagnostico['idCliente'].'</td>';
-            echo '<td>'.$diagnostico['conceptoTecnico'].'</td>';
+            echo '<td>'.$infoCLiente['nombre'].'</td>';
+            echo '<td><button class ="btn btn-primary" onclick ="verDiagnostico('.$diagnostico['id'].')">Ver</button></td>';
             echo '</tr>';    
         }
         echo '</table>';
@@ -71,7 +75,7 @@ class diagnosticoEbApView
          $clientes = $this->ClienteModel->traerClientes(); 
        
         ?>
-        <div id="div_principal_diagnosticoEbAp">
+        <div class="row mt-3"  id="div_principal_diagnosticoEbAp">
             <P>DIAGNOSTICO EQUIPO BOMBEO AGUA POTABLE</P>
 
             <div class="row">
@@ -91,23 +95,57 @@ class diagnosticoEbApView
                     </select>
                 </div>
             </div>
-            <div class="row">
+            <br>
+            <div class="row mt-3">
+                <button class ="btn btn-primary" onclick="crearEncabezadoDiagnosticoEbAp();">Continuar</button>
+            </div>
+
+            <!-- <div class="row">
                 <label for="" class="col-lg-3">
                     Direccion:
                 </label>
                 <label for="" class="col-lg-9" id="labelDireccion"></label>
-            </div>
-            <div class="row" style="padding:5px;">
-                  <?php
-                      $this->formuTablerosEbAp();
-                  ?>
-            </div>
-            <div class="row">
-                <button class="btn btn-primary" onclick="grabarDiagnosticoEbAp();">GRABAR DIAGNOSTICO</button>
-            </div>            
-
+            </div> -->
+            
         </div>
         <?php
+    }
+    
+    
+    public function mostrarConceptosDiagnosticoEbAp($idDiagnostico)
+    {
+        $infoDiagnostico = $this->model->traerDiagnosticoId($idDiagnostico); 
+        //   echo '<pre>'; 
+        //     print_r($infoDiagnostico); 
+        //     echo'</pre>';
+        //     die(); 
+        $infoCLiente = $this->ClienteModel->traerClienteId($infoDiagnostico['idCliente']); 
+     ?>   
+        
+        <div class="row" style="padding:5px;">
+                <label for="" class="col-lg-3">
+                    Razon Social:
+                </label>
+                <div class="col-lg-9">
+                    <label><?php    echo $infoCLiente['nombre']  ?> </label>
+                </div>
+
+        </div>
+
+        <div class="row" style="padding:5px;">
+            <form id="formularioDiagnostico" name ="formularioDiagnostico">
+                <input type="hidden" id="idDiagnostico" name="idDiagnostico" value="<?php echo $idDiagnostico ?>" >
+
+                <?php
+                  $this->formuTablerosEbAp();
+                  ?>
+            </form>
+        </div>
+        <div class="row">
+            <!-- <button type="submit" class="btn btn-primary" onclick="grabarDiagnosticoEbAp();">GRABAR DIAGNOSTICO</button> -->
+            <button  class="btn btn-primary" onclick="grabarDiagnosticoEbAp();">GRABAR DIAGNOSTICO</button>
+        </div>
+     <?php               
     }
 
     public function formuTablerosEbAp()
@@ -179,4 +217,64 @@ class diagnosticoEbApView
         </div>       
       <?php
     }
-}    
+
+    public function verDiagnostico($idDiagnostico)
+    {
+        // echo '<br>NUmero '.$idDiagnostico; 
+        $infoDiagnostico = $this->model->traerDiagnosticoId($idDiagnostico); 
+        $infoCLiente = $this->ClienteModel->traerClienteId($infoDiagnostico['idCliente']); 
+        $infoTablerosDiagnostico = $this->tableroDiagnosticoModel->traerTablerosDiagnostico($idDiagnostico);  
+            //    echo '<pre>'; 
+            // print_r($infoTablerosDiagnostico); 
+            // echo'</pre>';
+            // die(); 
+
+       ?>
+       
+       <div class="row mt-3" style="padding:5px;">
+            <div class="col-lg-3">
+                  <img width="100"   src = "../movil/imagen/logonuevo.png">  
+                  <!-- <label>Nit: 901077768-7</label>
+                  <label>Nit: Cel : 3132140149</label> -->
+            </div>
+            <div class="col-lg-6">
+                Razon Social: <?php echo $infoCLiente['nombre'] ?>
+                <br>
+                Direccion: <?php echo $infoCLiente['direccion'] ?>
+            </div>
+            <div class="col-lg-3">
+                No : <?php  echo $idDiagnostico ?>
+                <br>
+                Fecha:   <?php  echo $infoDiagnostico['fecha'] ?>
+            </div>
+    
+       </div>
+       <div class="row">
+        DIAGNOSTICO EQUIPO DE BOMBEO AGUA POTABLE
+       </div>
+       <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <th>CONCEPTO</th>
+                    <th>VALOR</th>
+                </thead>
+                <tbody>
+                    <?php
+                        foreach($infoTablerosDiagnostico as $tablero)
+                        {
+                            $infoConcepto = $this->conceptoTableroModel->traerConceptoTablerosEbApId($tablero['idConceptoTablero']); 
+                            echo '<tr>' ; 
+                            echo '<td>'.$infoConcepto['descripcion'].'</td>';     
+                            echo '<td>'.$tablero['valorConceptoTablero'].'</td>';     
+                            echo '</tr>';
+                        }
+                    ?>
+
+                </tbody>
+            </table>
+       </div>
+
+       <?php
+    }    
+
+}

@@ -2,17 +2,22 @@
 $raiz = dirname(dirname(dirname(__file__)));
 require_once($raiz.'/diagnosticoEbAp/views/diagnosticoEbApView.php'); 
 require_once($raiz.'/diagnosticoEbAp/models/DiagnosticoEbApModel.php'); 
+require_once($raiz.'/diagnosticoEbAp/models/TableroDiagnosticoEbApModel.php'); 
 // die($raiz); 
 
 class diagnosticoEbApController 
 {
     protected $view;
     protected $model;
+    protected $tableroDiagnosticoModel;
 
     public function __construct()
     {
+        session_start();
+
         $this->view = new diagnosticoEbApView();
         $this->model = new DiagnosticoEbApModel();
+        $this->tableroDiagnosticoModel = new TableroDiagnosticoEbApModel();
         // die('constructg');
         // echo 'desde controlador'; 
         // $this->view = new hardwareView();
@@ -32,9 +37,24 @@ class diagnosticoEbApController
         {
             $this->mostrarDiagnosticos();
         }
+        if($_REQUEST['opcion']=='crearEncabezadoDiagnosticoEbAp')
+        {
+            $maximoId = $this->model->crearEncabezadoDiagnosticoEbAp($_REQUEST,$_SESSION['id_usuario']);
+            $this->view->mostrarConceptosDiagnosticoEbAp($maximoId);
+        }
+        if($_REQUEST['opcion']=='verDiagnostico')
+        {
+            // $maximoId = $this->model->crearEncabezadoDiagnosticoEbAp($_REQUEST,$_SESSION['id_usuario']);
+            $this->view->verDiagnostico($_REQUEST['idDiagnostico']);
+        }
+        
         if($_REQUEST['opcion']=='grabarDiagnosticoEbAp')
         {
-            $this->grabarDiagnosticoEbAp();
+            // echo '<pre>'; 
+            // print_r($_REQUEST); 
+            // echo'</pre>';
+            // die(); 
+            $this->grabarDiagnosticoEbAp($_REQUEST);
         }
 
 
@@ -56,9 +76,14 @@ class diagnosticoEbApController
         $this->view->mostrarDiagnosticos();
 
     }
-    public function grabarDiagnosticoEbAp()
+    public function grabarDiagnosticoEbAp($request)
     {
         // $this->view->mostrarDiagnosticos();
+
+        // echo 'llego a grabar diagnostico ';
+        $this->tableroDiagnosticoModel->grabarTableroDiagnostico($request); 
+        $this->view->mostrarDiagnosticos();
+        // echo 'Registrado Exitosamente '; 
 
     }
 

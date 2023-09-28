@@ -11,6 +11,7 @@ class movilVista{
     // echo '<pre>';
     // print_r($_SESSION);
     // echo '</pre>';
+    // die();
   } 
   public function pantallaLogueo()
   {
