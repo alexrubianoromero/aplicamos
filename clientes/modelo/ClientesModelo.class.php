@@ -269,6 +269,15 @@ class ClientesModelo extends Conexion
       $consulta = mysql_query($sql,$this->connectMysql()); 
       $arreglo = $this->get_table_assoc($consulta); 
       return $arreglo;
+    }
+    
+    public function traerDiagnosticoEbApIdcliente($idCliente)
+    {
+      $sql = "select * from diagnosticoEbAp where idCliente = '".$idCliente."' order by id desc    "; 
+      // die($sql ); 
+      $consulta = mysql_query($sql,$this->connectMysql()); 
+      $arreglo = $this->get_table_assoc($consulta); 
+      return $arreglo; 
   }
 
 

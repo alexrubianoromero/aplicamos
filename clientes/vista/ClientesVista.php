@@ -3,13 +3,17 @@
 $raiz = dirname(dirname(dirname(__file__)));
 
 require_once($raiz.'/vista/vista.php');
+require_once($raiz.'/clientes/modelo/ClientesModelo.class.php');
 
 class CLientesVista extends vista
 {
+    protected $model;
 
 
-
-
+    public function __construct()
+    {
+        $this->model = new ClientesModelo(); 
+    }
 
 
 
@@ -464,6 +468,11 @@ class CLientesVista extends vista
 
     public function muestreInfoCliente($infoCLiente)
     {
+        $diagnosticosEbAp =   $this->model->traerDiagnosticoEbApIdcliente($infoCLiente['idcliente']);
+        //   echo 'veeeehiculos<pre>';
+        //             print_r($diagnosticosEbAp);
+        //             echo '</pre>';
+        //             die();
         ?>
         <div  style="color:black;">
             <div class="row form-group">
@@ -509,7 +518,25 @@ class CLientesVista extends vista
             </div>
 
             <div class="row">
-                
+                <h3>Diagnosticos Agua Potable </h3>
+                 <table class="table table-striped">
+                    <tr>
+                        <th>Numero </th>
+                        <th>Fecha</th>
+                        <th>Concepto Tecnico</th>
+                    </tr>
+
+                     <?php
+                    foreach( $diagnosticosEbAp as $diagnostico)
+                    {
+                         echo '<tr>'; 
+                         echo '<td>'.$diagnostico['id'].'</td>'; 
+                         echo '<td>'.$diagnostico['fecha'].'</td>'; 
+                         echo '<td>'.$diagnostico['conceptoTecnico'].'</td>'; 
+                         echo '</tr>';   
+                    }
+                    ?>
+                </table>
             </div>
 
         </div>

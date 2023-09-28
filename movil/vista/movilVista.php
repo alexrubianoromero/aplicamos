@@ -156,8 +156,8 @@ class movilVista{
             
             if($_SESSION['nivel'] > 2 || $request['nivel']>2)
             {
-              echo   '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaUsuarios();">USUARIOS 
-              </button>';
+            //   echo   '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaUsuarios();">USUARIOS 
+            //   </button>';
             //   <i class="fas fa-list"></i>
               
             }  
