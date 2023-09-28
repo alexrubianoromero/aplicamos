@@ -1,0 +1,1 @@
+delete  FROM `diagnosticoEbAll` WHERE 1
