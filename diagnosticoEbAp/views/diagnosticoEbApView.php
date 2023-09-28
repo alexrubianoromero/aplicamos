@@ -2,20 +2,20 @@
 $raiz = dirname(dirname(dirname(__file__)));
 // require_once($raiz.'/hardware/views/hardwareView.php'); 
 require_once($raiz.'/diagnosticoEbAp/models/DiagnosticoEbApModel.php'); 
-require_once($raiz.'/diagnosticoEbAp/models/TableroEbApModel.php'); 
+require_once($raiz.'/diagnosticoEbAp/models/ConceptoTableroEbApModel.php'); 
 require_once($raiz.'/clientes/models/ClienteModel.php'); 
 
 class diagnosticoEbApView
 {
     protected $model; 
     protected $ClienteModel; 
-    protected $TableroModel;
+    protected $conceptoTableroModel;
 
     public function __construct()
     {
         $this->model = new DiagnosticoEbApModel();
         $this->ClienteModel = new ClienteModel();
-        $this->TableroModel = new TableroEbApModel();
+        $this->conceptoTableroModel = new ConceptoTableroEbApModel();
     }
 
     public function pantallaDiagnosticoEbAp()
@@ -79,7 +79,7 @@ class diagnosticoEbApView
                     Razon Social:
                 </label>
                 <div class="col-lg-9">
-                    <select id="idCliente" style="color:black;" class="form-control">
+                    <select id="idCliente" name="idCliente" style="color:black;" class="form-control">
                         <option value= "">Sleccione...</option>
                         <?php
                         foreach($clientes as $cliente)
@@ -103,7 +103,7 @@ class diagnosticoEbApView
                   ?>
             </div>
             <div class="row">
-                <button class="btn btn-primary" >GRABAR DIAGNOSTICO</button>
+                <button class="btn btn-primary" onclick="grabarDiagnosticoEbAp();">GRABAR DIAGNOSTICO</button>
             </div>            
 
         </div>
@@ -112,17 +112,17 @@ class diagnosticoEbApView
 
     public function formuTablerosEbAp()
     {
-        $tableros = $this->TableroModel->traerTablerosEbAp()
+        $conceptos = $this->conceptoTableroModel->traerTablerosEbAp()
         ?>
         <div class="row" style="color:black;" >
 
                 <table class="table table-striped">
                 <?php
-                foreach($tableros as $tablero)
+                foreach($conceptos as $concepto)
                 {
                     echo '<tr>'; 
-                    echo '<td>'.$tablero['descripcion'].'</td>';
-                    echo '<td><select id="tablero_'.$tablero['idTablero'].'" class="form-control">
+                    echo '<td>'.$concepto['descripcion'].'</td>';
+                    echo '<td><select id="concepto'.$concepto['id'].'" name="concepto'.$concepto['id'].'" class="form-control">
                                     <option value ="">Seleccione...</option>
                                     <option value ="B">Bueno</option>
                                     <option value ="R">Regular</option>
@@ -139,22 +139,22 @@ class diagnosticoEbApView
         <div class="row">
             <div class="col-lg-4">
                 <label>Variador:</label>
-                <input type="checkbox" id="checkVariador">
+                <input type="checkbox" id="checkVariador" name ="checkVariador">
             </div>
             <div class="col-lg-4">
                 <label>Arranque Directo:</label>
-                <input type="checkbox" id="checkArranque">
+                <input type="checkbox" id="checkArranque" name="checkArranque">
             </div>
             <div class="col-lg-4">
                 <label>Estrella Triangulo:</label>
-                <input type="checkbox" id="checkEstrella">
+                <input type="checkbox" id="checkEstrella" name="checkEstrella">
             </div>
         </div>      
 
         <div class="row">
             <div class="col-lg-2">
                 <label>Hidroflow:</label>
-                <input type="checkbox" id="checkHidroflow">
+                <input type="checkbox" id="checkHidroflow" name="checkHidroflow">
             </div>
             <div class="col-lg-2">
                 <label>Capacidad:</label>
@@ -162,15 +162,15 @@ class diagnosticoEbApView
             </div>
             <div class="col-lg-2">
                 <label>Marca de las bombas:</label>
-                <input type="text" id="marcaBomba" size="4px">
+                <input type="text" id="marcaBomba" name="marcaBomba"  size="4px">
             </div>
             <div class="col-lg-2">
                 <label>HP:</label>
-                <input type="text" id="hp" size="4px">
+                <input type="text" id="hp" name="hp"  size="4px">
             </div>
             <div class="col-lg-4">
                 <label>Fugas:</label>
-                <select id="fugas" >
+                <select id="fugas" name="fugas">
                     <option value="">...</option>
                     <option value="S">Si</option>
                     <option value="N">No</option>

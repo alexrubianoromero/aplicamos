@@ -32,6 +32,10 @@ class diagnosticoEbApController
         {
             $this->mostrarDiagnosticos();
         }
+        if($_REQUEST['opcion']=='grabarDiagnosticoEbAp')
+        {
+            $this->grabarDiagnosticoEbAp();
+        }
 
 
 
@@ -50,6 +54,11 @@ class diagnosticoEbApController
     public function mostrarDiagnosticos()
     {
         $this->view->mostrarDiagnosticos();
+
+    }
+    public function grabarDiagnosticoEbAp()
+    {
+        // $this->view->mostrarDiagnosticos();
 
     }
 
