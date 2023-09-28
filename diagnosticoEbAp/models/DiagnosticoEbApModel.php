@@ -44,6 +44,12 @@ class DiagnosticoEbAPModel extends Conexion
         $sql = "update diagnosticoEbAp set numeroTableros  =  '".$numero."'  where id='".$idDiagnostico."'    ";
         $consulta = mysql_query($sql,$this->connectMysql()); 
     }
-
+    
+    public function actualizarInfoEnDiagnostico($request)
+    {
+        $sql ="update  diagnosticoEbAp  set conceptoTecnico = '".$request['conceptoTecnico']."'   
+        where  id = '".$request['idDiagnostico']."' ";
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+    }
 
 }

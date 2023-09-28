@@ -96,6 +96,8 @@ function grabarDiagnosticoEbAp(){
     var concepto28 = document.getElementById('concepto28').value;
     var concepto29 = document.getElementById('concepto29').value;
     var concepto30 = document.getElementById('concepto30').value;
+
+    var conceptoTecnico = document.getElementById('conceptoTecnico').value;
     
     
     const http=new XMLHttpRequest();
@@ -141,6 +143,8 @@ function grabarDiagnosticoEbAp(){
     +'&concepto28='+concepto28
     +'&concepto29='+concepto29
     +'&concepto30='+concepto30
+
+    +'&conceptoTecnico='+conceptoTecnico
     );
 }
 

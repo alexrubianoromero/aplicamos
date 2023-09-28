@@ -36,7 +36,7 @@ class diagnosticoEbApView
 
                 </div>
             </div>
-            <div class="row" id="divResultadosDiagEbAp">
+            <div class="row mt-3" id="divResultadosDiagEbAp">
                 <?php
                     $this->mostrarDiagnosticos();
                 ?>
@@ -214,7 +214,11 @@ class diagnosticoEbApView
                     <option value="N">No</option>
                 </select>
             </div>
-        </div>       
+        </div>      
+        <div class="row">
+         
+            <textarea id="conceptoTecnico" name="conceptoTecnico" class ="form-control" rows="5" placeholder = "   CONCEPTO TECNICO AGUA POTABLE "></textarea>
+        </div> 
       <?php
     }
 
@@ -272,6 +276,9 @@ class diagnosticoEbApView
 
                 </tbody>
             </table>
+       </div>
+       <div class="row">
+           <textarea class="form-control" rows="5"><?php echo $infoDiagnostico['conceptoTecnico']  ?></textarea>
        </div>
 
        <?php

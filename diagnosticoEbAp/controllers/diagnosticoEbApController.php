@@ -82,6 +82,7 @@ class diagnosticoEbApController
 
         // echo 'llego a grabar diagnostico ';
         $this->tableroDiagnosticoModel->grabarTableroDiagnostico($request); 
+        $this->model->actualizarInfoEnDiagnostico($request);
         $this->view->mostrarDiagnosticos();
         // echo 'Registrado Exitosamente '; 
 
