@@ -217,7 +217,7 @@ class diagnosticoEbAllView
         </div>       -->
         <div class="row">
          
-            <textarea id="conceptoTecnico" name="conceptoTecnico" class ="form-control" rows="5" placeholder = "   CONCEPTO TECNICO AGUA POTABLE "></textarea>
+            <textarea id="conceptoTecnico" name="conceptoTecnico" class ="form-control" rows="5" placeholder = "   CONCEPTO TECNICO AGUAS LLUVIAS  "></textarea>
         </div> 
       <?php
     }

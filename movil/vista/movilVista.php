@@ -98,11 +98,11 @@ class movilVista{
             <!-- <img src="planeta.png"> -->
             <div class="row" id="div_botones_inicio"> 
                 <div class = "form_group ">
-                    <input value="" type = "text" class = "form-control botoninicio " id="txtUsuario" placeholder = "Usuario" > 
+                    <input style="background-color:gray;" value="" type = "text" class = "form-control botoninicio " id="txtUsuario" placeholder = "Usuario" > 
                 </div>
                 <br><br><br>
                 <div class = "form_group ">
-                    <input  value="" type = "password" class = "form-control botoninicio" id="txtClave" placeholder = "Clave"> 
+                    <input style="background-color:gray;"  value="" type = "password" class = "form-control botoninicio" id="txtClave" placeholder = "Clave"> 
                 </div>
                 <br><br><br><br>
                 <div class = "form_group ">

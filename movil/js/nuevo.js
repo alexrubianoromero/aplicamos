@@ -294,6 +294,21 @@ function pantallaOrdenes(){
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         http.send('opcion=pantallaPrincipalVentas');
     }
+    function pantallaAlertas()
+    {
+        document.getElementById("imagenInicial").style.display = 'none';
+        document.getElementById("divBotonesPrincipales").style.display = 'block';    
+        const http=new XMLHttpRequest();
+        const url = '../alertas/alertas.php';
+        http.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status ==200){
+                document.getElementById("div_principal").innerHTML  = this.responseText;
+            }
+        };
+        http.open("POST",url);
+        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        http.send('opcion=pantallaAlertas');
+    }
 
 
 

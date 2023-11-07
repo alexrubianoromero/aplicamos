@@ -133,6 +133,9 @@ class diagnosticoEbApView
         </div>
 
         <div class="row" style="padding:5px;">
+        <div class="row">
+            CONVENCIONES: B= BUENO; R= REGULAR; M= MALO; A= AUSENTE; N/A= NO APLICA  
+        </div>
             <form id="formularioDiagnostico" name ="formularioDiagnostico">
                 <input type="hidden" id="idDiagnostico" name="idDiagnostico" value="<?php echo $idDiagnostico ?>" >
 
