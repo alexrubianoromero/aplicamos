@@ -12,6 +12,26 @@ class DiagnosticoEbAPModel extends Conexion
         $diagnosticos = $this->get_table_assoc($consulta);
         return $diagnosticos; 
     }
+    public function traerUltimoDiagnosticoCliente($idCliente)
+    {
+        $sql = "select * from diagnosticoEbAp  where anulado = 0  and idCliente = '".$idCliente."' order by id desc limit 1" ;
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+        $diagnostico = mysql_fetch_assoc($consulta);
+        return $diagnostico; 
+    }
+    public function filtrarDiagnosticosEbApPorFecha($request)
+    {
+        $sql = "select * from diagnosticoEbAp  d
+                where d.anulado = 0 
+                and d.idCliente = '".$request['idCliente']."'
+                and d.fecha >= '".$request['fechain']."'
+                and d.fecha <= '".$request['fechafin']."'
+                order by d.id desc" ;
+                // die($sql);
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+        $diagnosticos = $this->get_table_assoc($consulta);
+        return $diagnosticos; 
+    }
     public function traerDiagnosticoId($idDiagnostico)
     {
         $sql = "select * from diagnosticoEbAp  where anulado = 0 and id ='".$idDiagnostico."'   " ;

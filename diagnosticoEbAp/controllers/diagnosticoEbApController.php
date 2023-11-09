@@ -3,11 +3,13 @@ $raiz = dirname(dirname(dirname(__file__)));
 require_once($raiz.'/diagnosticoEbAp/views/diagnosticoEbApView.php'); 
 require_once($raiz.'/diagnosticoEbAp/models/DiagnosticoEbApModel.php'); 
 require_once($raiz.'/diagnosticoEbAp/models/TableroDiagnosticoEbApModel.php'); 
+require_once($raiz.'/clientes/vista/ClientesVista.php'); 
 // die($raiz); 
 
 class diagnosticoEbApController 
 {
     protected $view;
+    protected $clienteView;
     protected $model;
     protected $tableroDiagnosticoModel;
 
@@ -16,6 +18,7 @@ class diagnosticoEbApController
         session_start();
 
         $this->view = new diagnosticoEbApView();
+        $this->clienteView = new CLientesVista();
         $this->model = new DiagnosticoEbApModel();
         $this->tableroDiagnosticoModel = new TableroDiagnosticoEbApModel();
         // die('constructg');
@@ -56,11 +59,29 @@ class diagnosticoEbApController
             // die(); 
             $this->grabarDiagnosticoEbAp($_REQUEST);
         }
+        if($_REQUEST['opcion']=='filtrarDiagnosticosEbApPorFecha')
+        {
+            $this->filtrarDiagnosticosEbApPorFecha($_REQUEST);
+        }
+        if($_REQUEST['opcion']=='traerUltimoDiagnosticoCliente')
+        {
+            $this->traerUltimoDiagnosticoCliente($_REQUEST);
+        }
 
 
 
     }
     
+    public function traerUltimoDiagnosticoCliente($request)
+    {
+        $ultDiagnostico = $this->model->traerUltimoDiagnosticoCliente($request['idCliente']);
+        $this->view ->mostrarUltimoDiagnosticoCliente($ultDiagnostico);
+    }
+    public function filtrarDiagnosticosEbApPorFecha($request)
+    {
+        $diagnosticos = $this->model->filtrarDiagnosticosEbApPorFecha($request);
+        $this->clienteView->pintarDiagnosticosCliente($diagnosticos);
+    }
     public function pantallaDiagnosticoEbAp()
     {
         // $diagnosticos = $this->model->traerDiagnosticos();

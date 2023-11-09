@@ -466,11 +466,11 @@ class CLientesVista extends vista
         echo '<div class= "avisoGrabado">La informacion del propietario se guardo de forma exitosa</div>';
     }
 
-    public function muestreInfoCliente($infoCLiente)
+    public function muestreInfoCliente($infoCLiente,$diagnosticosEbAp)
     {
-        $diagnosticosEbAp =   $this->model->traerDiagnosticoEbApIdcliente($infoCLiente['idcliente']);
+        // $diagnosticosEbAp =   $this->model->traerDiagnosticoEbApIdcliente($infoCLiente['idcliente']);
         //   echo 'veeeehiculos<pre>';
-        //             print_r($diagnosticosEbAp);
+        //             print_r($infoCLiente);
         //             echo '</pre>';
         //             die();
         ?>
@@ -516,9 +516,26 @@ class CLientesVista extends vista
                      <?php  echo  $infoCLiente['direccion'] ?>
                 </div>
             </div>
-
             <div class="row">
-                <h3>Diagnosticos Agua Potable </h3>
+                FECHA INICIAL : 
+                <input type="date" id="fechain">
+                FECHA FINAL: 
+                <input type="date" id="fechafin">
+                <button class="btn btn-primary" onclick ="filtrarDiagnosticosEbApPorFecha(<?php echo $infoCLiente['idcliente']  ?>);">Filtrar Fechas</button>
+            </div>
+            <div class="row" id="div_mostrar_info_diagnostico">
+                      <?php $this->pintarDiagnosticosCliente($diagnosticosEbAp);  ?>
+            </div>
+
+        </div>
+
+        <?php
+    }
+    
+    public function pintarDiagnosticosCliente($diagnosticosEbAp)
+    {
+       ?>
+          <h3>Diagnosticos Agua Potable </h3>
                  <table class="table table-striped">
                     <tr>
                         <th>Numero </th>
@@ -537,13 +554,9 @@ class CLientesVista extends vista
                     }
                     ?>
                 </table>
-            </div>
-
-        </div>
-
-        <?php
+       
+       <?php
     }
-
     public function mostrarVehiculosCliente($vehiculos)
     {
             // echo 'vista vehiculos<pre>';

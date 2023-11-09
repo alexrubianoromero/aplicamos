@@ -172,9 +172,11 @@ class ClientesControlador{
         //             print_r($vehiculos);
         //             echo '</pre>';
         //             die();
-        $this->vista->muestreInfoCliente($infoCLiente);        
+        $diagnosticosEbAp =   $this->modelo->traerDiagnosticoEbApIdcliente($infoCLiente['idcliente']);
+        $this->vista->muestreInfoCliente($infoCLiente,$diagnosticosEbAp);        
         
     }
+    
     
     function buscarClientePorNombre($request)
     {

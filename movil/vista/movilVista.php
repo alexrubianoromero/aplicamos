@@ -166,7 +166,7 @@ class movilVista{
             {
                 echo '<br><br>';
                 echo '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaClientes();">CLIENTES 
-                    <i class="far fa-user"></i>
+               
                 </button>';
             }    
             
@@ -174,21 +174,17 @@ class movilVista{
             {
                 echo     '<br><br>';
              echo '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaDiagEbAp();"><span align="left">DIAGNOSTICO EB AGUA POTABLE<span> 
-                    <i class="fas fa-biking"></i>
                 </button>';
             }    
                 
             echo  '<br><br>';
 
             echo    '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaDiagEbAll();">DIAGNOSTICO EQUIPO EB AGUAS LLUVIAS
-                    <!-- <i class="fas fa-boxes"></i> -->
-                    <i class="fas fa-tools"></i>
                 </button>';
                 if($_SESSION['nivel'] > 2 || $request['nivel']>2 )
                 {
                 echo    '<br><br>';
              echo    '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaInspeccionCI();">INSPECCION CONTRA INCENDIOS 
-                    <i class="fas fa-list"></i>
                 </button>';
             }
 
@@ -197,14 +193,12 @@ class movilVista{
             {
                  echo    '<br><br>';
                 echo     '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaImagenes();">MODULO IMAGENES
-                            <!-- <i class="far fa-user"></i> -->
                     </button>';
              }       
             if($_SESSION['nivel'] > 2 || $request['nivel']>2)
             {
                  echo    '<br><br>';
                 echo     '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaAlertas();">MODULO ALERTAS
-                            <!-- <i class="far fa-user"></i> -->
                     </button>';
              }       
              echo    '<br><br>';
@@ -215,7 +209,6 @@ class movilVista{
                         onclick="preguntarNuevaClave('.$_SESSION['id_usuario'].');"
                     >
                     CAMBIO DE CLAVE
-                            <!-- <i class="far fa-user"></i> -->
                     </button>';
             echo     '<br><br>';
                 

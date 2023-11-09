@@ -4,6 +4,10 @@ CAmbiar el tamaño de marca de las bombas
 cuadro de convenciones en el informe de diagnostico 
 colocar filtro por fechas para ver los mantenimientos de un cliente 
 opcion por trimestres 
-
 revisar los iconos  de los botones 
+
 cuando seleccione el cliente que traiga el ultimo diagnostico que se realizo 
+
+que se puedan grabar varios tableros para el mismo diagnostico 
+
+que se grabe el tecnico que realizo el mantenimiento 

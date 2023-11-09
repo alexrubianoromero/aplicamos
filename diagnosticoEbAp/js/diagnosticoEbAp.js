@@ -60,6 +60,43 @@ function crearEncabezadoDiagnosticoEbAp()
     +'&idCliente='+idCliente
     );
 }
+function filtrarDiagnosticosEbApPorFecha(idCliente)
+{
+    var fechain = document.getElementById('fechain').value;
+    var fechafin = document.getElementById('fechafin').value;
+    const http=new XMLHttpRequest();
+    const url = '../diagnosticoEbAp/diagnosticoEbAp.php';
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status ==200){
+            console.log(this.responseText);
+            document.getElementById("div_mostrar_info_diagnostico").innerHTML  = this.responseText;
+        }
+    };
+    http.open("POST",url);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send("opcion=filtrarDiagnosticosEbApPorFecha"
+    +'&idCliente='+idCliente
+    +'&fechain='+fechain
+    +'&fechafin='+fechafin
+    );
+}
+function traerUltimoDiagnosticoCliente()
+{
+    var idCliente = document.getElementById('idCliente').value;
+    const http=new XMLHttpRequest();
+    const url = '../diagnosticoEbAp/diagnosticoEbAp.php';
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status ==200){
+            console.log(this.responseText);
+            document.getElementById("div_ultimo_diagnostico_cliente").innerHTML  = this.responseText;
+        }
+    };
+    http.open("POST",url);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send("opcion=traerUltimoDiagnosticoCliente"
+    +'&idCliente='+idCliente
+    );
+}
 
 function grabarDiagnosticoEbAp(){
     // alert('grabar diagnostico');
