@@ -13,6 +13,13 @@ class ConceptoTableroEbApModel extends Conexion
         $tableros = $this->get_table_assoc($consulta);
         return $tableros;   
     }
+    public function traerConceptosTablerosEbAp()
+    {
+        $sql = "select * from conceptosTablerosEbAp ";
+        $consulta = mysql_query($sql,$this->connectMysql());
+        $tableros = $this->get_table_assoc($consulta);
+        return $tableros;   
+    }
     
     public function traerConteoConceptosTablero()
     {

@@ -44,6 +44,19 @@ class TableroDiagnosticoEbApModel extends Conexion
         $arrTableros = $this->get_table_assoc($consulta);
         return $arrTableros;  
     }
+    public function traerTableroIdConcepNumTableroIdDiag($idConcepto,$numeroTablero,$idDiagnostico)
+    {
+        $sql = "select * from tablerosDiagnosticosEbAp  
+                where idConceptoTablero = '".$idConcepto."' 
+                and  noTablero ='".$numeroTablero."'  
+                and idDiagnostico = '".$idDiagnostico."'
+                "; 
+                
+        // die($sql);
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+        $arrValor = mysql_fetch_assoc($consulta);
+        return $arrValor;  
+    }
 
 
 }

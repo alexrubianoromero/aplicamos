@@ -45,6 +45,11 @@ class diagnosticoEbApController
             $maximoId = $this->model->crearEncabezadoDiagnosticoEbAp($_REQUEST,$_SESSION['id_usuario']);
             $this->view->mostrarConceptosDiagnosticoEbAp($maximoId);
         }
+        if($_REQUEST['opcion']=='formuAdicionarTableroEbAp')
+        {
+            // $maximoId = $this->model->crearEncabezadoDiagnosticoEbAp($_REQUEST,$_SESSION['id_usuario']);
+            $this->view->mostrarConceptosDiagnosticoEbAp($_REQUEST['idDiagnostico']);
+        }
         if($_REQUEST['opcion']=='verDiagnostico')
         {
             // $maximoId = $this->model->crearEncabezadoDiagnosticoEbAp($_REQUEST,$_SESSION['id_usuario']);
@@ -67,7 +72,6 @@ class diagnosticoEbApController
         {
             $this->traerUltimoDiagnosticoCliente($_REQUEST);
         }
-
 
 
     }
