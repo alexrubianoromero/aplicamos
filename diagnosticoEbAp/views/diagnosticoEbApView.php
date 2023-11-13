@@ -55,6 +55,7 @@ class diagnosticoEbApView
         echo '<th>Fecha</th>';
         echo '<th>Cliente</th>';
         echo '<th>Ver</th>';
+        echo '<th>Pdf</th>';
         echo '</tr>';
         foreach($diagnosticos as $diagnostico)
         {
@@ -64,6 +65,7 @@ class diagnosticoEbApView
             echo '<td>'.$diagnostico['fecha'].'</td>';
             echo '<td>'.$infoCLiente['nombre'].'</td>';
             echo '<td><button class ="btn btn-primary" onclick ="verDiagnostico('.$diagnostico['id'].')">Ver</button></td>';
+            echo '<td><a href="../diagnosticoEbAp/pdf/ordenPdf3.php?idDiagnostico='.$diagnostico['id'].'" target="_blank" >PDF</a></td>';
             echo '</tr>';    
         }
         echo '</table>';

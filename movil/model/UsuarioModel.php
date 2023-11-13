@@ -50,6 +50,14 @@ class UsuarioModel extends Conexion
         where id_usuario = '".$request['idUsuario']."'  ";
         $consulta = mysql_query($sql,$this->connectMysql());
     }
+    public function traerusuarioId($idUsuario)
+    {
+        $sql = "select * from usuarios where id_usuario = '".$idUsuario."'  ";
+        $consulta = mysql_query($sql,$this->connectMysql());
+        $datosUser = mysql_fetch_assoc($consulta);
+        return $datosUser;
+    }
+
 }
 
 ?>
