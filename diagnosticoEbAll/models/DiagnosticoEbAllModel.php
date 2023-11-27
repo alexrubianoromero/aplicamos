@@ -50,5 +50,12 @@ class DiagnosticoEbAllModel extends Conexion
         where  id = '".$request['idDiagnostico']."' ";
         $consulta = mysql_query($sql,$this->connectMysql()); 
     }
+    public function traerUltimoDiagnosticoClienteEbAll($idCliente)
+    {
+        $sql = "select * from diagnosticoEbAll  where anulado = 0  and idCliente = '".$idCliente."' order by id desc limit 1" ;
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+        $diagnostico = mysql_fetch_assoc($consulta);
+        return $diagnostico; 
+    }
 
 }

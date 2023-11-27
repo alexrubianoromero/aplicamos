@@ -54,10 +54,20 @@ class diagnosticoEbAllController
             $this->grabarDiagnosticoEbAll($_REQUEST);
         }
 
+        if($_REQUEST['opcion']=='traerUltimoDiagnosticoClienteEbAll')
+        {
+            $this->traerUltimoDiagnosticoClienteEbAll($_REQUEST);
+        }
+
 
 
     }
     
+    public function traerUltimoDiagnosticoClienteEbAll($request)
+    {
+        $ultDiagnostico = $this->model->traerUltimoDiagnosticoClienteEbAll($request['idCliente']);
+        $this->view ->mostrarUltimoDiagnosticoClienteEbAll($ultDiagnostico);
+    }
     public function pantallaDiagnosticoEbAll()
     {
         // $diagnosticos = $this->model->traerDiagnosticos();

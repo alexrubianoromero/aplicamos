@@ -65,8 +65,6 @@ function crearEncabezadoDiagnosticoEbAp()
     if(idCliente =='')
     { alert('Escoja un cliente'); }else
     {
-
-        
         const http=new XMLHttpRequest();
         const url = '../diagnosticoEbAp/diagnosticoEbAp.php';
         http.onreadystatechange = function(){

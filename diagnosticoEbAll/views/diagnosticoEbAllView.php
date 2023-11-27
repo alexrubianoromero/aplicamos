@@ -5,6 +5,7 @@ require_once($raiz.'/diagnosticoEbAll/models/DiagnosticoEbAllModel.php');
 require_once($raiz.'/diagnosticoEbAll/models/ConceptoTableroEbAllModel.php'); 
 require_once($raiz.'/clientes/models/ClienteModel.php'); 
 require_once($raiz.'/diagnosticoEbAll/models/TableroDiagnosticoEbAllModel.php'); 
+require_once($raiz.'/movil/model/UsuarioModel.php'); 
 
 class diagnosticoEbAllView
 {
@@ -12,6 +13,7 @@ class diagnosticoEbAllView
     protected $ClienteModel; 
     protected $conceptoTableroModel;
     protected $tableroDiagnosticoModel;
+    protected $usuarioModel;
 
     public function __construct()
     {
@@ -19,6 +21,7 @@ class diagnosticoEbAllView
         $this->ClienteModel = new ClienteModel();
         $this->conceptoTableroModel = new ConceptoTableroEbAllModel();
         $this->tableroDiagnosticoModel = new TableroDiagnosticoEbAllModel();
+        $this->usuarioModel = new UsuarioModel();
     }
 
     public function pantallaDiagnosticoEbAll()
@@ -83,7 +86,7 @@ class diagnosticoEbAllView
                     Razon Social:
                 </label>
                 <div class="col-lg-9">
-                    <select id="idCliente" name="idCliente" style="color:black;" class="form-control">
+                    <select id="idCliente" name="idCliente" style="color:black;" class="form-control"  onchange="traerUltimoDiagnosticoClienteEbAll();">
                         <option value= "">Sleccione...</option>
                         <?php
                         foreach($clientes as $cliente)
@@ -94,6 +97,9 @@ class diagnosticoEbAllView
                         ?>
                     </select>
                 </div>
+            </div>
+            <br>
+            <div id="div_ultimo_diagnostico_clienteEbAll">
             </div>
             <br>
             <div class="row mt-3">
@@ -285,6 +291,35 @@ class diagnosticoEbAllView
        <?php
     }    
 
-    
+    public function mostrarUltimoDiagnosticoClienteEbAll($diagnostico)
+    {
+
+        $usuario =  $this->usuarioModel->traerusuarioId($diagnostico['idAtendioVisita']); 
+        //   echo '<pre>'; 
+        //     print_r($diagnostico); 
+        //     echo'</pre>';
+        //     die(); 
+        ?>
+        <div class="row">
+            <label>Ultimo Diagnostico</label>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Fecha:</td>
+                        <td>Atendio:</td>
+                        <td>Concepto:</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><?php   echo $diagnostico['fecha'] ?></td>
+                        <td><?php   echo $usuario['nombre'] ?></td>
+                        <td><?php   echo $diagnostico['conceptoTecnico'] ?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <?php
+    }
 
 }

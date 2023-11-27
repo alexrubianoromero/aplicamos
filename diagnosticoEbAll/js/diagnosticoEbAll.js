@@ -149,3 +149,21 @@ function grabarDiagnosticoEbAll(){
 // //  }
 
 // // });
+
+function traerUltimoDiagnosticoClienteEbAll()
+{
+    var idCliente = document.getElementById('idCliente').value;
+    const http=new XMLHttpRequest();
+    const url = '../diagnosticoEbAll/diagnosticoEbAll.php';
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status ==200){
+            console.log(this.responseText);
+            document.getElementById("div_ultimo_diagnostico_clienteEbAll").innerHTML  = this.responseText;
+        }
+    };
+    http.open("POST",url);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send("opcion=traerUltimoDiagnosticoClienteEbAll"
+    +'&idCliente='+idCliente
+    );
+}
