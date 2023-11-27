@@ -117,7 +117,37 @@ class diagnosticoEbAllView
         <?php
     }
 
-    
+    public function mostrarInfoEncabezado($idDiagnostico)
+    {
+        $infoDiagnostico = $this->model->traerDiagnosticoId($idDiagnostico); 
+        $infoCLiente = $this->ClienteModel->traerClienteId($infoDiagnostico['idCliente']); 
+        $infoTablerosDiagnostico = $this->tableroDiagnosticoModel->traerTablerosDiagnostico($idDiagnostico);   
+        $infoUsuario = $this->usuarioModel->traerusuarioId($infoDiagnostico['idAtendioVisita']);  
+        ?>
+        <div class="row mt-3" style="padding:5px; font-size:20px;" >
+            <div class="col-lg-3">
+                  <img width="100"   src = "../movil/imagen/logonuevo.png">  
+                  <!-- <label>Nit: 901077768-7</label>
+                  <label>Nit: Cel : 3132140149</label> -->
+            </div>
+            <div class="col-lg-6" >
+                Razon Social_: <?php echo $infoCLiente['nombre'] ?>
+                <br>
+                Direccion: <?php echo $infoCLiente['direccion'] ?>
+                <br>
+             
+                Atendio Visita: <?php echo $infoUsuario['nombre'] ?>
+            </div>
+            <div class="col-lg-3">
+                No : <?php  echo $idDiagnostico ?>
+                <br>
+                Fecha:   <?php  echo $infoDiagnostico['fecha'] ?>
+            </div>
+       </div>
+        <?php
+    }
+
+
     public function mostrarConceptosDiagnosticoEbAll($idDiagnostico)
     {
         $infoDiagnostico = $this->model->traerDiagnosticoId($idDiagnostico); 
@@ -127,8 +157,9 @@ class diagnosticoEbAllView
         //     die(); 
         $infoCLiente = $this->ClienteModel->traerClienteId($infoDiagnostico['idCliente']); 
      ?>   
-        
-        <div class="row" style="padding:5px;">
+
+    <?php  $this->mostrarInfoEncabezado($idDiagnostico);  ?>  
+        <!-- <div class="row" style="padding:5px;">
                 <label for="" class="col-lg-3">
                     Razon Social:
                 </label>
@@ -136,9 +167,13 @@ class diagnosticoEbAllView
                     <label><?php    echo $infoCLiente['nombre']  ?> </label>
                 </div>
 
-        </div>
+        </div> -->
 
         <div class="row" style="padding:5px;">
+            <div class="row">
+                CONVENCIONES: B= BUENO; R= REGULAR; M= MALO; A= AUSENTE; N/A= NO APLICA  
+            </div>
+
             <form id="formularioDiagnostico" name ="formularioDiagnostico">
                 <input type="hidden" id="idDiagnostico" name="idDiagnostico" value="<?php echo $idDiagnostico ?>" >
 
