@@ -11,3 +11,5 @@ cuando seleccione el cliente que traiga el ultimo diagnostico que se realizo
 que se puedan grabar varios tableros para el mismo diagnostico 
 
 que se grabe el tecnico que realizo el mantenimiento 
+
+crear el pdf con el fiagnostico y sus tableros 

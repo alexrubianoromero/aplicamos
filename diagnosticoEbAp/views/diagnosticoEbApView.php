@@ -5,6 +5,7 @@ require_once($raiz.'/diagnosticoEbAp/models/DiagnosticoEbApModel.php');
 require_once($raiz.'/diagnosticoEbAp/models/ConceptoTableroEbApModel.php'); 
 require_once($raiz.'/clientes/models/ClienteModel.php'); 
 require_once($raiz.'/diagnosticoEbAp/models/TableroDiagnosticoEbApModel.php'); 
+require_once($raiz.'/movil/model/UsuarioModel.php'); 
 
 class diagnosticoEbApView
 {
@@ -12,6 +13,7 @@ class diagnosticoEbApView
     protected $ClienteModel; 
     protected $conceptoTableroModel;
     protected $tableroDiagnosticoModel;
+    protected $usuarioModel;
 
     public function __construct()
     {
@@ -19,6 +21,7 @@ class diagnosticoEbApView
         $this->ClienteModel = new ClienteModel();
         $this->conceptoTableroModel = new ConceptoTableroEbApModel();
         $this->tableroDiagnosticoModel = new TableroDiagnosticoEbApModel();
+        $this->usuarioModel = new UsuarioModel();
     }
 
     public function pantallaDiagnosticoEbAp()
@@ -350,6 +353,8 @@ class diagnosticoEbApView
 
     public function mostrarUltimoDiagnosticoCliente($diagnostico)
     {
+
+        $usuario =  $this->usuarioModel->traerusuarioId($diagnostico['idAtendioVisita']); 
         //   echo '<pre>'; 
         //     print_r($diagnostico); 
         //     echo'</pre>';
@@ -368,7 +373,7 @@ class diagnosticoEbApView
                 <tbody>
                     <tr>
                         <td><?php   echo $diagnostico['fecha'] ?></td>
-                        <td><?php   echo $diagnostico['atendio'] ?></td>
+                        <td><?php   echo $usuario['nombre'] ?></td>
                         <td><?php   echo $diagnostico['conceptoTecnico'] ?></td>
                     </tr>
                 </tbody>
