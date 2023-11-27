@@ -13,3 +13,8 @@ que se puedan grabar varios tableros para el mismo diagnostico
 que se grabe el tecnico que realizo el mantenimiento 
 
 crear el pdf con el fiagnostico y sus tableros 
+
+mas pendientes 
+verificar que al crear el encabezado del diagnostico se graba el usuario como quien atendio la visita
+Colocar el tecnico que atendio la visita en la consulta de diagnostico de agua potable 
+validar que no se pueda crear un diagnostico si no se ha escogido el cliente 

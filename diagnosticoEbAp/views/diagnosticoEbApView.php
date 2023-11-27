@@ -124,7 +124,8 @@ class diagnosticoEbApView
     {
         $infoDiagnostico = $this->model->traerDiagnosticoId($idDiagnostico); 
         $infoCLiente = $this->ClienteModel->traerClienteId($infoDiagnostico['idCliente']); 
-        $infoTablerosDiagnostico = $this->tableroDiagnosticoModel->traerTablerosDiagnostico($idDiagnostico);     
+        $infoTablerosDiagnostico = $this->tableroDiagnosticoModel->traerTablerosDiagnostico($idDiagnostico);   
+        $infoUsuario = $this->usuarioModel->traerusuarioId($infoDiagnostico['idAtendioVisita']);  
         ?>
         <div class="row mt-3" style="padding:5px; font-size:20px;" >
             <div class="col-lg-3">
@@ -136,13 +137,15 @@ class diagnosticoEbApView
                 Razon Social_: <?php echo $infoCLiente['nombre'] ?>
                 <br>
                 Direccion: <?php echo $infoCLiente['direccion'] ?>
+                <br>
+             
+                Atendio Visita: <?php echo $infoUsuario['nombre'] ?>
             </div>
             <div class="col-lg-3">
                 No : <?php  echo $idDiagnostico ?>
                 <br>
                 Fecha:   <?php  echo $infoDiagnostico['fecha'] ?>
             </div>
-    
        </div>
         <?php
     }

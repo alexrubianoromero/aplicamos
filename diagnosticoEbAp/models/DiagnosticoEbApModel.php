@@ -43,8 +43,8 @@ class DiagnosticoEbAPModel extends Conexion
     
     public function crearEncabezadoDiagnosticoEbAp($request,$id_usuario)
     {
-        $sql = "insert into diagnosticoEbAp (idCliente,idUsuarioCreacion)    
-        values ('".$request['idCliente']."','".$id_usuario."') ";
+        $sql = "insert into diagnosticoEbAp (idCliente,idUsuarioCreacion,idAtendioVisita)    
+        values ('".$request['idCliente']."','".$id_usuario."','".$id_usuario."') ";
         $consulta = mysql_query($sql,$this->connectMysql()); 
         $ultimoId = $this->traerUltimoIdDiagnosticoEbAp();
         return $ultimoId; 
