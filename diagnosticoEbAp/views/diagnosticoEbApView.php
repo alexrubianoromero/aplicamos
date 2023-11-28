@@ -302,6 +302,7 @@ class diagnosticoEbApView
         $numeroTableros = $infoDiagnostico['numeroTableros']; 
         $infoCLiente = $this->ClienteModel->traerClienteId($infoDiagnostico['idCliente']); 
         $infoTablerosDiagnostico = $this->tableroDiagnosticoModel->traerTablerosDiagnostico($idDiagnostico);  
+        $numeroMaximoCasillasVisuales = 9;
             //    echo '<pre>'; 
             // print_r($numeroTableros); 
             // echo'</pre>';
@@ -320,9 +321,9 @@ class diagnosticoEbApView
                 <thead>
                     <th>CONCEPTO</th>
                     <?php
-                        for($i=1;$i<= $numeroTableros;$i++)
+                        for($i=1;$i<= $numeroMaximoCasillasVisuales;$i++)
                         {
-                            echo '<th>B'.$i.'</th>';
+                                echo '<th>B'.$i.'</th>';
                         }
                     ?>
                 </thead>
@@ -335,10 +336,18 @@ class diagnosticoEbApView
                             // $infoConcepto = $this->conceptoTableroModel->traerConceptoTablerosEbApId($tablero['idConceptoTablero']); 
                             echo '<tr>' ; 
                             echo '<td>'.$concepto['descripcion'].'</td>';     
-                            for($i=1;$i<= $numeroTableros;$i++)
+                            // for($i=1;$i<= $numeroTableros;$i++)
+                            for($i=1;$i<= $numeroMaximoCasillasVisuales;$i++)
                             {
-                                $valor = $this->tableroDiagnosticoModel->traerTableroIdConcepNumTableroIdDiag($concepto['id'],$i,$idDiagnostico);
-                                echo '<td>'.$valor['valorConceptoTablero'].'</td>';     
+                                if($i <= $numeroTableros)
+                                {
+                                    $valor = $this->tableroDiagnosticoModel->traerTableroIdConcepNumTableroIdDiag($concepto['id'],$i,$idDiagnostico);
+                                    echo '<td>'.$valor['valorConceptoTablero'].'</td>';     
+                                }
+                                else{
+                                    echo '<td></td>';     
+                                }    
+                            
                             }
                             echo '</tr>';
                         }
