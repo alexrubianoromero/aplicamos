@@ -58,6 +58,7 @@ class diagnosticoEbAllView
         echo '<th>Fecha</th>';
         echo '<th>Cliente</th>';
         echo '<th>Ver</th>';
+        echo '<th>Pdf</th>';
         echo '</tr>';
         foreach($diagnosticos as $diagnostico)
         {
@@ -67,6 +68,7 @@ class diagnosticoEbAllView
             echo '<td>'.$diagnostico['fecha'].'</td>';
             echo '<td>'.$infoCLiente['nombre'].'</td>';
             echo '<td><button class ="btn btn-primary" onclick ="verDiagnosticoEbAll('.$diagnostico['id'].')">Ver</button></td>';
+            echo '<td><a href="../diagnosticoEbAll/pdf/ordenPdf3.php?idDiagnostico='.$diagnostico['id'].'" target="_blank" >PDF</a></td>';
             echo '</tr>';    
         }
         echo '</table>';
