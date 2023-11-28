@@ -19,4 +19,13 @@ verificar que al crear el encabezado del diagnostico se graba el usuario como qu
 Colocar el tecnico que atendio la visita en la consulta de diagnostico de agua potable //ya lo graba al cear el encabezado 
 validar que no se pueda crear un diagnostico si no se ha escogido el cliente 
 
+Estoy en aguas lluvias replicando la funcionalidad de agua potable 
+Ya replique que muestre encabezado 
+
+ahora revisar como hice lo de agregar varios tableros  a un diagnostico y replicarlo
+
+revisar la parte de agregar nuevo tablero a diagnostico 
+
+
+
 

@@ -39,6 +39,14 @@ class diagnosticoEbAllController
             // die('maximo'.$maximoId);
             $this->view->mostrarConceptosDiagnosticoEbAll($maximoId);
         }
+
+        if($_REQUEST['opcion']=='formuAdicionarTableroEbAll')
+        {
+            // $maximoId = $this->model->crearEncabezadoDiagnosticoEbAp($_REQUEST,$_SESSION['id_usuario']);
+            $this->view->mostrarConceptosDiagnosticoEbAll($_REQUEST['idDiagnostico']);
+        }
+
+
         if($_REQUEST['opcion']=='verDiagnostico')
         {
             // $maximoId = $this->model->crearEncabezadoDiagnosticoEbAp($_REQUEST,$_SESSION['id_usuario']);
