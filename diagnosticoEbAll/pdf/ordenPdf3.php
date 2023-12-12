@@ -23,6 +23,7 @@ $numeroTableros = $infoDiagnostico['numeroTableros'];
 $infoCliente = $clienteModel->traerClienteId($infoDiagnostico['idCliente']); 
 $infoUsuario = $usuarioModel->traerusuarioId($infoDiagnostico['idAtendioVisita']);
 $convenciones = "B=BUENO; R=REGULAR; M=MALO A=AUSENTE"; 
+$numeroMaximoCasillasVisuales = 9;
         //   echo '<pre>';
         //     print_r($infoCliente); 
         //     echo '</pre>';
@@ -72,7 +73,7 @@ $pdf->AddPage();
     
     $pdf->SetFont('Arial','B',10);
     $pdf->Cell(60,$alto,'TABLEROS',1,0,'L');
-    for($i=1;$i< $numeroTableros;$i++)
+    for($i=1;$i< $numeroMaximoCasillasVisuales;$i++)
     {
         $pdf->Cell($anchoValores,$alto,'B'.$i,1,0,'C');
     }
@@ -84,10 +85,16 @@ $pdf->AddPage();
     foreach($conceptosTableroEbAp as $concepto)
     {
         $pdf->Cell(60,$alto,$concepto['descripcion'],1,0,'L');
-        for($i=1;$i< $numeroTableros;$i++)
+        for($i=1;$i< $numeroMaximoCasillasVisuales;$i++)
         {
-            $valor = $tableroDiagnosticoModel->traerTableroIdConcepNumTableroIdDiag($concepto['id'],$i,$_REQUEST['idDiagnostico']);
-            $pdf->Cell($anchoValores,$alto,$valor['valorConceptoTablero'],1,0,'C');
+            if($i <= $numeroTableros)
+            {
+                $valor = $tableroDiagnosticoModel->traerTableroIdConcepNumTableroIdDiag($concepto['id'],$i,$_REQUEST['idDiagnostico']);
+                $pdf->Cell($anchoValores,$alto,$valor['valorConceptoTablero'],1,0,'C');
+            }
+            else{
+                $pdf->Cell($anchoValores,$alto,'',1,0,'C');
+            }
         }
         $valor = $tableroDiagnosticoModel->traerTableroIdConcepNumTableroIdDiag($concepto['id'],$i,$_REQUEST['idDiagnostico']);
         $pdf->Cell($anchoValores,$alto,$valor['valorConceptoTablero'],1,1,'C');
