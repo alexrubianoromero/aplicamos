@@ -29,6 +29,7 @@ revisar la parte de agregar nuevo tablero a diagnostico
 buscar la forma que siempre salgan las 10 casillas de los tableros asi esten vacios como por estetica
 Ahora replicarlo en aguas lluvias 
 
+mejorar el letrero de los botones ya no cabe
 
 
 hacer la parte para que grabe las imagenes 

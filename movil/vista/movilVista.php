@@ -46,8 +46,6 @@ class movilVista{
         </div>
         <!-- <p id="slogankaymo">TECNOLOGIA VERDADERA</p> -->
         <div id="divBotonesPrincipales">
-
-
             <button onclick="menuPrincipal();" class = "bontonesmenuinternos"> MENU PRINCIPAL
             <i class="fas fa-bars"></i>
         </button>
@@ -164,7 +162,7 @@ class movilVista{
             
             if($_SESSION['nivel'] > 2 || $request['nivel']>2)
             {
-                echo '<br><br>';
+                // echo '<br>';
                 echo '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaClientes();">CLIENTES 
                
                 </button>';
@@ -172,36 +170,36 @@ class movilVista{
             
             if($_SESSION['nivel'] > 2 || $request['nivel']>2)
             {
-                echo     '<br><br>';
-             echo '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaDiagEbAp();"><span align="left">DIAGNOSTICO EB AGUA POTABLE<span> 
+                echo     '<br>';
+             echo '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaDiagEbAp();"><span align="left"> EB AGUA POTABLE<span> 
                 </button>';
             }    
                 
-            echo  '<br><br>';
+            echo  '<br>';
 
-            echo    '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaDiagEbAll();">DIAGNOSTICO EQUIPO EB AGUAS LLUVIAS
+            echo    '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaDiagEbAll();"> EB AGUAS LLUVIAS
                 </button>';
                 if($_SESSION['nivel'] > 2 || $request['nivel']>2 )
                 {
-                echo    '<br><br>';
-             echo    '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaInspeccionCI();">INSPECCION CONTRA INCENDIOS 
+                echo    '<br>';
+             echo    '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaInspeccionCI();"> CONTRA INCENDIOS 
                 </button>';
             }
 
             
             if($_SESSION['nivel'] > 2 || $request['nivel']>2)
             {
-                 echo    '<br><br>';
+                 echo    '<br>';
                 echo     '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaImagenes();">MODULO IMAGENES
                     </button>';
              }       
             if($_SESSION['nivel'] > 2 || $request['nivel']>2)
             {
-                 echo    '<br><br>';
+                 echo    '<br>';
                 echo     '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaAlertas();">MODULO ALERTAS
                     </button>';
              }       
-             echo    '<br><br>';
+             echo    '<br>';
 
             echo        '<button 
                         class = "btn btn-primary bontonesmenu"  
@@ -210,7 +208,7 @@ class movilVista{
                     >
                     CAMBIO DE CLAVE
                     </button>';
-            echo     '<br><br>';
+            echo     '<br>';
                 
             echo    '<button class = "btn btn-default bontonsalir" id="btn_salir" onclick="salirSistema();">SALIR <i class="fas fa-sign-out-alt"></i></button>
             </div>';
