@@ -24,30 +24,94 @@ class diagnosticoEbApView
         $this->usuarioModel = new UsuarioModel();
     }
 
+
+
     public function pantallaDiagnosticoEbAp()
     {
         ?>
-        <div class="row" id="divPantallaDiagEbAp" style="padding:5px;">
-            <div id="botonesDiagEbAp">
-                <div class="row">
-                    <div class="col-lg-3 ofset-3">
-                        <button class="btn btn-primary" onclick="formuNuevoDiagnostico();">Nuevo Diagnostico </button>  
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+        </head>
+        <body>
+            
+            <div class="row" id="divPantallaDiagEbAp" style="padding:5px;">
+                <div id="botonesDiagEbAp">
+                    <div class="row">
+                        <div class="col-lg-3 ofset-3">
+                            <button class="btn btn-primary" onclick="formuNuevoDiagnostico();">Nuevo Diagnostico </button>  
+                        </div>
+                        <div class="col-lg-3 ofset-3">
+                            <button class="btn btn-primary" onclick="mostrarDiagnosticos();">Mostrar Diagnosticos </button>  
+                        </div>
+                        
                     </div>
-                    <div class="col-lg-3 ofset-3">
-                        <button class="btn btn-primary" onclick="mostrarDiagnosticos();">Mostrar Diagnosticos </button>  
-                    </div>
-
                 </div>
-            </div>
-            <div class="row mt-3" id="divResultadosDiagEbAp">
-                <?php
+                <div class="row mt-3" id="divResultadosDiagEbAp">
+                    <?php
                     $this->mostrarDiagnosticos();
-                ?>
+                    
+                    ?>
             </div>        
-
         </div>
+        <?php    $this->modalSubirArchivo();  ?>    
+        <?php    $this->modalUltimoDiagnostico();  ?>    
+    </body>
+    </html>
         <?php
     }
+
+    public function modalSubirArchivo (){
+        ?>
+         <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
+         Launch demo modal
+         </button> -->
+          <div  class="modal fade " id="modalSubirArchivo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                  <div class="modal-header" id="headerNuevoCliente">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Informacion</h4>
+                  </div>
+                  <div id="cuerpoModalSubirArchivo" class="modal-body">
+                  </div>
+                  <div class="modal-footer" id="footerNuevoCliente">
+                      <button type="button" class="btn btn-default" data-dismiss="modal" onclick = "pantallaClientes();">Cerrar</button>
+                      <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                  </div>
+                  </div>
+              </div>
+          </div>
+        <?php
+
+    } 
+    public function modalUltimoDiagnostico (){
+        ?>
+         <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
+         Launch demo modal
+         </button> -->
+          <div  class="modal fade " id="modalUltimoDiagnostico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                  <div class="modal-header" id="headerNuevoCliente">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Informacion</h4>
+                  </div>
+                  <div id="cuerpoModalUltimoDiagnostico" class="modal-body">
+                  </div>
+                  <div class="modal-footer" id="footerNuevoCliente">
+                      <button type="button" class="btn btn-default" data-dismiss="modal" onclick = "pantallaClientes();">Cerrar</button>
+                      <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                  </div>
+                  </div>
+              </div>
+          </div>
+        <?php
+
+    } 
 
     function mostrarDiagnosticos()
     {
@@ -314,7 +378,15 @@ class diagnosticoEbApView
         <button 
             class="btn btn-primary"
             onclick="formuAdicionarTableroEbAp(<?php  echo $idDiagnostico;   ?>);"
-            >ADICIONAR TABLERO</button>
+            >ADICIONAR TABLERO
+        </button>
+        <button 
+            class="btn btn-primary"
+            onclick="verimagenesDiagnosticoEbAp(<?php  echo $idDiagnostico;   ?>);"
+            >IMAGENES
+        </button>
+       </div>
+       <div class="row" id="imagenes_diagnosticoEbAp">
        </div>
        <div class="row">
             <table class="table table-striped">
@@ -384,7 +456,14 @@ class diagnosticoEbApView
                 </thead>
                 <tbody>
                     <tr>
-                        <td><?php   echo $diagnostico['fecha'] ?></td>
+                        <td><button 
+                            class="btn btn-primary btn-sm"
+                            data-toggle="modal" 
+                            data-target="#modalUltimoDiagnostico"
+                            onclick="traerInfoCompletaUltimoDiagnostico(<?php   echo $diagnostico['id'] ?>);"
+                            ><?php   echo $diagnostico['fecha'] ?>
+                           </button>
+                        </td>
                         <td><?php   echo $usuario['nombre'] ?></td>
                         <td><?php   echo $diagnostico['conceptoTecnico'] ?></td>
                     </tr>
@@ -392,6 +471,53 @@ class diagnosticoEbApView
             </table>
         </div>
         <?php
+    }
+
+
+
+    public function verimagenesDiagnosticoEbAp($imagenes,$idDiagnostico)
+    {
+        echo '<div class="row"><button 
+                                class="btn btn-primary"
+                                data-bs-toggle="modal" 
+                                data-bs-target="#modalSubirArchivo"
+                                onclick ="formuAgregarImagenDiagnostico('.$idDiagnostico.');"
+                                >
+                                Nueva Imagen
+                                </button>
+                                </div> '; 
+        // echo 'Aqui mostrara las imagenes del diagnostico '; 
+        foreach($imagenes as $imagen)
+        {
+            $raiz123 = dirname(dirname(dirname(__file__)));
+            // die($raiz123); 
+            $rutaImagen = $raiz123.'/imagenes/imagenesDiagnosticoEbAp/'.$imagen['rutaImagen'];
+            echo '<div style="border:1px solid; width:200px; display:inline">'; 
+            // echo '<img src="'.$rutaImagen.'" > '; 
+            echo '<img src="../imagenes/imagenesDiagnosticoEbAp/'.$imagen['rutaImagen'].'"  width="200px"> '; 
+            echo '</div>';
+        }
+        
+    }
+
+
+    public function formuAgregarImagenDiagnostico()
+    {
+        // echo 'subir archivo '; 
+        ?>
+        <div id="div_cargue_archivo">
+                <input name="imagen" id="imagen" type="file">
+                <br><br><br><br>
+                <!-- <button onclick="procesarformu();" >Procesar</button> -->
+                <br><br>
+                <!-- <button id="btnEnviar">Enviar!!</button> -->
+                <!-- </form> -->
+                <div id="div_muestre_resultado"></div>
+                <span id="demo"></span>
+        </div>
+        
+        <?php
+
     }
 
 }

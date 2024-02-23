@@ -2,6 +2,7 @@
 $raiz = dirname(dirname(dirname(__file__)));
 require_once($raiz.'/diagnosticoEbAp/views/diagnosticoEbApView.php'); 
 require_once($raiz.'/diagnosticoEbAp/models/DiagnosticoEbApModel.php'); 
+require_once($raiz.'/diagnosticoEbAp/models/ImagenDiagnosticoEbApModel.php'); 
 require_once($raiz.'/diagnosticoEbAp/models/TableroDiagnosticoEbApModel.php'); 
 require_once($raiz.'/clientes/vista/ClientesVista.php'); 
 // die($raiz); 
@@ -12,6 +13,7 @@ class diagnosticoEbApController
     protected $clienteView;
     protected $model;
     protected $tableroDiagnosticoModel;
+    protected $imagenDiagnosticoModel;
 
     public function __construct()
     {
@@ -21,6 +23,7 @@ class diagnosticoEbApController
         $this->clienteView = new CLientesVista();
         $this->model = new DiagnosticoEbApModel();
         $this->tableroDiagnosticoModel = new TableroDiagnosticoEbApModel();
+        $this->imagenDiagnosticoModel = new ImagenDiagnosticoEbApModel();
         // die('constructg');
         // echo 'desde controlador'; 
         // $this->view = new hardwareView();
@@ -72,10 +75,35 @@ class diagnosticoEbApController
         {
             $this->traerUltimoDiagnosticoCliente($_REQUEST);
         }
-
+        if($_REQUEST['opcion']=='verimagenesDiagnosticoEbAp')
+        {
+            $imagenes = $this->imagenDiagnosticoModel->traerImagenesDiagnosticoId($_REQUEST['idDiagnostico']);
+            //     echo '<pre>'; 
+            // print_r($imagenes); 
+            // echo'</pre>';
+            // die('imagenes '); 
+            $this->view->verimagenesDiagnosticoEbAp($imagenes,$_REQUEST['idDiagnostico']);
+        }
+        
+        if($_REQUEST['opcion']=='formuAgregarImagenDiagnostico')
+        {
+            $this->view->formuAgregarImagenDiagnostico($_REQUEST['idDiagnostico']);
+        }
+        if($_REQUEST['opcion']=='traerInfoCompletaUltimoDiagnostico')
+        {
+            $this->traerInfoCompletaUltimoDiagnostico($_REQUEST);
+        }
 
     }
     
+    //esa funcion es para mostrar toda la informacion del ultimo diagnostico del cliente 
+    public function traerInfoCompletaUltimoDiagnostico($request)
+    {
+        // $infoDiagnostico = $this->model->traerDiagnosticoId($request['idDiagnostico']);
+        //podria ser ver diagnostico 
+        $this->view->verDiagnostico($request['idDiagnostico']);
+    }
+
     public function traerUltimoDiagnosticoCliente($request)
     {
         $ultDiagnostico = $this->model->traerUltimoDiagnosticoCliente($request['idCliente']);

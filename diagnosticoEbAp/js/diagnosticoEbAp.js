@@ -42,6 +42,64 @@ function verDiagnostico(idDiagnostico){
     +'&idDiagnostico='+idDiagnostico
     );
 }
+function verimagenesDiagnosticoEbAp(idDiagnostico){
+    const http=new XMLHttpRequest();
+    const url = '../diagnosticoEbAp/diagnosticoEbAp.php';
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status ==200){
+              console.log(this.responseText);
+           document.getElementById("imagenes_diagnosticoEbAp").innerHTML  = this.responseText;
+        }
+    };
+    http.open("POST",url);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send("opcion=verimagenesDiagnosticoEbAp"
+    +'&idDiagnostico='+idDiagnostico
+    );
+}
+function formuAgregarImagenDiagnostico(idDiagnostico){
+    // alert(idDiagnostico)
+    const http=new XMLHttpRequest();
+    const url = '../diagnosticoEbAp/diagnosticoEbAp.php';
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status ==200){
+              console.log(this.responseText);
+           document.getElementById("imagenes_diagnosticoEbAp").innerHTML  = this.responseText;
+        }
+    };
+    http.open("POST",url);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send("opcion=formuAgregarImagenDiagnostico"
+    +'&idDiagnostico='+idDiagnostico
+    );
+}
+
+
+function realizarCargaArchivoImagen()
+{
+    var inputFile = document.getElementById('imagen');
+
+    if (inputFile.files.length > 0) {
+        let formData = new FormData();
+        formData.append("file", inputFile.files[0]); // En la posición 0; es decir, el primer elemento
+        formData.append("opcion", 'cargarArchivo'); // En la posición 0; es decir, el primer elemento
+        // fetch("cargues/cargues.php", {
+        fetch("cargues/cargar_stickers.php", {
+            method: 'POST',
+            body: formData,
+        })
+            .then(respuesta => respuesta.text())
+            .then(decodificado => {
+                console.log(decodificado.archivo);
+                document.getElementById("div_cargue_archivo").innerHTML = 'Cargue Realizado!!';
+            });
+    } else {
+        alert("Selecciona un archivo");
+    }
+}
+
+
+
 function formuAdicionarTableroEbAp(idDiagnostico){
     const http=new XMLHttpRequest();
     const url = '../diagnosticoEbAp/diagnosticoEbAp.php';
@@ -101,6 +159,7 @@ function filtrarDiagnosticosEbApPorFecha(idCliente)
     +'&fechafin='+fechafin
     );
 }
+//esta funcion traer los datos basicos del ultimo mantenimiento del cliente 
 function traerUltimoDiagnosticoCliente()
 {
     var idCliente = document.getElementById('idCliente').value;
@@ -118,6 +177,26 @@ function traerUltimoDiagnosticoCliente()
     +'&idCliente='+idCliente
     );
 }
+
+//esta funcion ya muestra todo el diagnostico del ultimo cliente 
+function traerInfoCompletaUltimoDiagnostico(idDiagnostico)
+{
+    // var idCliente = document.getElementById('idCliente').value;
+    const http=new XMLHttpRequest();
+    const url = '../diagnosticoEbAp/diagnosticoEbAp.php';
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status ==200){
+            console.log(this.responseText);
+            document.getElementById("cuerpoModalUltimoDiagnostico").innerHTML  = this.responseText;
+        }
+    };
+    http.open("POST",url);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send("opcion=traerInfoCompletaUltimoDiagnostico"
+    +'&idDiagnostico='+idDiagnostico
+    );
+}
+
 
 function grabarDiagnosticoEbAp(){
     // alert('grabar diagnostico');

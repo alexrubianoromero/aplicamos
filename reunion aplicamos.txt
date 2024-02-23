@@ -34,6 +34,18 @@ mejorar el letrero de los botones ya no cabe
 
 hacer la parte para que grabe las imagenes 
  pedir reunion con morcillo y preguntar que mas informacion debe manejar el foru de aguas lluvias 
+revisar como capturamos una imegen
+
+
+PENDIENTE REUNION 19/02/2024
+
+Colocar el mensaje en cada uno de los diagnosticos en el pdf para cada uno de los formatos 
+colocar un boton para enviar el correo al cliente con el diagnostico 
+y una copia al correo de Aplicamos que sea indicado 
+
+cuando se muestre el ultimo diagnostico realizado al clientecolocar un boton para ver ese diagnostico 
+
+
 
 
 

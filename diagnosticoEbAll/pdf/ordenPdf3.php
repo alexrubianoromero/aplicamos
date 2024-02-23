@@ -61,7 +61,7 @@ $pdf->AddPage();
     $pdf->Ln(2);
     $pdf->Cell(35);
     $pdf->SetFont('Arial','B',11);
-    $pdf->Cell(115,6,'DIAGNOSTICO EQUIPO AGUAS LLUVIAS',0,1,'C');
+    $pdf->Cell(115,6,'DIAGNOSTICO EQUIPO DE BOMBEO AGUAS LLUVIAS',0,1,'C');
 
     
     
