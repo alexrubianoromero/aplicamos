@@ -38,7 +38,7 @@ class inspeccionesCiView extends vista
             <title>Document</title>
         </head>
         <body>
-            FORMATO INSPECCION RED CONTRA INCENDIOS
+            <H3>FORMATO INSPECCION RED CONTRA INCENDIOS</H3>
             <div class="row" id="divPantallaDiagEbAp" style="padding:5px;">
                 <div id="botonesDiagEbAp">
                     <div class="row">
@@ -265,20 +265,28 @@ class inspeccionesCiView extends vista
         <div class="row" style="padding:5px;">
         <div class="row">
             <!-- CONVENCIONES: B= BUENO; R= REGULAR; M= MALO; A= AUSENTE; N/A= NO APLICA   -->
-        </div class="row">
+        <div class="row">
             <!-- <form id="formularioDiagnostico" name ="formularioDiagnostico">
                 <input type="hidden" id="idDiagnostico" name="idDiagnostico" value="<?php echo $idDiagnostico ?>" >
 
             </form> -->
-            <div class="col-lg-5" style="border:1px solid black;">
+            <div class="col-lg-5" style="border:1px solid black; font-size:12px;">
                 <?php
                   $this->formuInformacionBombaLider();
                   ?>
             </div>
-            <div class="col-lg-offset-1 col-lg-5" style="border:1px solid black;">
+            <div class="col-lg-offset-1 col-lg-5" style="border:1px solid black; font-size:12px;">
                 <?php
                   $this->formuInformacionBombaJockey();
                   ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5" style="border:1px solid black; font-size:12px;">
+               <?php  $this->formuInfoTableroLider(); ?>
+            </div>
+            <div class="col-lg-offset-1 col-lg-5" style="border:1px solid black; font-size:12px;">
+                <?php  $this->formuInfoTableroJockey(); ?>
             </div>
         </div>
         <div class="row">
@@ -290,47 +298,54 @@ class inspeccionesCiView extends vista
 
     public function formuInformacionBombaLider()
     {
+    $ancho = 4; 
      ?>
      <div >
         <div><H3>INFORMACION BOMBA LIDER</H3></div>
         <div class="row">
             <label for="" class="col-lg-8">Se encuentra operativa en automatico</label>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <select name="" id="operativaAutomatico" class="form-control">
-                    <option value="">Seleccione...</option>
+                    <option value="">Sel...</option>
                     <option value="SI">SI</option>
                     <option value="NO">NO</option>
                     
                 </select>
             </div>
         </div>
-        <div class="col-lg-4">
-            <!-- <label for="" >Equipo Listado</label> -->
-            <input type="text" class="form-control" placeholder = "EQUIPO LISTADO">
+        <div class="row">
+
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Equipo Listado</label>
+                <input type="text" class="form-control" placeholder = " ">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Modelo</label>
+                <input type="text"  class="form-control" placeholder = "">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Marca bomba</label>
+                <input type="text"  class="form-control"placeholder = " ">
+            </div>
         </div>
-        <div class="col-lg-4">
-            <!-- <label for="" >Modelo</label> -->
-            <input type="text"  class="form-control" placeholder = "MODELO">
-        </div>
-        <div class="col-lg-4">
-            <!-- <label for="" >Marca de la bomba</label> -->
-            <input type="text"  class="form-control"placeholder = "MARCA BOMBA">
-        </div>
-        <div class="col-lg-5">
-            <label for="" >Potencia(HP)</label>
-            <input type="text"  class="form-control">
-        </div>
-        <div class="col-lg-5">
+        
+        <div class="row">
+
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Potencia(HP)</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
             <label for="" >Transferencia</label>
             <input type="text"  class="form-control">
         </div>
-        <div class="col-lg-5">
+        <div class="col-lg-<?php  echo $ancho; ?>">
             <label for="" >Ubicacion</label>
             <input type="text"  class="form-control">
         </div>
-        <div class="col-lg-5">
-            <label for="" >Tipo de Bomba</label>
-            <select name="" id="tipoBomba" class="form-control">
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Tipo de Bomba</label>
+                <select name="" id="tipoBomba" class="form-control">
                     <option value="">Seleccione...</option>
                     <option value="Vertical">Vertical</option>
                     <option value="Horizontal">Horizontal</option>
@@ -338,117 +353,406 @@ class inspeccionesCiView extends vista
                     <option value="Carcaza Partida">Carcaza Partida</option>
                     
                 </select>
+            </div>
+            
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Tipo Succion(+-)</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Q MAX(GPM)</label>
+                <input type="text"  class="form-control">
+            </div>
         </div>
-        <div class="col-lg-5">
-            <label for="" >Tipo de Succion(+-)</label>
-            <input type="text"  class="form-control">
+        
+        <div class="row">
+           
+            
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >PRESION MAX(PSI)</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Q NOMINAL (GPM)</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >PRESION AL 150%(PSI)</label>
+                <input type="text"  class="form-control">
+            </div>
         </div>
-        <div class="col-lg-5">
-            <label for="" >Q MAX(GPM)</label>
-            <input type="text"  class="form-control">
+        <div class="row">
+
+        
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >DIAMETRO DE SUCCION</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >DIAMETRO DE DESCARGA</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >MATERIAL DE LA TUBERIA</label>
+                <input type="text"  class="form-control">
+            </div>
         </div>
-        <div class="col-lg-5">
-            <label for="" >PRESION MAX(PSI)</label>
-            <input type="text"  class="form-control">
-        </div>
-        <div class="col-lg-5">
-            <label for="" >Q NOMINAL (GPM)</label>
-            <input type="text"  class="form-control">
-        </div>
-        <div class="col-lg-5">
-            <label for="" >PRESION AL 150%(PSI)</label>
-            <input type="text"  class="form-control">
-        </div>
-        <div class="col-lg-5">
-            <label for="" >DIAMETRO DE SUCCION</label>
-            <input type="text"  class="form-control">
-        </div>
-        <div class="col-lg-5">
-            <label for="" >DIAMETRO DE DESCARGA</label>
-            <input type="text"  class="form-control">
-        </div>
-        <div class="col-lg-5">
-            <label for="" >MATERIAL DE LA TUBERIA</label>
-            <input type="text"  class="form-control">
-        </div>
-        <div class="col-lg-5">
-            <label for="" >FUGAS</label>
-            <input type="text"  class="form-control">
-        </div>
-        <div class="col-lg-5">
-            <label for="" >CABEZAL DE PRUEBAS</label>
-            <select name="" id="tipoCabezal" class="form-control">
+        <div class="row">
+
+        
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >FUGAS</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >CABEZAL PRUEBAS</label>
+                <select name="" id="tipoCabezal" class="form-control">
                     <option value="">Seleccione...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >MANOMETRO</label>
+                <input type="text"  class="form-control">
+            </div>
         </div>
-        <div class="col-lg-5">
-            <label for="" >MANOMETRO</label>
-            <input type="text"  class="form-control">
-        </div>
-    
-        <div class="col-lg-5">
-            <label for="" >SELLO MECANICO / P.ESTOPA</label>
-            <select name="" id="selloMecanico" class="form-control">
+        <div class="row">
+
+         
+            
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >SELLO MECANICO / P.ESTOPA</label>
+                <select name="" id="selloMecanico" class="form-control">
                     <option value="">Seleccione...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >MANOVACUOMETRO</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >RODAMIENTOS DE MOTOR</label>
+                <input type="text"  class="form-control">
+            </div>
         </div>
-        <div class="col-lg-5">
-            <label for="" >MANOVACUOMETRO</label>
-            <input type="text"  class="form-control">
+
+        <div class="row">
+           
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >EMPAQUETADURA</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >VALVULAS CORTE </label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >CAUDALIMETRO</label>
+                <input type="text"  class="form-control">
+            </div>
         </div>
-        <div class="col-lg-5">
-            <label for="" >RODAMIENTOS DE MOTOR</label>
-            <input type="text"  class="form-control">
+
+        <div class="row">
+
+          
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >VALVULA DE ALIVIO</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >RETORNO TANQUE</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >CONDICIONES OPERACION</label>
+                <select name="" id="idCondicionOperacion" class="form-control">
+                        <option value="">Seleccione...</option>
+                        <option value="BUENO">BUENO</option>
+                        <option value="REGULAR">REGULAR</option>
+                        <option value="MALO">MALO</option>
+                </select>
+            </div>
+
         </div>
-        <div class="col-lg-5">
-            <label for="" >EMPAQUETADURA</label>
-            <input type="text"  class="form-control">
-        </div>
-        <div class="col-lg-5">
-            <label for="" >VALVULAS DE CORTE </label>
-            <input type="text"  class="form-control">
-        </div>
-        <div class="col-lg-5">
-            <label for="" >CAUDALIMETRO</label>
-            <input type="text"  class="form-control">
-        </div>
-        <div class="col-lg-5">
-            <label for="" >VALVULA DE ALIVIO</label>
-            <input type="text"  class="form-control">
-        </div>
-        <div class="col-lg-5">
-            <label for="" >RETORNO A TANQUE</label>
-            <input type="text"  class="form-control">
-        </div>
+
+      
     
      </div>
      <?php
     }
     public function formuInformacionBombaJockey()
     {
+        $ancho= 4;
      ?>
      <div >
         <div><h3>INFORMACION BOMBA JOCKEY</h3></div>
         <div class="row">
+        <div class="row">
             <label for="" class="col-lg-8">Se encuentra operativa en automatico</label>
-            <div class="col-lg-4">
-                <select name="" id="operativaAutomatico">
-                    <option value="">Seleccione...</option>
+            <div class="col-lg-3">
+                <select name="" id="operativaAutomatico" class="form-control">
+                    <option value="">Sel...</option>
                     <option value="SI">SI</option>
                     <option value="NO">NO</option>
-    
+                    
                 </select>
             </div>
         </div>
+        <div class="row">
+
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Equipo Listado</label>
+                <input type="text" class="form-control" placeholder = "">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Modelo</label>
+                <input type="text"  class="form-control" placeholder = " ">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Marca bomba</label>
+                <input type="text"  class="form-control"placeholder = "">
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Potencia(HP)</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Tipo de Bomba</label>
+                <select name="" id="tipoBomba" class="form-control">
+                    <option value="">Seleccione...</option>
+                    <option value="Vertical">Vertical</option>
+                    <option value="Horizontal">Horizontal</option>
+                    <!-- <option value="Eje Libre">Eje Libre</option>
+                    <option value="Carcaza Partida">Carcaza Partida</option> -->
+                    
+                </select>
+            </div>
+            
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Q MAX(GPM)</label>
+                <input type="text"  class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >PRESION MAX(PSI)</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Q NOMINAL(GPM)</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >PRESION AL 150%(PSI)</label>
+                <input type="text"  class="form-control">
+            </div>
+        </div>
+            
+        <div class="row">
+           
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >DIAMETRO DE SUCCION</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >DIAMETRO DE DESCARGA</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >MATERIAL DE LA TUBERIA</label>
+                <input type="text"  class="form-control">
+            </div>
+        </div>
+        <div class="row">
+
+        
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >FUGAS</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >MANOMETRO</label>
+                <input type="text"  class="form-control">
+            </div>
+            
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >SELLO MECANICO</label>
+                <select name="" id="selloMecanico" class="form-control">
+                    <option value="">Sel...</option>
+                    <option value="BUENO">BUENO</option>
+                    <option value="REGULAR">REGULAR</option>
+                    <option value="MALO">MALO</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+
+        
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >MANOVACUOMETRO</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+            <label for="" >RODAMIENTOS DE MOTOR</label>
+            <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >EMPAQUETADURA</label>
+                <input type="text"  class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >COMPROBACION VENTILADOR</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >VALVULAS DE CORTE </label>
+                <input type="text"  class="form-control">
+            </div>
+            
+        </div>
     
      </div>
+     <br>
+    <div class="row"><H3>INFORMACION PARA MANIPULACION</H3></div>
+        <div class="row form-group">
+            <label class="col-lg-9">INSTRUCCIONES DE MANIPULACION</label>
+            <div class="col-lg-3">
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-lg-9">DEMARCACION DE LOS ELEMENTOS</label>
+            <div class="col-lg-3">
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-lg-9">LUZ DE EMERGENCIA</label>
+            <div class="col-lg-3">
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-lg-9">AREA EN ORDEN Y ASEADA</label>
+            <div class="col-lg-3">
+                <input type="text" class="form-control">
+            </div>
+        </div>
+    </div>
      <?php
+    }
+
+    public function formuInfoTableroLider()
+    {
+        $ancho= 4;
+        ?>
+        <div class="row">
+            <H3>INFORMACION TABLERO LIDER</H3>
+        </div>
+        <div class="row">
+            
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >CONTACTOR</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >INDICADOR LUMINOSO</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >GUARDAMOTOR</label>
+                <input type="text"  class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >FUSIBLES/MINIBREAKERS</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >TEMPORIZADOR</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >PRESOSTATOS</label>
+                <input type="text"  class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >CAUDALIMETRO</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >TABLERO LIBRE DE ALARMAS</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >DISPLAY DEL TABLERO</label>
+                <input type="text"  class="form-control">
+            </div>
+        </div>
+        <?php
+    }
+
+    public function formuInfoTableroJockey()
+    {
+        $ancho= 4;
+        ?>
+        <div class="row">
+            <H3>INFORMACION TABLERO JOCKEY</H3>
+        </div>
+        <div class="row">
+            
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >CONTACTOR</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >INDICADOR LUMINOSO</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >GUARDAMOTOR</label>
+                <input type="text"  class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >FUSIBLES/MINIBREAKERS</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >TEMPORIZADOR</label>
+                <input type="text"  class="form-control">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >PRESOSTATOS</label>
+                <input type="text"  class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >TRANSDUCTOR</label>
+                <input type="text"  class="form-control">
+            </div>
+          
+        </div>
+        <?php
     }
 
     public function verDiagnostico($idDiagnostico)
