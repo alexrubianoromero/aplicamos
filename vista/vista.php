@@ -36,6 +36,24 @@ public function draw_table($datos)
                 
                 }
 
+                public function printR($arreglo)
+                {
+                    echo '<pre>';
+                    print_r($arreglo); 
+                    echo '</pre>';
+                    die(); 
+                }
+                public function bodyCorreo($idcliente,$idDiagnostico)
+                {
+                    $body = '
+                            Aplicamos Ingenieria informa atentamente que seha realizado el siguiente diagnostico 
+                            
+                            https://www.alexrubiano.com/aplicamos/diag/'.$idDiagnostico.'
+                            ';
+                    return $body;
+
+                }
+
 }
 
 ?>

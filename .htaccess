@@ -1,0 +1,12 @@
+Options +FollowSymLinks
+
+RewriteEngine on
+
+
+
+RewriteRule ^diag/([0-9]+)$ diagnosticoEbAp/pdf/ordenPdf3.php?id=$1
+
+
+
+
+

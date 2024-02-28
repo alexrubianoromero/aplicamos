@@ -196,6 +196,23 @@ function traerInfoCompletaUltimoDiagnostico(idDiagnostico)
     +'&idDiagnostico='+idDiagnostico
     );
 }
+function enviarCorreoConDiagnostico(idDiagnostico)
+{
+    // var idCliente = document.getElementById('idCliente').value;
+    const http=new XMLHttpRequest();
+    const url = '../diagnosticoEbAp/diagnosticoEbAp.php';
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status ==200){
+            console.log(this.responseText);
+            document.getElementById("cuerpoModalEnviarCorreo").innerHTML  = this.responseText;
+        }
+    };
+    http.open("POST",url);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send("opcion=enviarCorreoConDiagnostico"
+    +'&idDiagnostico='+idDiagnostico
+    );
+}
 
 
 function grabarDiagnosticoEbAp(){

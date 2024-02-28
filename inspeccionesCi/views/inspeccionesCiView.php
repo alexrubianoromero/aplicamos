@@ -1,32 +1,33 @@
 <?php
 $raiz = dirname(dirname(dirname(__file__)));
 // require_once($raiz.'/hardware/views/hardwareView.php'); 
-require_once($raiz.'/diagnosticoEbAp/models/DiagnosticoEbApModel.php'); 
-require_once($raiz.'/diagnosticoEbAp/models/ConceptoTableroEbApModel.php'); 
+// require_once($raiz.'/diagnosticoEbAp/models/DiagnosticoEbApModel.php'); 
+// require_once($raiz.'/diagnosticoEbAp/models/ConceptoTableroEbApModel.php'); 
 require_once($raiz.'/clientes/models/ClienteModel.php'); 
-require_once($raiz.'/diagnosticoEbAp/models/TableroDiagnosticoEbApModel.php'); 
 require_once($raiz.'/movil/model/UsuarioModel.php'); 
+require_once($raiz.'/inspeccionesCi/models/InspeccionCiModel.php'); 
+require_once($raiz.'/vista/vista.php'); 
 
-class diagnosticoEbApView
+class inspeccionesCiView extends vista
 {
     protected $model; 
     protected $ClienteModel; 
-    protected $conceptoTableroModel;
-    protected $tableroDiagnosticoModel;
+    // protected $conceptoTableroModel;
+    // protected $tableroDiagnosticoModel;
     protected $usuarioModel;
 
     public function __construct()
     {
-        $this->model = new DiagnosticoEbApModel();
+        $this->model = new InspeccionCiModel();
         $this->ClienteModel = new ClienteModel();
-        $this->conceptoTableroModel = new ConceptoTableroEbApModel();
-        $this->tableroDiagnosticoModel = new TableroDiagnosticoEbApModel();
+        // $this->conceptoTableroModel = new ConceptoTableroEbApModel();
+        // $this->tableroDiagnosticoModel = new TableroDiagnosticoEbApModel();
         $this->usuarioModel = new UsuarioModel();
     }
 
 
 
-    public function pantallaDiagnosticoEbAp()
+    public function pantallaInspeccionCI()
     {
         ?>
         <!DOCTYPE html>
@@ -37,15 +38,15 @@ class diagnosticoEbApView
             <title>Document</title>
         </head>
         <body>
-            
+            FORMATO INSPECCION RED CONTRA INCENDIOS
             <div class="row" id="divPantallaDiagEbAp" style="padding:5px;">
                 <div id="botonesDiagEbAp">
                     <div class="row">
                         <div class="col-lg-3 ofset-3">
-                            <button class="btn btn-primary" onclick="formuNuevoDiagnostico();">Nuevo Diagnostico </button>  
+                            <button class="btn btn-primary" onclick="formuNuevaInspeccionCi();">Nuevo Formato Inspeccion </button>  
                         </div>
                         <div class="col-lg-3 ofset-3">
-                            <button class="btn btn-primary" onclick="mostrarDiagnosticos();">Mostrar Diagnosticos </button>  
+                            <button class="btn btn-primary" onclick="mostrarFormatosCi();">Mostrar Formatos de Inspeccion </button>  
                         </div>
                         
                     </div>
@@ -138,53 +139,54 @@ class diagnosticoEbApView
 
     } 
 
-    function mostrarDiagnosticos()
-    {
-        $diagnosticos = $this->model->traerDiagnosticos();    
-        echo '<table class="table">'; 
-        echo '<tr>'; 
-        echo '<th>No</th>';
-        echo '<th>Fecha</th>';
-        echo '<th>Cliente</th>';
-        echo '<th>Correo</th>';
+    // function mostrarDiagnosticos()
+    // {
+    //     $diagnosticos = $this->model->traerDiagnosticos();    
+    //     echo '<table class="table">'; 
+    //     echo '<tr>'; 
+    //     echo '<th>No</th>';
+    //     echo '<th>Fecha</th>';
+    //     echo '<th>Cliente</th>';
+    //     echo '<th>Correo</th>';
        
-        echo '<th>Ver</th>';
-        echo '<th>Pdf</th>';
-        echo '</tr>';
-        foreach($diagnosticos as $diagnostico)
-        {
-            $infoCLiente = $this->ClienteModel->traerClienteId($diagnostico['idCliente']);             
-            echo '<tr>'; 
-            echo '<td>'.$diagnostico['id'].'</td>';
-            echo '<td>'.$diagnostico['fecha'].'</td>';
-            echo '<td>'.$infoCLiente['nombre'].'</td>';
-            echo '<th><button class="btn btn-warning btn-sm"
-                    data-toggle="modal"   
-                    data-target="#modalEnviarCorreo"
-                    onclick = "enviarCorreoConDiagnostico('.$diagnostico['id'].'); "
-                    ">Correo</button></th>';
-            echo '<td><button class ="btn btn-primary btn-sm" onclick ="verDiagnostico('.$diagnostico['id'].')">Ver</button></td>';
-            echo '<td><a href="../diagnosticoEbAp/pdf/ordenPdf3.php?idDiagnostico='.$diagnostico['id'].'" target="_blank" >PDF</a></td>';
-            echo '</tr>';    
-        }
-        echo '</table>';
-    }
+    //     echo '<th>Ver</th>';
+    //     echo '<th>Pdf</th>';
+    //     echo '</tr>';
+    //     foreach($diagnosticos as $diagnostico)
+    //     {
+    //         $infoCLiente = $this->ClienteModel->traerClienteId($diagnostico['idCliente']);             
+    //         echo '<tr>'; 
+    //         echo '<td>'.$diagnostico['id'].'</td>';
+    //         echo '<td>'.$diagnostico['fecha'].'</td>';
+    //         echo '<td>'.$infoCLiente['nombre'].'</td>';
+    //         echo '<th><button class="btn btn-warning btn-sm"
+    //                 data-toggle="modal"   
+    //                 data-target="#modalEnviarCorreo"
+    //                 onclick = "enviarCorreoConDiagnostico('.$diagnostico['id'].'); "
+    //                 ">Correo</button></th>';
+    //         echo '<td><button class ="btn btn-primary btn-sm" onclick ="verDiagnostico('.$diagnostico['id'].')">Ver</button></td>';
+    //         echo '<td><a href="../diagnosticoEbAp/pdf/ordenPdf3.php?idDiagnostico='.$diagnostico['id'].'" target="_blank" >PDF</a></td>';
+    //         echo '</tr>';    
+    //     }
+    //     echo '</table>';
+    // }
 
 
-    public function formuNuevoDiagnostico()
+    public function formuNuevaInspeccionCi()
     {
          $clientes = $this->ClienteModel->traerClientes(); 
+        //  $this->printR($clientes); 
        
         ?>
         <div class="row mt-3"  id="div_principal_diagnosticoEbAp">
-            <P>DIAGNOSTICO EQUIPO BOMBEO AGUA POTABLE</P>
+            <P>FORMATO INSPECCION RED CONTRA INCENDIO</P>
 
             <div class="row">
                 <label for="" class="col-lg-3">
                     Razon Social:
                 </label>
                 <div class="col-lg-9">
-                    <select id="idCliente" name="idCliente" style="color:black;" class="form-control" onchange="traerUltimoDiagnosticoCliente();">
+                    <select id="idCliente" name="idCliente" style="color:black;" class="form-control" onchange="traerUltimoFormatoInspeccionCliente();">
                         <option value= "">Sleccione...</option>
                         <?php
                         foreach($clientes as $cliente)
@@ -202,7 +204,7 @@ class diagnosticoEbApView
             </div>
             <br>
             <div class="row mt-3">
-                <button class ="btn btn-primary" onclick="crearEncabezadoDiagnosticoEbAp();">Continuar</button>
+                <button class ="btn btn-primary" onclick="crearEncabezadoInspeccionIncencio();">Continuar</button>
             </div>
 
             <!-- <div class="row">
@@ -218,9 +220,10 @@ class diagnosticoEbApView
     
     public function mostrarInfoEncabezado($idDiagnostico)
     {
-        $infoDiagnostico = $this->model->traerDiagnosticoId($idDiagnostico); 
+        $infoDiagnostico = $this->model->traerFormatoInspeccionId($idDiagnostico); 
+        // $this->printR($infoDiagnostico);
         $infoCLiente = $this->ClienteModel->traerClienteId($infoDiagnostico['idCliente']); 
-        $infoTablerosDiagnostico = $this->tableroDiagnosticoModel->traerTablerosDiagnostico($idDiagnostico);   
+        // $infoTablerosDiagnostico = $this->tableroDiagnosticoModel->traerTablerosDiagnostico($idDiagnostico);   
         $infoUsuario = $this->usuarioModel->traerusuarioId($infoDiagnostico['idAtendioVisita']);  
         ?>
         <div class="row mt-3" style="padding:5px; font-size:20px;" >
@@ -245,9 +248,11 @@ class diagnosticoEbApView
        </div>
         <?php
     }
-    public function mostrarConceptosDiagnosticoEbAp($idDiagnostico)
+
+    public function mostrarConceptosFormatoInspeccion($idDiagnostico)
     {
-        $infoDiagnostico = $this->model->traerDiagnosticoId($idDiagnostico); 
+        $infoDiagnostico = $this->model->traerFormatoInspeccionId($idDiagnostico); 
+        // $this->printR($infoDiagnostico);
         //   echo '<pre>'; 
         //     print_r($infoDiagnostico); 
         //     echo'</pre>';
@@ -259,15 +264,22 @@ class diagnosticoEbApView
 
         <div class="row" style="padding:5px;">
         <div class="row">
-            CONVENCIONES: B= BUENO; R= REGULAR; M= MALO; A= AUSENTE; N/A= NO APLICA  
-        </div>
-            <form id="formularioDiagnostico" name ="formularioDiagnostico">
+            <!-- CONVENCIONES: B= BUENO; R= REGULAR; M= MALO; A= AUSENTE; N/A= NO APLICA   -->
+        </div class="row">
+            <!-- <form id="formularioDiagnostico" name ="formularioDiagnostico">
                 <input type="hidden" id="idDiagnostico" name="idDiagnostico" value="<?php echo $idDiagnostico ?>" >
 
+            </form> -->
+            <div class="col-lg-5" style="border:1px solid black;">
                 <?php
-                  $this->formuTablerosEbAp();
+                  $this->formuInformacionBombaLider();
                   ?>
-            </form>
+            </div>
+            <div class="col-lg-offset-1 col-lg-5" style="border:1px solid black;">
+                <?php
+                  $this->formuInformacionBombaJockey();
+                  ?>
+            </div>
         </div>
         <div class="row">
             <!-- <button type="submit" class="btn btn-primary" onclick="grabarDiagnosticoEbAp();">GRABAR DIAGNOSTICO</button> -->
@@ -276,119 +288,167 @@ class diagnosticoEbApView
      <?php               
     }
 
-    public function formuTablerosEbAp()
+    public function formuInformacionBombaLider()
     {
-        $conceptos = $this->conceptoTableroModel->traerTablerosEbAp()
-        ?>
-        <div class="row" style="color:black;" >
-
-                <table class="table table-striped">
-                <?php
-                foreach($conceptos as $concepto)
-                {
-                    echo '<tr>'; 
-                    echo '<td>'.$concepto['descripcion'].'</td>';
-                    echo '<td><select id="concepto'.$concepto['id'].'" name="concepto'.$concepto['id'].'" class="form-control">
-                                    <option value ="">Seleccione...</option>
-                                    <option value ="B">Bueno</option>
-                                    <option value ="R">Regular</option>
-                                    <option value ="M">Malo</option>
-                                    <option value ="A">Ausente</option>
-                                    <option value ="NA">No Aplica</option>
-                                    </select>
-                            </td>';
-                    echo '</tr>';  
-                }
-                ?>
-                </table>
-        </div>    
-        <hr></hr>
-        <div class="row mt-3">
-            <div class="col-lg-3" align="left">
-                <label for="checkVariador">VARIADOR</label>
-                <input type="checkbox" id="checkVariador" name ="checkVariador" >
-            </div>    
-            <div class="col-lg-3" align="left">
-                <label for="checkArranque">ARRANQUE DIRECTO:</label>
-                <input type="checkbox" id="checkArranque" name="checkArranque" >
-            </div>    
-            <div class="col-lg-3" align="left">
-                <label for="checkEstrella">ESTRELLA TRIANGULO:</label>
-                <input type="checkbox" id="checkEstrella" name="checkEstrella" >   
-            </div>    
-            <div class="col-lg-3" align="left">
-            </div>    
-        </div>
-
-        <hr></hr>        
-        <div class="row mt-3">
-            <div class="col-lg-2" align="left">
-                <label for="checkHidroflow" >HIDROFLOW:</label>
-                <input type="checkbox" id="checkHidroflow" name="checkHidroflow">
-            </div>
-            <div class="col-lg-2" align="left">
-                <label>CAPACIDAD:</label>
-                <input type="text" id="capacidad" class="form-control" >
-            </div>
-            <div class="col-lg-8 form-group" align="left">
-                <label>MARCA DE LAS BOMBAS:</label>
-                <input type="text" id="marcaBomba" name="marcaBomba" class="form-control" >
-            </div>
-        </div>   
-         
-        <div class="row mt-1">    
-            <div class="col-lg-1" align="left">
-                <label>HP:</label>
-                <input type="text" id="hp" name="hp" class="form-control" >
-            </div>
-            <div class="col-lg-1" align="left">
-                <label >FUGAS:</label>
-                <div  align="left">
-                    <select id="fugas" name="fugas"  class="form-control" >
-                        <option value="">...</option>
-                        <option value="S">Si</option>
-                        <option value="N">No</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-lg-3" align="left">
-                <label>MARCA DEL TABLERO:</label>
-                <input type="text" id="marcasTableros" name="marcasTableros" class="form-control" >
-            </div>
-            
-            <div class="col-lg-6" align="left">
-                <div>
-                    <label for="">PRESION DEL TRABAJO</label>
-                </div>
-            
-                <div class="col-lg-3">
-                    <label class="col-lg-1">ON</label>
-                    <div class="col-lg-8">
-                        <input type="text" id="presiondetrabajoOn" name="presiondetrabajoOn" class="form-control" >
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <label class="col-lg-2">OFF</label>
-                    <div class="col-lg-8">
-                        <input type="text" id="presiondetrabajoOff" name="presiondetrabajoOff" class="form-control" >
-                    </div>
-                </div>
-            </div>
-
-        </div>      
-         <br>       
-        <div class="row mt-3">
-            <div class="col-lg-3">
-                <label for="">MATERIAL TUBERIA</label>
-                <input type="text" id="materialTuberia" name="materialTuberia" class="form-control" >
-
+     ?>
+     <div >
+        <div><H3>INFORMACION BOMBA LIDER</H3></div>
+        <div class="row">
+            <label for="" class="col-lg-8">Se encuentra operativa en automatico</label>
+            <div class="col-lg-4">
+                <select name="" id="operativaAutomatico" class="form-control">
+                    <option value="">Seleccione...</option>
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
+                    
+                </select>
             </div>
         </div>
-        <br>
-        <div class="row mt-3">
-            <textarea id="conceptoTecnico" name="conceptoTecnico" class ="form-control" rows="5" placeholder = "   CONCEPTO TECNICO AGUA POTABLE "></textarea>
-        </div> 
-      <?php
+        <div class="col-lg-4">
+            <!-- <label for="" >Equipo Listado</label> -->
+            <input type="text" class="form-control" placeholder = "EQUIPO LISTADO">
+        </div>
+        <div class="col-lg-4">
+            <!-- <label for="" >Modelo</label> -->
+            <input type="text"  class="form-control" placeholder = "MODELO">
+        </div>
+        <div class="col-lg-4">
+            <!-- <label for="" >Marca de la bomba</label> -->
+            <input type="text"  class="form-control"placeholder = "MARCA BOMBA">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >Potencia(HP)</label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >Transferencia</label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >Ubicacion</label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >Tipo de Bomba</label>
+            <select name="" id="tipoBomba" class="form-control">
+                    <option value="">Seleccione...</option>
+                    <option value="Vertical">Vertical</option>
+                    <option value="Horizontal">Horizontal</option>
+                    <option value="Eje Libre">Eje Libre</option>
+                    <option value="Carcaza Partida">Carcaza Partida</option>
+                    
+                </select>
+        </div>
+        <div class="col-lg-5">
+            <label for="" >Tipo de Succion(+-)</label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >Q MAX(GPM)</label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >PRESION MAX(PSI)</label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >Q NOMINAL (GPM)</label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >PRESION AL 150%(PSI)</label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >DIAMETRO DE SUCCION</label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >DIAMETRO DE DESCARGA</label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >MATERIAL DE LA TUBERIA</label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >FUGAS</label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >CABEZAL DE PRUEBAS</label>
+            <select name="" id="tipoCabezal" class="form-control">
+                    <option value="">Seleccione...</option>
+                    <option value="BUENO">BUENO</option>
+                    <option value="REGULAR">REGULAR</option>
+                    <option value="MALO">MALO</option>
+                </select>
+        </div>
+        <div class="col-lg-5">
+            <label for="" >MANOMETRO</label>
+            <input type="text"  class="form-control">
+        </div>
+    
+        <div class="col-lg-5">
+            <label for="" >SELLO MECANICO / P.ESTOPA</label>
+            <select name="" id="selloMecanico" class="form-control">
+                    <option value="">Seleccione...</option>
+                    <option value="BUENO">BUENO</option>
+                    <option value="REGULAR">REGULAR</option>
+                    <option value="MALO">MALO</option>
+                </select>
+        </div>
+        <div class="col-lg-5">
+            <label for="" >MANOVACUOMETRO</label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >RODAMIENTOS DE MOTOR</label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >EMPAQUETADURA</label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >VALVULAS DE CORTE </label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >CAUDALIMETRO</label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >VALVULA DE ALIVIO</label>
+            <input type="text"  class="form-control">
+        </div>
+        <div class="col-lg-5">
+            <label for="" >RETORNO A TANQUE</label>
+            <input type="text"  class="form-control">
+        </div>
+    
+     </div>
+     <?php
+    }
+    public function formuInformacionBombaJockey()
+    {
+     ?>
+     <div >
+        <div><h3>INFORMACION BOMBA JOCKEY</h3></div>
+        <div class="row">
+            <label for="" class="col-lg-8">Se encuentra operativa en automatico</label>
+            <div class="col-lg-4">
+                <select name="" id="operativaAutomatico">
+                    <option value="">Seleccione...</option>
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
+    
+                </select>
+            </div>
+        </div>
+    
+     </div>
+     <?php
     }
 
     public function verDiagnostico($idDiagnostico)
@@ -467,7 +527,7 @@ class diagnosticoEbApView
        <?php
     }    
 
-    public function mostrarUltimoDiagnosticoCliente($diagnostico)
+    public function mostrarUltimoFormatoInspeccionCliente($diagnostico)
     {
 
         $usuario =  $this->usuarioModel->traerusuarioId($diagnostico['idAtendioVisita']); 

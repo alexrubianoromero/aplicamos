@@ -5,15 +5,18 @@ require_once($raiz.'/diagnosticoEbAp/models/DiagnosticoEbApModel.php');
 require_once($raiz.'/diagnosticoEbAp/models/ImagenDiagnosticoEbApModel.php'); 
 require_once($raiz.'/diagnosticoEbAp/models/TableroDiagnosticoEbApModel.php'); 
 require_once($raiz.'/clientes/vista/ClientesVista.php'); 
+require_once($raiz.'/correo/EnviarCorreoPhpMailer.class.php'); 
+require_once($raiz.'/vista/vista.php'); 
 // die($raiz); 
 
-class diagnosticoEbApController 
+class diagnosticoEbApController extends vista
 {
     protected $view;
     protected $clienteView;
     protected $model;
     protected $tableroDiagnosticoModel;
     protected $imagenDiagnosticoModel;
+    protected $enviarCorreo; 
 
     public function __construct()
     {
@@ -24,6 +27,7 @@ class diagnosticoEbApController
         $this->model = new DiagnosticoEbApModel();
         $this->tableroDiagnosticoModel = new TableroDiagnosticoEbApModel();
         $this->imagenDiagnosticoModel = new ImagenDiagnosticoEbApModel();
+      
         // die('constructg');
         // echo 'desde controlador'; 
         // $this->view = new hardwareView();
@@ -93,9 +97,23 @@ class diagnosticoEbApController
         {
             $this->traerInfoCompletaUltimoDiagnostico($_REQUEST);
         }
-
+        if($_REQUEST['opcion']=='enviarCorreoConDiagnostico')
+        {
+            $this->enviarCorreoConDiagnostico($_REQUEST);
+        }
+        
     }
     
+    public function enviarCorreoConDiagnostico($request)
+    {
+        //definir la funcionalidad para enviar correo 
+        $email = 'alexrubianoromero@gmail.com';
+        $infoCliente = $this->model->traerInfoClienteIdDiagnostico($request['idDiagnostico']); 
+        // $this->printR($infoCliente['idcliente']); 
+        $body = $this->bodyCorreo($infoCliente['idcliente'],$request['idDiagnostico']);
+        // die($body); 
+        $this->enviarCorreo = new EnviarCorreoPhpMailer($infoCliente['email'],$body);
+    }
     //esa funcion es para mostrar toda la informacion del ultimo diagnostico del cliente 
     public function traerInfoCompletaUltimoDiagnostico($request)
     {
