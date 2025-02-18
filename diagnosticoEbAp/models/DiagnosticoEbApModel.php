@@ -83,4 +83,10 @@ class DiagnosticoEbAPModel extends Conexion
         $infoCLiente = mysql_fetch_assoc($consulta);
         return $infoCLiente;
     }
+    
+    function actualizarNumeroImagenesDiagEbAp($idDiagnostico,$noImagenes)
+    {
+        $sql = "update diagnosticoEbAp set numeroImagenes = '".$noImagenes."' where id= '".$idDiagnostico."' " ; 
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+    }
 }

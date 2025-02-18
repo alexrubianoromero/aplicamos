@@ -83,6 +83,7 @@ class movilVista{
     <script src="../cambiosdeaceite/js/cambiosdeaceite.js"></script> -->
     <script src="../diagnosticoEbAp/js/diagnosticoEbAp.js"></script>
     <script src="../diagnosticoEbAll/js/diagnosticoEbAll.js"></script>
+    <script src="../users/js/users.js"></script>
     <?php
   }
   public function htmlLogueo(){
@@ -164,6 +165,13 @@ class movilVista{
             if($_SESSION['nivel'] > 2 || $request['nivel']>2)
             {
                 // echo '<br>';
+                echo '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaUsuarios();">USUARIOS 
+               
+                </button>';
+            }    
+            if($_SESSION['nivel'] > 2 || $request['nivel']>2)
+            {
+                // echo '<br>';
                 echo '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaClientes();">CLIENTES 
                
                 </button>';
@@ -188,12 +196,12 @@ class movilVista{
             }
 
             
-            if($_SESSION['nivel'] > 2 || $request['nivel']>2)
-            {
-                 echo    '<br>';
-                echo     '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaImagenes();">MODULO IMAGENES
-                    </button>';
-             }       
+            // if($_SESSION['nivel'] > 2 || $request['nivel']>2)
+            // {
+            //      echo    '<br>';
+            //     echo     '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaImagenes();">MODULO IMAGENES
+            //         </button>';
+            //  }       
             if($_SESSION['nivel'] > 2 || $request['nivel']>2)
             {
                  echo    '<br>';

@@ -2,6 +2,9 @@
 $raiz = dirname(dirname(dirname(__file__)));
 require_once($raiz.'/inspeccionesCi/views/inspeccionesCiView.php'); 
 require_once($raiz.'/inspeccionesCi/models/InspeccionCiModel.php'); 
+require_once($raiz.'/inspeccionesCi/models/InfoBombaLiderModel.php'); 
+require_once($raiz.'/inspeccionesCi/models/InfoBombaJockeyModel.php'); 
+require_once($raiz.'/inspeccionesCi/models/ImagenDiagnosticoCiModel.php'); 
 // require_once($raiz.'/diagnosticoEbAp/models/DiagnosticoEbApModel.php'); 
 // require_once($raiz.'/diagnosticoEbAp/models/ImagenDiagnosticoEbApModel.php'); 
 // require_once($raiz.'/diagnosticoEbAp/models/TableroDiagnosticoEbApModel.php'); 
@@ -16,6 +19,9 @@ class inspeccionesCiController extends vista
     protected $view;
     // protected $clienteView;
     protected $model;
+    protected $infoLiderModel;
+    protected $infoJockeyModel;
+    protected $imagenModel; 
     // protected $tableroDiagnosticoModel;
     // protected $imagenDiagnosticoModel;
     // protected $enviarCorreo; 
@@ -33,6 +39,9 @@ class inspeccionesCiController extends vista
         $this->view = new inspeccionesCiView();
         // $this->clienteView = new CLientesVista();
         $this->model = new InspeccionCiModel();
+        $this->infoLiderModel = new InfoBombaLiderModel();
+        $this->infoJockeyModel = new InfoBombaJockeyModel();
+        $this->imagenModel = new ImagenDiagnosticoCiModel();
         // $this->tableroDiagnosticoModel = new TableroDiagnosticoEbApModel();
         // $this->imagenDiagnosticoModel = new ImagenDiagnosticoEbApModel();
       
@@ -52,10 +61,7 @@ class inspeccionesCiController extends vista
         {
            $this->view->formuNuevaInspeccionCi();
         }
-        // if($_REQUEST['opcion']=='mostrarDiagnosticos')
-        // {
-        //     $this->mostrarDiagnosticos();
-        // }
+     
         if($_REQUEST['opcion']=='crearEncabezadoInspeccionIncencio')
         {
             //esto esta en desarrollo
@@ -63,63 +69,112 @@ class inspeccionesCiController extends vista
             // $this->printR($maximoId); 
             $this->view->mostrarConceptosFormatoInspeccion($maximoId);
         }
-        // if($_REQUEST['opcion']=='formuAdicionarTableroEbAp')
+
+
+        // if($_REQUEST['opcion']=='grabarDiagnosticoInspeccion')
         // {
-        //     // $maximoId = $this->model->crearEncabezadoDiagnosticoEbAp($_REQUEST,$_SESSION['id_usuario']);
-        //     $this->view->mostrarConceptosDiagnosticoEbAp($_REQUEST['idDiagnostico']);
+        //     //   echo '<pre>'; print_r($_REQUEST); echo '</pre>';
+        //     // die();
+        //     $this->infoLiderModel->grabarInfoBombaLider($_REQUEST);
         // }
-        // if($_REQUEST['opcion']=='verDiagnostico')
-        // {
-        //     // $maximoId = $this->model->crearEncabezadoDiagnosticoEbAp($_REQUEST,$_SESSION['id_usuario']);
-        //     $this->view->verDiagnostico($_REQUEST['idDiagnostico']);
-        // }
-        
-        // if($_REQUEST['opcion']=='grabarDiagnosticoEbAp')
-        // {
-            //     // echo '<pre>'; 
-            //     // print_r($_REQUEST); 
-            //     // echo'</pre>';
-            //     // die(); 
-            //     $this->grabarDiagnosticoEbAp($_REQUEST);
-            // }
-            // if($_REQUEST['opcion']=='filtrarDiagnosticosEbApPorFecha')
-            // {
-                //     $this->filtrarDiagnosticosEbApPorFecha($_REQUEST);
-                // }
-                if($_REQUEST['opcion']=='traerUltimoFormatoInspeccionCliente')
-                {
-                    $this->traerUltimoFormatoInspeccionCliente($_REQUEST);
-                }
-                // if($_REQUEST['opcion']=='verimagenesDiagnosticoEbAp')
-                // {
-                    //     $imagenes = $this->imagenDiagnosticoModel->traerImagenesDiagnosticoId($_REQUEST['idDiagnostico']);
-                    //     //     echo '<pre>'; 
-                    //     // print_r($imagenes); 
-                    //     // echo'</pre>';
-                    //     // die('imagenes '); 
-                    //     $this->view->verimagenesDiagnosticoEbAp($imagenes,$_REQUEST['idDiagnostico']);
-                    // }
-                    
-                    // if($_REQUEST['opcion']=='formuAgregarImagenDiagnostico')
-                    // {
-                        //     $this->view->formuAgregarImagenDiagnostico($_REQUEST['idDiagnostico']);
-                        // }
-                        // if($_REQUEST['opcion']=='traerInfoCompletaUltimoDiagnostico')
-                        // {
-                            //     $this->traerInfoCompletaUltimoDiagnostico($_REQUEST);
-        // }
-        // if($_REQUEST['opcion']=='enviarCorreoConDiagnostico')
-        // {
-            //     $this->enviarCorreoConDiagnostico($_REQUEST);
-            // }
+
+        if($_REQUEST['opcion']=='grabarDiagnosticoInspeccionBombaLider')
+        {
+            $idBombaLider =  $this->infoLiderModel->grabarInfoBombaLider($_REQUEST);
+            //asignarle el id de bomvalider a la inspeccion ci 
+            $this->model->asignarIdBombaLiderAInspeccion($_REQUEST['idDiagnostico'],$idBombaLider);
+            
+            
+            
+            
             
         }
-        
-        public function traerUltimoFormatoInspeccionCliente($request)
+        if($_REQUEST['opcion']=='grabarDiagnosticoInspeccionBombaJockey')
         {
+            // echo '<pre>'; print_r($_REQUEST); echo '</pre>';
+            //  die();
+            $idBombaJockey = $this->infoJockeyModel->grabarInfoBombaJockey($_REQUEST);
+            $this->model->asignarIdBombaJockeyAInspeccion($_REQUEST['idDiagnostico'],$idBombaJockey);
+
+        }
+
+
+       
+        if($_REQUEST['opcion']=='traerUltimoFormatoInspeccionCliente')
+        {
+            $this->traerUltimoFormatoInspeccionCliente($_REQUEST);
+        }
+
+        if($_REQUEST['opcion']=='mostrarInspeccionesCi')
+        {
+           $this->view->mostrarInspeccionesCi();
+        }
+
+        if($_REQUEST['opcion']=='verimagenesDiagnosticoCi')
+        {
+            $imagenes = $this->imagenModel->traerImagenesDiagnosticoCi($_REQUEST['idDiagnostico']);
+            // $this->printR($imagenes); 
+            //     echo '<pre>'; 
+            // print_r($imagenes); 
+            // echo'</pre>';
+            // die('imagenes '); 
+            $this->view->verimagenesDiagnosticoCi($imagenes,$_REQUEST['idDiagnostico']);
+        }
+        if($_REQUEST['opcion']=='formuAgregarImagenDiagnosticoCi')
+        {
+            $this->view->formuAgregarImagenDiagnosticoCi($_REQUEST['idDiagnostico']);
+        }
+
+        if($_REQUEST['opcion']=='realizarCargaArchivoCi')
+        {
+            $this->realizarCargaArchivoCi($_REQUEST);
+        }
+        
+          
+    } //este debe ser el fin de construct
+        
+
+    public function realizarCargaArchivoCi($request)
+    {
+        //traerinfoGanado
+        $infodiagnostico = $this->model->traerFormatoInspeccionId($request['idDiagnostico']);
+
+        $noSigImagen = $infodiagnostico['numeroImagenes']+1;
+        //crear el nombre del archivo
+        $nombreArchivo =  $request['idDiagnostico'].'-'.$noSigImagen.'-'.$_FILES['archivo']['name'];
+        //actualizar el numero de imagenes en ganado
+
+        $this->model->actualizarNumeroImagenesDiagCi($request['idDiagnostico'],$noSigImagen);
+
+        //subir el archivo
+        $this->subirArchivoDevolucionCi($nombreArchivo);
+        //insertar en  la tabla de imagenes
+        $this->imagenModel->grabaregistroImagenesDiagnosticoCi($request['idDiagnostico'],$nombreArchivo,'imagenes/imagenesDiagnosticoCi');
+        // $this->dosisAplicadaModel->eliminarDosisAplicada($request['idSosisAplicada']);
+        // echo 'Registro ELiminado';
+
+    }
+
+    public function subirArchivoDevolucionCi($nombre_archivo)
+    {
+        //  $this->printR($_FILES);
+        //  $nombre_archivo = $_FILES['archivo']['name'];
+            // if (move_uploaded_file($_FILES['archivo']['tmp_name'],  'archivos/'.$nombre_archivo)){
+                // ../imagenes/imagenesDiagnosticoEbAp/imagen1.jpg
+            if (move_uploaded_file($_FILES['archivo']['tmp_name'],  '../imagenes/imagenesDiagnosticoCi/'.$nombre_archivo)){
+                echo "El archivo ha sido cargado correctamente.";
+            }else{
+                echo "Ocurrió algún error al subir el fichero. No pudo guardarse.";
+            }
+            // die('Archivo subido');
+
+    }
+
+    public function traerUltimoFormatoInspeccionCliente($request)
+    {
             $ultDiagnostico = $this->model->traerUltimoFormatoInspeccionCliente($request['idCliente']);
             $this->view ->mostrarUltimoFormatoInspeccionCliente($ultDiagnostico);
-        }
+    }
         // public function enviarCorreoConDiagnostico($request)
         // {
             //     //definir la funcionalidad para enviar correo 

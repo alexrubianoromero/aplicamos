@@ -24,6 +24,15 @@ class ImagenDiagnosticoEbApModel extends Conexion
     }
 
 
+    public function grabaregistroImagenesDiagnostico($idDiagnostico,$nombreIma,$ruta)
+    {
+        $sql = "insert into imagenesDiagnosticoEbAp(idDiagnostico,nombre,rutaImagen) 
+        values ('".$idDiagnostico."','".$nombreIma."','".$ruta."')";
+        // die($sql); 
+        $consulta = mysql_query($sql,$this->connectMysql());
+    }
+
+
 
 }
 

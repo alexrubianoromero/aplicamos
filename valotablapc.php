@@ -42,7 +42,10 @@ $nombrebase = "base_demo";
 
 
 
-
+$servidor = "localhost";
+$usuario = "ctwtvsxj_admin";
+$clave  = "ElMejorProgramador***";
+$nombrebase = "ctwtvsxj_base_aplicamos";
 
 
 $conexion =mysql_connect($servidor,$usuario,$clave);

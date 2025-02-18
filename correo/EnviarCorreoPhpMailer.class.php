@@ -29,14 +29,14 @@ class EnviarCorreoPhpMailer
             $this->mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
             $this->mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
             //Recipients
-            $this->mail->setFrom('correo@arsolutiontechnology.com', 'APLICAMOS INGENIERIA');
+            $this->mail->setFrom('correo@arsolutiontechnology.com', 'KAYMO Software para Talleres');
             $this->mail->addAddress($this->email);     //Add a recipient
             //Attachments
             // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
             // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
             //Content
             $this->mail->isHTML(true);                                  //Set email format to HTML
-            $this->mail->Subject = 'APLICAMOS INGENIERIA';
+            $this->mail->Subject = 'KAYMO SOFTWARE';
             $this->mail->Body    = $this->body;
             // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
             $this->mail->send();

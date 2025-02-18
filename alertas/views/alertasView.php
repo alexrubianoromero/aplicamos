@@ -34,9 +34,9 @@ class alertasView
             <body>
                 <div class="row">
                     <div>
-                        <button class="btn btn-primary" onclick="formuAlerta(); " >Nueva Alerta</button>
+                        <button class="btn btn-primary">Nueva Alerta</button>
                     </div>
-                    <div class="mt-3">
+                    <div>
                         <?php  $this->mostrarAlertas();  ?>
                     </div>
                 </div>

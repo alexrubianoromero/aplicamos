@@ -6,12 +6,14 @@ $raiz = dirname(dirname(dirname(__file__)));
 require_once($raiz.'/clientes/models/ClienteModel.php'); 
 require_once($raiz.'/movil/model/UsuarioModel.php'); 
 require_once($raiz.'/inspeccionesCi/models/InspeccionCiModel.php'); 
+require_once($raiz.'/inspeccionesCi/models/ImagenDiagnosticoCiModel.php'); 
 require_once($raiz.'/vista/vista.php'); 
 
 class inspeccionesCiView extends vista
 {
     protected $model; 
     protected $ClienteModel; 
+    protected $imagenModel; 
     // protected $conceptoTableroModel;
     // protected $tableroDiagnosticoModel;
     protected $usuarioModel;
@@ -23,6 +25,7 @@ class inspeccionesCiView extends vista
         // $this->conceptoTableroModel = new ConceptoTableroEbApModel();
         // $this->tableroDiagnosticoModel = new TableroDiagnosticoEbApModel();
         $this->usuarioModel = new UsuarioModel();
+        $this->imagenModel = new ImagenDiagnosticoCiModel();
     }
 
 
@@ -46,14 +49,14 @@ class inspeccionesCiView extends vista
                             <button class="btn btn-primary" onclick="formuNuevaInspeccionCi();">Nuevo Formato Inspeccion </button>  
                         </div>
                         <div class="col-lg-3 ofset-3">
-                            <button class="btn btn-primary" onclick="mostrarFormatosCi();">Mostrar Formatos de Inspeccion </button>  
+                            <button class="btn btn-primary" onclick="mostrarInspeccionesCi();">Mostrar Formatos de Inspeccion </button>  
                         </div>
                         
                     </div>
                 </div>
                 <div class="row mt-3" id="divResultadosDiagEbAp">
                     <?php
-                    $this->mostrarDiagnosticos();
+                    $this->mostrarInspeccionesCi();
                     
                     ?>
             </div>        
@@ -61,6 +64,7 @@ class inspeccionesCiView extends vista
         <?php    $this->modalSubirArchivo();  ?>    
         <?php    $this->modalUltimoDiagnostico();  ?>    
         <?php    $this->modalEnviarCorreo();  ?>    
+        <?php    $this->modalVerImagenesDiagnosticoCi();  ?>    
     </body>
     </html>
         <?php
@@ -139,37 +143,72 @@ class inspeccionesCiView extends vista
 
     } 
 
-    // function mostrarDiagnosticos()
-    // {
-    //     $diagnosticos = $this->model->traerDiagnosticos();    
-    //     echo '<table class="table">'; 
-    //     echo '<tr>'; 
-    //     echo '<th>No</th>';
-    //     echo '<th>Fecha</th>';
-    //     echo '<th>Cliente</th>';
-    //     echo '<th>Correo</th>';
+    public function modalVerImagenesDiagnosticoCi(){
+        ?>
+         <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
+         Launch demo modal
+         </button> -->
+          <div  class="modal fade " id="modalVerImagenesDiagnosticoCi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                  <div class="modal-header" id="headerNuevoCliente">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Imagenes </h4>
+                  </div>
+                  <div id="cuerpoModalVerImagenesDiagnosticoCi" class="modal-body">
+                  </div>
+                  <div class="modal-footer" id="footerNuevoCliente">
+                      <button type="button" class="btn btn-default" data-dismiss="modal" onclick = "">Cerrar</button>
+                      <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                  </div>
+                  </div>
+              </div>
+          </div>
+        <?php
+    } 
+
+
+
+    function mostrarInspeccionesCi()
+    {
+        $diagnosticos = $this->model->traerInspecciones();  
+            //      echo '<pre>'; print_r($diagnosticos); echo '</pre>';
+            // die(); 
+        echo '<table class="table">'; 
+        echo '<tr>'; 
+        echo '<th>No.</th>';
+        echo '<th>Fecha</th>';
+        echo '<th>Cliente</th>';
+        echo '<th>Imagenes</th>';
+        echo '<th>Correo</th>';
        
-    //     echo '<th>Ver</th>';
-    //     echo '<th>Pdf</th>';
-    //     echo '</tr>';
-    //     foreach($diagnosticos as $diagnostico)
-    //     {
-    //         $infoCLiente = $this->ClienteModel->traerClienteId($diagnostico['idCliente']);             
-    //         echo '<tr>'; 
-    //         echo '<td>'.$diagnostico['id'].'</td>';
-    //         echo '<td>'.$diagnostico['fecha'].'</td>';
-    //         echo '<td>'.$infoCLiente['nombre'].'</td>';
-    //         echo '<th><button class="btn btn-warning btn-sm"
-    //                 data-toggle="modal"   
-    //                 data-target="#modalEnviarCorreo"
-    //                 onclick = "enviarCorreoConDiagnostico('.$diagnostico['id'].'); "
-    //                 ">Correo</button></th>';
-    //         echo '<td><button class ="btn btn-primary btn-sm" onclick ="verDiagnostico('.$diagnostico['id'].')">Ver</button></td>';
-    //         echo '<td><a href="../diagnosticoEbAp/pdf/ordenPdf3.php?idDiagnostico='.$diagnostico['id'].'" target="_blank" >PDF</a></td>';
-    //         echo '</tr>';    
-    //     }
-    //     echo '</table>';
-    // }
+        // echo '<th>Ver</th>';
+        echo '<th>Pdf</th>';
+        echo '</tr>';
+        foreach($diagnosticos as $diagnostico)
+        {
+            $infoCLiente = $this->ClienteModel->traerClienteId($diagnostico['idCliente']);             
+            echo '<tr>'; 
+            echo '<td>'.$diagnostico['id'].'</td>';
+            echo '<td>'.$diagnostico['fecha'].'</td>';
+            echo '<td>'.$infoCLiente['nombre'].'</td>';
+            echo '<th><button class="btn btn-warning btn-sm"
+                    data-toggle="modal"   
+                    data-target="#modalEnviarCorreo"
+                    onclick = "enviarCorreoConDiagnostico('.$diagnostico['id'].'); "
+                    ">Correo</button></th>';
+
+                    echo '<td><button class="btn btn-success btn-sm"
+                    data-toggle="modal"   
+                    data-target="#modalVerImagenesDiagnosticoCi"
+                    onclick = " verimagenesDiagnosticoCi('.$diagnostico['id'].'); "
+                    ">Imagenes</button></td>';        
+            // echo '<td><button class ="btn btn-primary btn-sm" onclick ="verDiagnostico('.$diagnostico['id'].')">Ver</button></td>';
+            echo '<td><a href="../inspeccionesCi/pdf/inspeccionCiPdf.php?idDiagnostico='.$diagnostico['id'].'" target="_blank" >PDF</a></td>';
+            echo '</tr>';    
+        }
+        echo '</table>';
+    }
 
 
     public function formuNuevaInspeccionCi()
@@ -267,9 +306,10 @@ class inspeccionesCiView extends vista
             <!-- CONVENCIONES: B= BUENO; R= REGULAR; M= MALO; A= AUSENTE; N/A= NO APLICA   -->
         <div class="row">
             <!-- <form id="formularioDiagnostico" name ="formularioDiagnostico">
+                
+                </form> -->
                 <input type="hidden" id="idDiagnostico" name="idDiagnostico" value="<?php echo $idDiagnostico ?>" >
 
-            </form> -->
             <div class="col-lg-5" style="border:1px solid black; font-size:12px;">
                 <?php
                   $this->formuInformacionBombaLider();
@@ -290,8 +330,12 @@ class inspeccionesCiView extends vista
             </div>
         </div>
         <div class="row">
+            <textarea class="form-control mt-3" id="observacionesICI" rows="5" placeholder="observaciones"></textarea>
+        </div>
+        <div class="row">
             <!-- <button type="submit" class="btn btn-primary" onclick="grabarDiagnosticoEbAp();">GRABAR DIAGNOSTICO</button> -->
-            <button  class="btn btn-primary" onclick="grabarDiagnosticoEbAp();">GRABAR DIAGNOSTICO</button>
+            <!-- <button  class="btn btn-primary" onclick="grabarDiagnosticoEbAp();">GRABAR DIAGNOSTICO</button> -->
+            <button  class="btn btn-primary" onclick="grabarDiagnosticoInspeccion();">GRABAR DIAGNOSTICO</button>
         </div>
      <?php               
     }
@@ -305,7 +349,7 @@ class inspeccionesCiView extends vista
         <div class="row">
             <label for="" class="col-lg-8">Se encuentra operativa en automatico</label>
             <div class="col-lg-3">
-                <select name="" id="operativaAutomatico" class="form-control">
+                <select  id="operativaAutomatico" class="form-control">
                     <option value="">Sel...</option>
                     <option value="SI">SI</option>
                     <option value="NO">NO</option>
@@ -317,15 +361,15 @@ class inspeccionesCiView extends vista
 
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Equipo Listado</label>
-                <input type="text" class="form-control" placeholder = " ">
+                <input id="equipoListado"  type="text" class="form-control" placeholder = " ">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Modelo</label>
-                <input type="text"  class="form-control" placeholder = "">
+                <input type="text"  class="form-control" placeholder = "" id="modelo">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Marca bomba</label>
-                <input type="text"  class="form-control"placeholder = " ">
+                <input type="text"  class="form-control" id="marcaBomba">
             </div>
         </div>
         
@@ -333,15 +377,15 @@ class inspeccionesCiView extends vista
 
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Potencia(HP)</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="potencia">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
             <label for="" >Transferencia</label>
-            <input type="text"  class="form-control">
+            <input type="text"  class="form-control" id="transferencia">
         </div>
         <div class="col-lg-<?php  echo $ancho; ?>">
             <label for="" >Ubicacion</label>
-            <input type="text"  class="form-control">
+            <input type="text"  class="form-control" id="ubicacion">
         </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Tipo de Bomba</label>
@@ -357,28 +401,31 @@ class inspeccionesCiView extends vista
             
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Tipo Succion(+-)</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="tipoSuccion">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >U Prue Pitometrica</label>
+                <input type="text"  class="form-control" id="ultimaPitometrica">
+            </div>
+
+            <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Q MAX(GPM)</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id = "qmaxGpm">
             </div>
         </div>
         
         <div class="row">
-           
-            
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >PRESION MAX(PSI)</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="presionMAxPsi">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Q NOMINAL (GPM)</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="qNominalGpm">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >PRESION AL 150%(PSI)</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="presionAl150">
             </div>
         </div>
         <div class="row">
@@ -386,15 +433,15 @@ class inspeccionesCiView extends vista
         
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >DIAMETRO DE SUCCION</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="diametroSuccion">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >DIAMETRO DE DESCARGA</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="diametroDescarga">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >MATERIAL DE LA TUBERIA</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="materialTuberia">
             </div>
         </div>
         <div class="row">
@@ -402,7 +449,7 @@ class inspeccionesCiView extends vista
         
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >FUGAS</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="fugas">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >CABEZAL PRUEBAS</label>
@@ -414,8 +461,12 @@ class inspeccionesCiView extends vista
                 </select>
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >TANQUE INDEPENDIENTE</label>
+                <input type="text"  class="form-control"  id="tanqueIndependiente">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >MANOMETRO</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="nanomentro">
             </div>
         </div>
         <div class="row">
@@ -433,11 +484,11 @@ class inspeccionesCiView extends vista
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >MANOVACUOMETRO</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="manovacumetro">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >RODAMIENTOS DE MOTOR</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="rodamientosMotor">
             </div>
         </div>
 
@@ -445,15 +496,19 @@ class inspeccionesCiView extends vista
            
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >EMPAQUETADURA</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="empaquetadura">
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >COMPROBACION VENTILADOR</label>
+                <input type="text"  class="form-control" id="comprobacionVentilador">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >VALVULAS CORTE </label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="valvulasDeCorte">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >CAUDALIMETRO</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="caudalimetro">
             </div>
         </div>
 
@@ -462,11 +517,11 @@ class inspeccionesCiView extends vista
           
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >VALVULA DE ALIVIO</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="valvulaAlivio">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >RETORNO TANQUE</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="retornoTanque">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >CONDICIONES OPERACION</label>
@@ -495,7 +550,7 @@ class inspeccionesCiView extends vista
         <div class="row">
             <label for="" class="col-lg-8">Se encuentra operativa en automatico</label>
             <div class="col-lg-3">
-                <select name="" id="operativaAutomatico" class="form-control">
+                <select name="" id="operativaAutomaticoJockey" class="form-control">
                     <option value="">Sel...</option>
                     <option value="SI">SI</option>
                     <option value="NO">NO</option>
@@ -507,15 +562,16 @@ class inspeccionesCiView extends vista
 
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Equipo Listado</label>
-                <input type="text" class="form-control" placeholder = "">
+                <input id="equipoListadoJockey"  type="text" class="form-control" placeholder = " ">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Modelo</label>
-                <input type="text"  class="form-control" placeholder = " ">
+                <input type="text"  class="form-control" placeholder = "" id="modeloJockey">
+                
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Marca bomba</label>
-                <input type="text"  class="form-control"placeholder = "">
+                <input type="text"  class="form-control" id="marcaBombaJockey">
             </div>
         </div>
 
@@ -523,38 +579,39 @@ class inspeccionesCiView extends vista
 
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Potencia(HP)</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="potenciaJockey">
             </div>
+
+
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Tipo de Bomba</label>
-                <select name="" id="tipoBomba" class="form-control">
+                <select name="" id="tipoBombaJockey" class="form-control">
                     <option value="">Seleccione...</option>
                     <option value="Vertical">Vertical</option>
                     <option value="Horizontal">Horizontal</option>
-                    <!-- <option value="Eje Libre">Eje Libre</option>
-                    <option value="Carcaza Partida">Carcaza Partida</option> -->
+                 
                     
                 </select>
             </div>
             
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Q MAX(GPM)</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="qmaxGpmJockey">
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >PRESION MAX(PSI)</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="presionMAxPsiJockey">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Q NOMINAL(GPM)</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="qNominalGpmJockey">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >PRESION AL 150%(PSI)</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="presionAl150Jockey">
             </div>
         </div>
             
@@ -562,15 +619,15 @@ class inspeccionesCiView extends vista
            
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >DIAMETRO DE SUCCION</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="diametroSuccionJockey">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >DIAMETRO DE DESCARGA</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="diametroDescargaJockey">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >MATERIAL DE LA TUBERIA</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="materialTuberiaJockey">
             </div>
         </div>
         <div class="row">
@@ -578,16 +635,16 @@ class inspeccionesCiView extends vista
         
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >FUGAS</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="fugasJockey">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >MANOMETRO</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="nanomentroJockey">
             </div>
             
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >SELLO MECANICO</label>
-                <select name="" id="selloMecanico" class="form-control">
+                <select name="" id="selloMecanicoJockey" class="form-control">
                     <option value="">Sel...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
@@ -600,15 +657,15 @@ class inspeccionesCiView extends vista
         
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >MANOVACUOMETRO</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="manovacumetroJockey">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
             <label for="" >RODAMIENTOS DE MOTOR</label>
-            <input type="text"  class="form-control">
+            <input type="text"  class="form-control" id="rodamientosMotorJockey">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >EMPAQUETADURA</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="empaquetaduraJockey">
             </div>
         </div>
 
@@ -616,11 +673,11 @@ class inspeccionesCiView extends vista
 
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >COMPROBACION VENTILADOR</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="comprobacionVentiladorJockey">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >VALVULAS DE CORTE </label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="valvulasDeCorteJockey">
             </div>
             
         </div>
@@ -631,25 +688,25 @@ class inspeccionesCiView extends vista
         <div class="row form-group">
             <label class="col-lg-9">INSTRUCCIONES DE MANIPULACION</label>
             <div class="col-lg-3">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" id="instrucciones">
             </div>
         </div>
         <div class="row form-group">
             <label class="col-lg-9">DEMARCACION DE LOS ELEMENTOS</label>
             <div class="col-lg-3">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" id="demarcacion">
             </div>
         </div>
         <div class="row form-group">
             <label class="col-lg-9">LUZ DE EMERGENCIA</label>
             <div class="col-lg-3">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" id="luzemergecia">
             </div>
         </div>
         <div class="row form-group">
             <label class="col-lg-9">AREA EN ORDEN Y ASEADA</label>
             <div class="col-lg-3">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" id="areaenorden">
             </div>
         </div>
     </div>
@@ -667,43 +724,43 @@ class inspeccionesCiView extends vista
             
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >CONTACTOR</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="contactorLider">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >INDICADOR LUMINOSO</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="indicadorLider">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >GUARDAMOTOR</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="guardamotorLider">
             </div>
         </div>
         <div class="row">
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >FUSIBLES/MINIBREAKERS</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="fusiblesLider">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >TEMPORIZADOR</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="temporizadorLider">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >PRESOSTATOS</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="presostatosLider">
             </div>
         </div>
         <div class="row">
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >CAUDALIMETRO</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="caudalimetrotableroLider">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >TABLERO LIBRE DE ALARMAS</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="tableroLider">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >DISPLAY DEL TABLERO</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="displayLider">
             </div>
         </div>
         <?php
@@ -720,35 +777,35 @@ class inspeccionesCiView extends vista
             
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >CONTACTOR</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="contactorJockey">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >INDICADOR LUMINOSO</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="indicadorJockey">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >GUARDAMOTOR</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="guardamotorJockey">
             </div>
         </div>
         <div class="row">
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >FUSIBLES/MINIBREAKERS</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="fusiblesJockey">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >TEMPORIZADOR</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="temporizadorJockey">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >PRESOSTATOS</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="presostatosJockey">
             </div>
         </div>
         <div class="row">
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >TRANSDUCTOR</label>
-                <input type="text"  class="form-control">
+                <input type="text"  class="form-control" id="transductorJockey">
             </div>
           
         </div>
@@ -915,5 +972,59 @@ class inspeccionesCiView extends vista
         <?php
 
     }
+
+    
+    public function verimagenesDiagnosticoCi($imagenes,$idDiagnostico)
+    {
+        echo '<div class="row"><button 
+                                class="btn btn-primary"
+                                onclick ="formuAgregarImagenDiagnosticoCi('.$idDiagnostico.');"
+                                >
+                                Nueva Imagen
+                                </button>
+                                </div> '; 
+                                // data-bs-toggle="modal" 
+                                // data-bs-target="#modalSubirArchivo"
+        // echo 'Aqui mostrara las imagenes del diagnostico '; 
+        foreach($imagenes as $imagen)
+        {
+            $raiz123 = dirname(dirname(dirname(__file__)));
+            // die($raiz123); 
+            // $rutaImagen = $raiz123.'/imagenes/imagenesDiagnosticoEbAp/'.$imagen['rutaImagen'];
+            $rutaImagen = $raiz123.$imagen['rutaImagen'];
+            // echo '<div style="border:1px solid; width:200px; display:inline">'; 
+            echo '<br>';
+            echo '<div  class="row" >'; 
+            // echo '<img src="'.$rutaImagen.'" > '; 
+            // echo '<img src="../'.$imagen['rutaImagen']."/".$imagen['nombre'].'"  width="200px"> '; 
+            echo '<img src="../'.$imagen['rutaImagen']."/".$imagen['nombre'].'"  width="90%"> '; 
+            echo '</div>';
+        }
+        
+    }
+
+    public function formuAgregarImagenDiagnosticoCi($idDiagnostico)
+    {
+        // echo 'subir archivo '; 
+        ?>
+            <div id="div_cargue_archivo">
+                    <!-- <input name="imagen" id="imagen" type="file">
+                    <br><br><br><br>
+                    <button onclick="subirFotoDiagnosticoEbAp();" >Subir Foto</button>
+                    <br><br>
+                    <div id="div_muestre_resultado"></div>
+                    <span id="demo"></span> -->
+                    <form  enctype="multipart/form-data"/>
+                    <input name="archivo" id="archivo" type="file"/>
+                    <!-- <input type="submit" name="subir" value="Subir imagen"/> -->
+                    </form>
+                    <button  
+                            class ="btn btn-primary"    
+                            onclick="realizarCargaArchivoCi(<?php echo $idDiagnostico; ?>);"
+                            >SUBIR IMAGEN </button>
+            </div>
+        <?php
+    }
+
 
 }

@@ -1,0 +1,67 @@
+reunion de Aplñicamos 
+
+CAmbiar el tamaño de marca de las bombas 
+cuadro de convenciones en el informe de diagnostico 
+colocar filtro por fechas para ver los mantenimientos de un cliente 
+opcion por trimestres 
+revisar los iconos  de los botones 
+
+cuando seleccione el cliente que traiga el ultimo diagnostico que se realizo 
+
+que se puedan grabar varios tableros para el mismo diagnostico 
+
+que se grabe el tecnico que realizo el mantenimiento 
+
+crear el pdf con el fiagnostico y sus tableros 
+
+mas pendientes 
+verificar que al crear el encabezado del diagnostico se graba el usuario como quien atendio la visita
+Colocar el tecnico que atendio la visita en la consulta de diagnostico de agua potable //ya lo graba al cear el encabezado 
+validar que no se pueda crear un diagnostico si no se ha escogido el cliente 
+
+Estoy en aguas lluvias replicando la funcionalidad de agua potable 
+Ya replique que muestre encabezado 
+
+ahora revisar como hice lo de agregar varios tableros  a un diagnostico y replicarlo
+
+revisar la parte de agregar nuevo tablero a diagnostico 
+
+buscar la forma que siempre salgan las 10 casillas de los tableros asi esten vacios como por estetica
+Ahora replicarlo en aguas lluvias 
+
+mejorar el letrero de los botones ya no cabe
+
+
+hacer la parte para que grabe las imagenes 
+ pedir reunion con Julio Cesar y preguntar que mas informacion debe manejar el formu de aguas lluvias 
+revisar como capturamos una imegen
+
+
+PENDIENTE REUNION 19/02/2024
+
+Colocar el mensaje en cada uno de los diagnosticos en el pdf para cada uno de los formatos 
+colocar un boton para enviar el correo al cliente con el diagnostico 
+y una copia al correo de Aplicamos que sea indicado 
+
+cuando se muestre el ultimo diagnostico realizado al clientecolocar un boton para 
+ver ese diagnostico 
+
+Implementar manejo de imagenes para los diagnosticos
+
+pendiente 
+verificar la reduccion de tamaño de las imagenes 
+las imagenes del  diagnostico se deben adjuntar al pdf al final 
+
+creacion de tabla bomba lider que es parte de un diagnostico ci contra incendios
+voy a mirar que por lo menos grabe la primera parte de la informacion osea informacion bomba lider 
+
+
+
+
+
+
+
+
+
+
+

@@ -82,6 +82,7 @@ class diagnosticoEbApController extends vista
         if($_REQUEST['opcion']=='verimagenesDiagnosticoEbAp')
         {
             $imagenes = $this->imagenDiagnosticoModel->traerImagenesDiagnosticoId($_REQUEST['idDiagnostico']);
+            // $this->printR($imagenes); 
             //     echo '<pre>'; 
             // print_r($imagenes); 
             // echo'</pre>';
@@ -101,9 +102,49 @@ class diagnosticoEbApController extends vista
         {
             $this->enviarCorreoConDiagnostico($_REQUEST);
         }
+        if($_REQUEST['opcion']=='realizarCargaArchivo')
+        {
+            $this->realizarCargaArchivo($_REQUEST);
+        }
         
     }
     
+    public function realizarCargaArchivo($request)
+    {
+        //traerinfoGanado
+        $infodiagnostico = $this->model->traerDiagnosticoId($request['idDiagnostico']);
+        $noSigImagen = $infodiagnostico['numeroImagenes']+1;
+        //crear el nombre del archivo
+        $nombreArchivo =  $request['idDiagnostico'].'-'.$noSigImagen.'-'.$_FILES['archivo']['name'];
+        //actualizar el numero de imagenes en ganado
+
+        $this->model->actualizarNumeroImagenesDiagEbAp($request['idDiagnostico'],$noSigImagen);
+
+        //subir el archivo
+        $this->subirArchivoDevolucion($nombreArchivo);
+        //insertar en  la tabla de imagenes
+        $this->imagenDiagnosticoModel->grabaregistroImagenesDiagnostico($request['idDiagnostico'],$nombreArchivo,'imagenes/imagenesDiagnosticoEbAp');
+        // $this->dosisAplicadaModel->eliminarDosisAplicada($request['idSosisAplicada']);
+        // echo 'Registro ELiminado';
+
+    }
+
+    public function subirArchivoDevolucion($nombre_archivo)
+    {
+        //  $this->printR($_FILES);
+        //  $nombre_archivo = $_FILES['archivo']['name'];
+            // if (move_uploaded_file($_FILES['archivo']['tmp_name'],  'archivos/'.$nombre_archivo)){
+                // ../imagenes/imagenesDiagnosticoEbAp/imagen1.jpg
+            if (move_uploaded_file($_FILES['archivo']['tmp_name'],  '../imagenes/imagenesDiagnosticoEbAp/'.$nombre_archivo)){
+                echo "El archivo ha sido cargado correctamente.";
+            }else{
+                echo "Ocurrió algún error al subir el fichero. No pudo guardarse.";
+            }
+            // die('Archivo subido');
+
+    }
+
+
     public function enviarCorreoConDiagnostico($request)
     {
         //definir la funcionalidad para enviar correo 

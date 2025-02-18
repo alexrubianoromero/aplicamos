@@ -60,6 +60,7 @@ class diagnosticoEbApView
         <?php    $this->modalSubirArchivo();  ?>    
         <?php    $this->modalUltimoDiagnostico();  ?>    
         <?php    $this->modalEnviarCorreo();  ?>    
+        <?php    $this->modalVerImagenesDiagnostico();  ?>    
     </body>
     </html>
         <?php
@@ -111,8 +112,32 @@ class diagnosticoEbApView
               </div>
           </div>
         <?php
-
     } 
+    public function modalVerImagenesDiagnostico(){
+        ?>
+         <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
+         Launch demo modal
+         </button> -->
+          <div  class="modal fade " id="modalVerImagenesDiagnostico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                  <div class="modal-header" id="headerNuevoCliente">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Imagenes </h4>
+                  </div>
+                  <div id="cuerpoModalVerImagenesDiagnostico" class="modal-body">
+                  </div>
+                  <div class="modal-footer" id="footerNuevoCliente">
+                      <button type="button" class="btn btn-default" data-dismiss="modal" onclick = "">Cerrar</button>
+                      <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                  </div>
+                  </div>
+              </div>
+          </div>
+        <?php
+    } 
+
+
     public function modalUltimoDiagnostico (){
         ?>
          <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
@@ -147,8 +172,9 @@ class diagnosticoEbApView
         echo '<th>Fecha</th>';
         echo '<th>Cliente</th>';
         echo '<th>Correo</th>';
+        echo '<th>Imagenes</th>';
        
-        echo '<th>Ver</th>';
+        // echo '<th>Ver</th>';
         echo '<th>Pdf</th>';
         echo '</tr>';
         foreach($diagnosticos as $diagnostico)
@@ -158,12 +184,20 @@ class diagnosticoEbApView
             echo '<td>'.$diagnostico['id'].'</td>';
             echo '<td>'.$diagnostico['fecha'].'</td>';
             echo '<td>'.$infoCLiente['nombre'].'</td>';
-            echo '<th><button class="btn btn-warning btn-sm"
+            
+            echo '<td><button class="btn btn-warning btn-sm"
+            data-toggle="modal"   
+            data-target="#modalEnviarCorreo"
+            onclick = "enviarCorreoConDiagnostico('.$diagnostico['id'].'); "
+            ">Correo</button></td>';
+            
+            echo '<td><button class="btn btn-success btn-sm"
                     data-toggle="modal"   
-                    data-target="#modalEnviarCorreo"
-                    onclick = "enviarCorreoConDiagnostico('.$diagnostico['id'].'); "
-                    ">Correo</button></th>';
-            echo '<td><button class ="btn btn-primary btn-sm" onclick ="verDiagnostico('.$diagnostico['id'].')">Ver</button></td>';
+                    data-target="#modalVerImagenesDiagnostico"
+                    onclick = " verimagenesDiagnosticoEbAp('.$diagnostico['id'].'); "
+                    ">Imagenes</button></td>';
+
+            // echo '<td><button class ="btn btn-primary btn-sm" onclick ="verDiagnostico('.$diagnostico['id'].')">Ver</button></td>';
             echo '<td><a href="../diagnosticoEbAp/pdf/ordenPdf3.php?idDiagnostico='.$diagnostico['id'].'" target="_blank" >PDF</a></td>';
             echo '</tr>';    
         }
@@ -414,6 +448,8 @@ class diagnosticoEbApView
         </button>
         <button 
             class="btn btn-primary"
+            data-toggle="modal"   
+            data-target="#modalVerImagenesDiagnostico"
             onclick="verimagenesDiagnosticoEbAp(<?php  echo $idDiagnostico;   ?>);"
             >IMAGENES
         </button>
@@ -511,45 +547,53 @@ class diagnosticoEbApView
     {
         echo '<div class="row"><button 
                                 class="btn btn-primary"
-                                data-bs-toggle="modal" 
-                                data-bs-target="#modalSubirArchivo"
                                 onclick ="formuAgregarImagenDiagnostico('.$idDiagnostico.');"
                                 >
                                 Nueva Imagen
                                 </button>
                                 </div> '; 
+                                // data-bs-toggle="modal" 
+                                // data-bs-target="#modalSubirArchivo"
         // echo 'Aqui mostrara las imagenes del diagnostico '; 
         foreach($imagenes as $imagen)
         {
             $raiz123 = dirname(dirname(dirname(__file__)));
             // die($raiz123); 
-            $rutaImagen = $raiz123.'/imagenes/imagenesDiagnosticoEbAp/'.$imagen['rutaImagen'];
-            echo '<div style="border:1px solid; width:200px; display:inline">'; 
+            // $rutaImagen = $raiz123.'/imagenes/imagenesDiagnosticoEbAp/'.$imagen['rutaImagen'];
+            $rutaImagen = $raiz123.$imagen['rutaImagen'];
+            // echo '<div style="border:1px solid; width:200px; display:inline">'; 
+            echo '<br>';
+            echo '<div  class="row" >'; 
             // echo '<img src="'.$rutaImagen.'" > '; 
-            echo '<img src="../imagenes/imagenesDiagnosticoEbAp/'.$imagen['rutaImagen'].'"  width="200px"> '; 
+            // echo '<img src="../'.$imagen['rutaImagen']."/".$imagen['nombre'].'"  width="200px"> '; 
+            echo '<img src="../'.$imagen['rutaImagen']."/".$imagen['nombre'].'"  width="90%"> '; 
             echo '</div>';
         }
         
     }
 
 
-    public function formuAgregarImagenDiagnostico()
+    public function formuAgregarImagenDiagnostico($idDiagnostico)
     {
         // echo 'subir archivo '; 
         ?>
-        <div id="div_cargue_archivo">
-                <input name="imagen" id="imagen" type="file">
-                <br><br><br><br>
-                <!-- <button onclick="procesarformu();" >Procesar</button> -->
-                <br><br>
-                <!-- <button id="btnEnviar">Enviar!!</button> -->
-                <!-- </form> -->
-                <div id="div_muestre_resultado"></div>
-                <span id="demo"></span>
-        </div>
-        
+            <div id="div_cargue_archivo">
+                    <!-- <input name="imagen" id="imagen" type="file">
+                    <br><br><br><br>
+                    <button onclick="subirFotoDiagnosticoEbAp();" >Subir Foto</button>
+                    <br><br>
+                    <div id="div_muestre_resultado"></div>
+                    <span id="demo"></span> -->
+                    <form  enctype="multipart/form-data"/>
+                    <input name="archivo" id="archivo" type="file"/>
+                    <!-- <input type="submit" name="subir" value="Subir imagen"/> -->
+                    </form>
+                    <button  
+                            class ="btn btn-primary"    
+                            onclick="realizarCargaArchivo(<?php echo $idDiagnostico; ?>);"
+                            >SUBIR IMAGEN </button>
+            </div>
         <?php
-
     }
 
 }

@@ -7,7 +7,8 @@ class InspeccionCiModel extends Conexion
 {
     public function traerInspecciones()
     {
-        $sql = "select * from inspecccionesCi  where anulado = 0 order by id desc" ;
+        $sql = "select * from inspeccionesCi  where anulado = 0 order by id desc" ;
+        // die($sql);
         $consulta = mysql_query($sql,$this->connectMysql()); 
         $inspecciones = $this->get_table_assoc($consulta);
         return $inspecciones; 
@@ -59,6 +60,24 @@ class InspeccionCiModel extends Conexion
         $arrMax = mysql_fetch_assoc($consulta);
         return $arrMax['maximo'];  
     }
+
+    public function asignarIdBombaLiderAInspeccion($idInspeccion,$idBombaLider)
+    {
+        $sql ="update inspeccionesCi set idInfoBombaLider = '".$idBombaLider."'  where id='".$idInspeccion."'  ";
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+    }
+    public function asignarIdBombaJockeyAInspeccion($idInspeccion,$idBombaJcokey)
+    {
+        $sql ="update inspeccionesCi set idInfoBombaJcokey = '".$idBombaJcokey."'  where id='".$idInspeccion."'  ";
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+    }
+    
+    function actualizarNumeroImagenesDiagCi($idDiagnostico,$noImagenes)
+    {
+        $sql = "update inspeccionesCi set numeroImagenes = '".$noImagenes."' where id= '".$idDiagnostico."' " ; 
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+    }
+
     
     // public function actualizarNumeroTablero($idDiagnostico,$numero)
     // {
