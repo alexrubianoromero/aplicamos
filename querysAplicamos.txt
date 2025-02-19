@@ -1,0 +1,9 @@
+update correoConfig set  
+ 	mailHost  = 'mail.aplicamosingenieria.net'
+ 	,userName   = 'correo.aplicamosingenieria.net'
+ 	,password   = 'MD~Z5E0uCN#u'
+ 	,anombredequienllega   = 'AplicamosIngenieria'
+ 	,subject   = 'Diagnostico Generado'
+ 	,rutaPdfDiagAp   = 'https://www.aplicamosingenieria.net/aplicamos123/diag/'
+
+
