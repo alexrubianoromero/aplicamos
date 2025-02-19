@@ -4,9 +4,11 @@ require_once($raiz.'/diagnosticoEbAp/views/diagnosticoEbApView.php');
 require_once($raiz.'/diagnosticoEbAp/models/DiagnosticoEbApModel.php'); 
 require_once($raiz.'/diagnosticoEbAp/models/ImagenDiagnosticoEbApModel.php'); 
 require_once($raiz.'/diagnosticoEbAp/models/TableroDiagnosticoEbApModel.php'); 
+require_once($raiz.'/movil/model/EmpresaModel.php');
 require_once($raiz.'/clientes/vista/ClientesVista.php'); 
 require_once($raiz.'/correo/EnviarCorreoPhpMailer.class.php'); 
 require_once($raiz.'/vista/vista.php'); 
+require_once($raiz.'/correo/model/CorreoModel.php'); 
 // die($raiz); 
 
 class diagnosticoEbApController extends vista
@@ -17,6 +19,9 @@ class diagnosticoEbApController extends vista
     protected $tableroDiagnosticoModel;
     protected $imagenDiagnosticoModel;
     protected $enviarCorreo; 
+    protected $EmpresaModel; 
+    protected $CorreoModel; 
+
 
     public function __construct()
     {
@@ -27,6 +32,8 @@ class diagnosticoEbApController extends vista
         $this->model = new DiagnosticoEbApModel();
         $this->tableroDiagnosticoModel = new TableroDiagnosticoEbApModel();
         $this->imagenDiagnosticoModel = new ImagenDiagnosticoEbApModel();
+        $this->EmpresaModel = new EmpresaModel();
+        $this->CorreoModel = new CorreoModel();
       
         // die('constructg');
         // echo 'desde controlador'; 
@@ -147,12 +154,21 @@ class diagnosticoEbApController extends vista
 
     public function enviarCorreoConDiagnostico($request)
     {
+        $infoCorreo = $this->CorreoModel->traerInfoConfigCorreo();
+        //    echo '<pre>'; 
+        //     print_r($infoCorreo); 
+        //     echo'</pre>';
+        //     die(); 
+        // die('llego a controlador de enviar correo ');
+        $infoEmpresa = $this->EmpresaModel->traerInfoEmpresa(); 
         //definir la funcionalidad para enviar correo 
-        $email = 'alexrubianoromero@gmail.com';
+        $email = $infoEmpresa['correoEnviarInfo'];
+        // die ($email);
         $infoCliente = $this->model->traerInfoClienteIdDiagnostico($request['idDiagnostico']); 
         // $this->printR($infoCliente['idcliente']); 
-        $body = $this->bodyCorreo($infoCliente['idcliente'],$request['idDiagnostico']);
-        // die($body); 
+        $body = $this->bodyCorreo($infoCliente['idcliente'],$request['idDiagnostico'],$infoCorreo['rutaPdfDiagAp']);
+        // die('enviar correo controller12');
+        //  die($body); 
         $this->enviarCorreo = new EnviarCorreoPhpMailer($infoCliente['email'],$body);
     }
     //esa funcion es para mostrar toda la informacion del ultimo diagnostico del cliente 

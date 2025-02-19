@@ -174,7 +174,7 @@ class diagnosticoEbApView
         echo '<th>Correo</th>';
         echo '<th>Imagenes</th>';
        
-        // echo '<th>Ver</th>';
+        echo '<th>Ver</th>';
         echo '<th>Pdf</th>';
         echo '</tr>';
         foreach($diagnosticos as $diagnostico)
@@ -197,7 +197,7 @@ class diagnosticoEbApView
                     onclick = " verimagenesDiagnosticoEbAp('.$diagnostico['id'].'); "
                     ">Imagenes</button></td>';
 
-            // echo '<td><button class ="btn btn-primary btn-sm" onclick ="verDiagnostico('.$diagnostico['id'].')">Ver</button></td>';
+            echo '<td><button class ="btn btn-primary btn-sm" onclick ="verDiagnostico('.$diagnostico['id'].')">Ver</button></td>';
             echo '<td><a href="../diagnosticoEbAp/pdf/ordenPdf3.php?idDiagnostico='.$diagnostico['id'].'" target="_blank" >PDF</a></td>';
             echo '</tr>';    
         }

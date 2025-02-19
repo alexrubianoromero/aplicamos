@@ -415,6 +415,7 @@ function pantallaCambiosDeAceite()
 
 function pantallaDiagEbAp()
 {
+    // alert('pantalla Eb Ap');
         document.getElementById("imagenInicial").style.display = 'none';
         document.getElementById("divBotonesPrincipales").style.display = 'block';    
         const http=new XMLHttpRequest();

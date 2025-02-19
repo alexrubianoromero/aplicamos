@@ -1,7 +1,22 @@
 <?php
+$raiz = dirname(dirname(__file__));
+// die('vista'.$raiz);
+require_once($raiz.'/correo/model/CorreoModel.php');
+// require_once($raiz.'/correo/model/CorreoConfigNew.php');
+
+// require_once($raiz.'/diagnosticoEbAp/models/DiagnosticoEbApModel.php'); 
+
+
 
 class vista
 {
+    protected $correo;
+
+    public function __construct()
+    {
+        $this->correo = new correoModel();
+    }
+
     public function get_table_assoc($datos)
     {
                      $arreglo_assoc='';
@@ -43,12 +58,22 @@ public function draw_table($datos)
                     echo '</pre>';
                     die(); 
                 }
-                public function bodyCorreo($idcliente,$idDiagnostico)
+
+
+                public function bodyCorreo($idcliente,$idDiagnostico,$rutaCorreo)
                 {
+                    // $infoCorreo = $this->correo->prueba();
+                    // die('llego  a body correo  despues de info '); 
+                    // $ruta = dirname(dirname(__FILE__));
+                    // echo '<pre>';
+                    // print_r($infoCorreo); 
+                    // echo '</pre>';
+                    // die(); 
                     $body = '
-                            Aplicamos Ingenieria informa atentamente que seha realizado el siguiente diagnostico 
+                            Aplicamos Ingenieria informa atentamente que seha realizado el siguiente diagnostico
+                             
                             
-                            https://www.alexrubiano.com/aplicamos/diag/'.$idDiagnostico.'
+                            '.$rutaCorreo.$idDiagnostico.'
                             ';
                     return $body;
 

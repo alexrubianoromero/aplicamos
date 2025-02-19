@@ -66,6 +66,10 @@ class diagnosticoEbAllController
         {
             $this->traerUltimoDiagnosticoClienteEbAll($_REQUEST);
         }
+        if($_REQUEST['opcion']=='enviarCorreoConDiagnostico')
+        {
+            $this->enviarCorreoConDiagnostico($_REQUEST);
+        }
 
 
 
@@ -96,6 +100,17 @@ class diagnosticoEbAllController
         $this->tableroDiagnosticoModel->grabarTableroDiagnostico($request); 
         $this->model->actualizarInfoEnDiagnostico($request);
         $this->view->mostrarDiagnosticos();
+    }
+
+    public function enviarCorreoConDiagnostico($request)
+    {
+        //definir la funcionalidad para enviar correo 
+        $email = 'alexrubianoromero@gmail.com';
+        $infoCliente = $this->model->traerInfoClienteIdDiagnostico($request['idDiagnostico']); 
+        // $this->printR($infoCliente['idcliente']); 
+        $body = $this->bodyCorreo($infoCliente['idcliente'],$request['idDiagnostico']);
+        // die($body); 
+        $this->enviarCorreo = new EnviarCorreoPhpMailer($infoCliente['email'],$body);
     }
 
 }
