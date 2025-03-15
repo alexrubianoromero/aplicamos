@@ -13,6 +13,16 @@ class InspeccionCiModel extends Conexion
         $inspecciones = $this->get_table_assoc($consulta);
         return $inspecciones; 
     }
+    public function traerInspeccionId($id)
+    {
+        $sql = "select * from inspeccionesCi  where anulado = 0 
+        and id= '".$id."'
+        order by id desc" ;
+        // die($sql);
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+        $inspeccion = mysql_fetch_assoc($consulta);
+        return $inspeccion; 
+    }
     public function traerUltimoFormatoInspeccionCliente($idCliente)
     {
         $sql = "select * from inspecccionesCi  where anulado = 0  and idCliente = '".$idCliente."' order by id desc limit 1" ;
@@ -68,7 +78,8 @@ class InspeccionCiModel extends Conexion
     }
     public function asignarIdBombaJockeyAInspeccion($idInspeccion,$idBombaJcokey)
     {
-        $sql ="update inspeccionesCi set idInfoBombaJcokey = '".$idBombaJcokey."'  where id='".$idInspeccion."'  ";
+        $sql ="update inspeccionesCi set idInfoBombaJockey = '".$idBombaJcokey."'  where id='".$idInspeccion."'  ";
+        // die($sql);
         $consulta = mysql_query($sql,$this->connectMysql()); 
     }
     

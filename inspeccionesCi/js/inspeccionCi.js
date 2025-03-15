@@ -33,9 +33,18 @@ function traerUltimoFormatoInspeccionCliente()
 }
 function grabarDiagnosticoInspeccion()
 {
-    // grabarDiagnosticoInspeccionBombaLider();
-    grabarDiagnosticoInspeccionBombaJockey();
-    // grabarInfoTableroLiderModel();
+    var idDiagnostico = document.getElementById('idDiagnostico').value;
+
+    grabarDiagnosticoInspeccionBombaLider();
+    
+    setTimeout(() => {
+        grabarDiagnosticoInspeccionBombaJockey();
+    }, 100);
+
+    setTimeout(() => {
+        mostrarConceptosFormatoInspeccion(idDiagnostico);
+    }, 100);
+   
 }
 
 function grabarDiagnosticoInspeccionBombaLider()
@@ -143,6 +152,8 @@ function grabarDiagnosticoInspeccionBombaLider()
             +'&tablero='+tablero
             +'&display='+display
         );
+        //aqui debe seguir la otra accion despues de grabar
+     
 
     }
 }
@@ -526,6 +537,26 @@ function crearEncabezadoInspeccionIncencio()
     }
 
 }
+
+function mostrarConceptosFormatoInspeccion(idDiagnostico)
+{
+        const http=new XMLHttpRequest();
+        const url = '../inspeccionesCi/inspeccionesCi.php';
+        http.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status ==200){
+                console.log(this.responseText);
+                document.getElementById("divResultadosDiagEbAp").innerHTML  = this.responseText;
+            }
+        };
+        http.open("POST",url);
+        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        http.send("opcion=mostrarConceptosFormatoInspeccion"
+        +'&idDiagnostico='+idDiagnostico
+        );
+}
+
+
+
 
 function mostrarInspeccionesCi()
 {

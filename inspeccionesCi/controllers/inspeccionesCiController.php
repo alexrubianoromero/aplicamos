@@ -80,21 +80,32 @@ class inspeccionesCiController extends vista
 
         if($_REQUEST['opcion']=='grabarDiagnosticoInspeccionBombaLider')
         {
-            $idBombaLider =  $this->infoLiderModel->grabarInfoBombaLider($_REQUEST);
-            //asignarle el id de bomvalider a la inspeccion ci 
-            $this->model->asignarIdBombaLiderAInspeccion($_REQUEST['idDiagnostico'],$idBombaLider);
-            
-            
-            
-            
-            
+            $infoInspeccion =    $this->model->traerInspeccionId($_REQUEST['idDiagnostico']);
+            // echo '<pre>'; print_r($infoInspeccion); echo '</pre>';
+            // die();
+
+            if($infoInspeccion['idInfoBombaLider'] == 0)
+            {
+                echo 'no tiene asociado informacion de bomba lider al diagnostico ';
+                $idBombaLider =  $this->infoLiderModel->grabarInfoBombaLider($_REQUEST);
+                //asignarle el id de bomvalider a la inspeccion ci 
+                $this->model->asignarIdBombaLiderAInspeccion($_REQUEST['idDiagnostico'],$idBombaLider);
+            }
         }
+
+
+
         if($_REQUEST['opcion']=='grabarDiagnosticoInspeccionBombaJockey')
         {
-            // echo '<pre>'; print_r($_REQUEST); echo '</pre>';
-            //  die();
-            $idBombaJockey = $this->infoJockeyModel->grabarInfoBombaJockey($_REQUEST);
-            $this->model->asignarIdBombaJockeyAInspeccion($_REQUEST['idDiagnostico'],$idBombaJockey);
+            $infoInspeccion =    $this->model->traerInspeccionId($_REQUEST['idDiagnostico']);
+            // echo '<pre>'; print_r($infoInspeccion); echo '</pre>';die();
+
+            if($infoInspeccion['idInfoBombaJockey'] == 0)
+            {
+                $infoInspeccion =    $this->model->traerInspeccionId($_REQUEST['idDiagnostico']);
+                $idBombaJockey = $this->infoJockeyModel->grabarInfoBombaJockey($_REQUEST);
+                $this->model->asignarIdBombaJockeyAInspeccion($_REQUEST['idDiagnostico'],$idBombaJockey);
+            }
 
         }
 
@@ -123,6 +134,10 @@ class inspeccionesCiController extends vista
         if($_REQUEST['opcion']=='formuAgregarImagenDiagnosticoCi')
         {
             $this->view->formuAgregarImagenDiagnosticoCi($_REQUEST['idDiagnostico']);
+        }
+        if($_REQUEST['opcion']=='mostrarConceptosFormatoInspeccion')
+        {
+            $this->view->mostrarConceptosFormatoInspeccion($_REQUEST['idDiagnostico']);
         }
 
         if($_REQUEST['opcion']=='realizarCargaArchivoCi')
