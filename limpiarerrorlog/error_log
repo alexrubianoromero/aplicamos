@@ -1,0 +1,1 @@
+[17-Mar-2025 11:42:18 America/Bogota] PHP Warning:  unlink(error_log): No such file or directory in /home/ctwtvsxj/public_html/aplicamos123/limpiarerrorlog/controllers/limpiarErrorController.php on line 40

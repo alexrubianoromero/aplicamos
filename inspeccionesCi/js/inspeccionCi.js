@@ -54,6 +54,7 @@ function grabarDiagnosticoInspeccion()
 
 function grabarDiagnosticoInspeccionBombaLider()
 {
+    
     var idDiagnostico = document.getElementById('idDiagnostico').value;
     var operativaAutomatico = document.getElementById('operativaAutomatico').value;
     var equipoListado = document.getElementById('equipoListado').value;
