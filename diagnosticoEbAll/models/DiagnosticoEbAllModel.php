@@ -58,4 +58,10 @@ class DiagnosticoEbAllModel extends Conexion
         return $diagnostico; 
     }
 
+    function actualizarNumeroImagenesDiagEbAll($idDiagnostico,$noImagenes)
+    {
+        $sql = "update diagnosticoEbAll set numeroImagenes = '".$noImagenes."' where id= '".$idDiagnostico."' " ; 
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+    }
+
 }

@@ -36,18 +36,43 @@ class diagnosticoEbAllView
                     <div class="col-lg-3 ofset-3">
                         <button class="btn btn-primary" onclick="mostrarDiagnosticosEbAll();">Mostrar Diagnosticos </button>  
                     </div>
-
+                    <STRONG>EB AGUAS LLUVIAS</STRONG>
                 </div>
             </div>
             <div class="row mt-3" id="divResultadosDiagEbAll">
                 <?php
                      $this->mostrarDiagnosticos();
                 ?>
-            </div>        
+            </div>
+            <?php    $this->modalVerImagenesDiagnosticoCi();  ?>    
 
         </div>
         <?php
     }
+    public function modalVerImagenesDiagnosticoCi(){
+        ?>
+         <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
+         Launch demo modal
+         </button> -->
+          <div  class="modal fade " id="modalVerImagenesDiagnosticoCi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                  <div class="modal-header" id="headerNuevoCliente">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Imagenes </h4>
+                  </div>
+                  <div id="cuerpoModalVerImagenesDiagnosticoAll" class="modal-body">
+                  </div>
+                  <div class="modal-footer" id="footerNuevoCliente">
+                      <button type="button" class="btn btn-default" data-dismiss="modal" onclick = "">Cerrar</button>
+                      <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                  </div>
+                  </div>
+              </div>
+          </div>
+        <?php
+    } 
+
 
     function mostrarDiagnosticos()
     {
@@ -58,6 +83,7 @@ class diagnosticoEbAllView
         echo '<th>Fecha</th>';
         echo '<th>Cliente</th>';
         echo '<th>Correo</th>';
+        echo '<th>Imagenes</th>';
         echo '<th>Ver</th>';
         echo '<th>Pdf</th>';
         echo '</tr>';
@@ -73,6 +99,14 @@ class diagnosticoEbAllView
             data-target="#modalEnviarCorreo"
             onclick = "enviarCorreoConDiagnostico('.$diagnostico['id'].'); "
             ">Correo</button></td>';
+
+            echo '<td><button class="btn btn-success btn-sm"
+            data-toggle="modal"   
+            data-target="#modalVerImagenesDiagnosticoCi"
+            onclick = " verimagenesDiagnosticoEbAll('.$diagnostico['id'].'); "
+            ">Imagenes</button></td>';
+
+
             echo '<td><button class ="btn btn-primary" onclick ="verDiagnosticoEbAll('.$diagnostico['id'].')">Ver</button></td>';
             echo '<td><a href="../diagnosticoEbAll/pdf/ordenPdf3.php?idDiagnostico='.$diagnostico['id'].'" target="_blank" >PDF</a></td>';
             echo '</tr>';    
@@ -369,6 +403,59 @@ class diagnosticoEbAllView
                 </tbody>
             </table>
         </div>
+        <?php
+    }
+
+    public function verimagenesDiagnosticoEbAll($imagenes,$idDiagnostico)
+    {
+        echo '<div class="row"><button 
+                                class="btn btn-primary"
+                                onclick ="formuAgregarImagenDiagnosticoEbAll('.$idDiagnostico.');"
+                                >
+                                Nueva Imagen
+                                </button>
+                                </div> '; 
+                                // data-bs-toggle="modal" 
+                                // data-bs-target="#modalSubirArchivo"
+        // echo 'Aqui mostrara las imagenes del diagnostico '; 
+        foreach($imagenes as $imagen)
+        {
+            $raiz123 = dirname(dirname(dirname(__file__)));
+            // die($raiz123); 
+            // $rutaImagen = $raiz123.'/imagenes/imagenesDiagnosticoEbAp/'.$imagen['rutaImagen'];
+            $rutaImagen = $raiz123.$imagen['rutaImagen'];
+            // echo '<div style="border:1px solid; width:200px; display:inline">'; 
+            echo '<br>';
+            echo '<div  class="row" >'; 
+            // echo '<img src="'.$rutaImagen.'" > '; 
+            // echo '<img src="../'.$imagen['rutaImagen']."/".$imagen['nombre'].'"  width="200px"> '; 
+            echo '<img src="../'.$imagen['rutaImagen']."/".$imagen['nombre'].'"  width="90%"> '; 
+            echo '</div>';
+        }
+        
+    }
+
+
+    public function formuAgregarImagenDiagnosticoEbAll($idDiagnostico)
+    {
+        // echo 'subir archivo '; 
+        ?>
+            <div id="div_cargue_archivo">
+                    <!-- <input name="imagen" id="imagen" type="file">
+                    <br><br><br><br>
+                    <button onclick="subirFotoDiagnosticoEbAp();" >Subir Foto</button>
+                    <br><br>
+                    <div id="div_muestre_resultado"></div>
+                    <span id="demo"></span> -->
+                    <form  enctype="multipart/form-data"/>
+                    <input name="archivo" id="archivo" type="file"/>
+                    <!-- <input type="submit" name="subir" value="Subir imagen"/> -->
+                    </form>
+                    <button  
+                            class ="btn btn-primary"    
+                            onclick="realizarCargaArchivoEbAll(<?php echo $idDiagnostico; ?>);"
+                            >SUBIR IMAGEN </button>
+            </div>
         <?php
     }
 

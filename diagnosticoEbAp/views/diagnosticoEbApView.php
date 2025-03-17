@@ -47,6 +47,7 @@ class diagnosticoEbApView
                         <div class="col-lg-3 ofset-3">
                             <button class="btn btn-primary" onclick="mostrarDiagnosticos();">Mostrar Diagnosticos </button>  
                         </div>
+                        <STRONG>EB AGUA POTABLE </STRONG>
                         
                     </div>
                 </div>

@@ -208,3 +208,72 @@ function enviarCorreoConDiagnosticoEbAll(idDiagnostico)
     +'&idDiagnostico='+idDiagnostico
     );
 }
+
+function verimagenesDiagnosticoEbAll(idDiagnostico){
+    const http=new XMLHttpRequest();
+    const url = '../diagnosticoEbAll/diagnosticoEbAll.php';
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status ==200){
+              console.log(this.responseText);
+           document.getElementById("cuerpoModalVerImagenesDiagnosticoAll").innerHTML  = this.responseText;
+        }
+    };
+    http.open("POST",url);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send("opcion=verimagenesDiagnosticoEbAll"
+    +'&idDiagnostico='+idDiagnostico
+    );
+}
+
+
+function formuAgregarImagenDiagnosticoEbAll(idDiagnostico){
+    // alert(idDiagnostico)
+    const http=new XMLHttpRequest();
+    const url = '../diagnosticoEbAll/diagnosticoEbAll.php';
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status ==200){
+              console.log(this.responseText);
+           document.getElementById("cuerpoModalVerImagenesDiagnosticoAll").innerHTML  = this.responseText;
+        }
+    };
+    http.open("POST",url);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send("opcion=formuAgregarImagenDiagnosticoEbAll"
+    +'&idDiagnostico='+idDiagnostico
+    );
+}
+
+
+function realizarCargaArchivoEbAll(idDiagnostico)
+{
+    // var idPedidoDev = document.getElementById('idPedidoDev').value;
+    // var idItemDev = document.getElementById('idItemDev').value;
+    // var obseDevolucion = document.getElementById('obseDevolucion').value;
+    // alert(idDiagnostico);
+    var inputFile = document.getElementById('archivo');
+    if (inputFile.files.length > 0) {
+        let formData = new FormData();
+        formData.append("archivo", inputFile.files[0]); // En la posición 0; es decir, el primer elemento
+        formData.append("opcion", 'realizarCargaArchivo'); // En la posición 0; es decir, el primer elemento
+        formData.append("idDiagnostico", idDiagnostico); // En la posición 0; es decir, el primer elemento
+        // formData.append("idPedidoDev", idPedidoDev); // En la posición 0; es decir, el primer elemento
+        // formData.append("idItemDev", idItemDev); // En la posición 0; es decir, el primer elemento
+        // formData.append("obseDevolucion", obseDevolucion); // En la posición 0; es decir, el primer elemento
+        // '../diagnosticoEbAp/diagnosticoEbAp.php';
+        fetch("../diagnosticoEbAll/diagnosticoEbAll.php", {
+            method: 'POST',
+            body: formData,
+        })
+            .then(respuesta => respuesta.text())
+            .then(decodificado => {
+                console.log(decodificado.archivo);
+                document.getElementById("cuerpoModalVerImagenesDiagnosticoAll").innerHTML = 'Imagen Almacenada!!';
+            });
+    } else {
+        alert("Selecciona un archivo");
+    }
+
+    setTimeout(() => {
+        verimagenesDiagnosticoEbAll(idDiagnostico); 
+    }, 300);
+}

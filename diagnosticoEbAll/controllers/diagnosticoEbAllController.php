@@ -3,6 +3,7 @@ $raiz = dirname(dirname(dirname(__file__)));
 require_once($raiz.'/diagnosticoEbAll/views/diagnosticoEbAllView.php'); 
 require_once($raiz.'/diagnosticoEbAll/models/DiagnosticoEbAllModel.php'); 
 require_once($raiz.'/diagnosticoEbAll/models/TableroDiagnosticoEbAllModel.php'); 
+require_once($raiz.'/diagnosticoEbAll/models/ImagenDiagnosticoEbAllModel.php'); 
 // die($raiz); 
 
 class diagnosticoEbAllController 
@@ -10,6 +11,7 @@ class diagnosticoEbAllController
     protected $view;
     protected $model;
     protected $tableroDiagnosticoModel;
+    protected $imagenDiagnosticoModel;
 
     public function __construct()
     {
@@ -18,6 +20,7 @@ class diagnosticoEbAllController
         $this->view = new diagnosticoEbAllView();
         $this->model = new DiagnosticoEbAllModel();
         $this->tableroDiagnosticoModel = new TableroDiagnosticoEbAllModel();
+        $this->imagenDiagnosticoModel = new ImagenDiagnosticoEbAllModel();
        
 
         if($_REQUEST['opcion']=='pantallaDiagnosticoEbAll')
@@ -71,9 +74,67 @@ class diagnosticoEbAllController
             $this->enviarCorreoConDiagnostico($_REQUEST);
         }
 
+        if($_REQUEST['opcion']=='verimagenesDiagnosticoEbAll')
+        {
+            // echo 'llego aca controlador EbAll';
+            $imagenes = $this->imagenDiagnosticoModel->traerImagenesDiagnosticoId($_REQUEST['idDiagnostico']);
+            $this->view->verimagenesDiagnosticoEbAll($imagenes,$_REQUEST['idDiagnostico']);
+            // $this->printR($imagenes); 
+            //     echo '<pre>'; 
+            // print_r($imagenes); 
+            // echo'</pre>';
+            // die('imagenes '); 
+        }
+        if($_REQUEST['opcion']=='formuAgregarImagenDiagnosticoEbAll')
+        {
+            $this->view->formuAgregarImagenDiagnosticoEbAll($_REQUEST['idDiagnostico']);
+        }
+        if($_REQUEST['opcion']=='realizarCargaArchivo')
+        {
+            $this->realizarCargaArchivo($_REQUEST);
+        }
+
 
 
     }
+
+
+    public function realizarCargaArchivo($request)
+    {
+        //traerinfoGanado
+        $infodiagnostico = $this->model->traerDiagnosticoId($request['idDiagnostico']);
+        $noSigImagen = $infodiagnostico['numeroImagenes']+1;
+        //crear el nombre del archivo
+        $nombreArchivo =  $request['idDiagnostico'].'-'.$noSigImagen.'-'.$_FILES['archivo']['name'];
+        //actualizar el numero de imagenes en ganado
+
+        $this->model->actualizarNumeroImagenesDiagEbAll($request['idDiagnostico'],$noSigImagen);
+
+        //subir el archivo
+        $this->subirArchivoDevolucion($nombreArchivo);
+        //insertar en  la tabla de imagenes
+        $this->imagenDiagnosticoModel->grabaregistroImagenesDiagnosticoAll($request['idDiagnostico'],$nombreArchivo,'imagenes/imagenesDiagnosticoEbAll');
+        // $this->dosisAplicadaModel->eliminarDosisAplicada($request['idSosisAplicada']);
+        // echo 'Registro ELiminado';
+
+    }
+
+    public function subirArchivoDevolucion($nombre_archivo)
+    {
+        //  $this->printR($_FILES);
+        //  $nombre_archivo = $_FILES['archivo']['name'];
+            // if (move_uploaded_file($_FILES['archivo']['tmp_name'],  'archivos/'.$nombre_archivo)){
+                // ../imagenes/imagenesDiagnosticoEbAp/imagen1.jpg
+            if (move_uploaded_file($_FILES['archivo']['tmp_name'],  '../imagenes/imagenesDiagnosticoEbAll/'.$nombre_archivo)){
+                echo "El archivo ha sido cargado correctamente.";
+            }else{
+                echo "Ocurrió algún error al subir el fichero. No pudo guardarse.";
+            }
+            // die('Archivo subido');
+
+    }
+
+
     
     public function traerUltimoDiagnosticoClienteEbAll($request)
     {
