@@ -9,6 +9,7 @@ require_once($ruta.'/fpdf/fpdf.php');
 require_once($ruta .'/inspeccionesCi/models/InspeccionCiModel.php');
 require_once($ruta .'/inspeccionesCi/models/InfoBombaLiderModel.php');
 require_once($ruta .'/inspeccionesCi/models/InfoBombaJockeyModel.php');
+require_once($ruta .'/inspeccionesCi/models/ImagenDiagnosticoCiModel.php');
 // require_once($raiz.'/diagnosticoEbAp/models/ConceptoTableroEbApModel.php'); 
 require_once($raiz.'/clientes/models/ClienteModel.php'); 
 // require_once($raiz.'/diagnosticoEbAp/models/TableroDiagnosticoEbApModel.php'); 
@@ -19,6 +20,7 @@ $clienteModel = new ClienteModel();
 $usuarioModel = new UsuarioModel();
 $infoBombaLiderModel = new InfoBombaLiderModel();
 $infoBombaJockeyModel = new InfoBombaJockeyModel();
+$imagenModel = new ImagenDiagnosticoCiModel();
 // $conceptoTableroModel = new ConceptoTableroEbApModel();
 // $tableroDiagnosticoModel = new TableroDiagnosticoEbApModel();
 
@@ -29,7 +31,7 @@ $infoBombaJockey = $infoBombaJockeyModel->traerInfoBombaJockeyId($infoDiagnostic
 // $numeroTableros = $infoDiagnostico['numeroTableros']; 
 $infoCliente = $clienteModel->traerClienteId($infoDiagnostico['idCliente']); 
 $infoUsuario = $usuarioModel->traerusuarioId($infoDiagnostico['idAtendioVisita']);
-// $convenciones = "B=BUENO; R=REGULAR; M=MALO A=AUSENTE"; 
+$convenciones = "B=BUENO; R=REGULAR; M=MALO A=AUSENTE"; 
 $numeroMaximoCasillasVisuales = 9;
         //   echo '<pre>';print_r($infoBombaJockey); echo '</pre>';die('');
 $letraTitulo = '10';
@@ -38,11 +40,14 @@ $pdf->AddPage();
     $posx = 10; 
     $posy = 5;
     $tamano = 35;
+    $tamLetraEncab = 9;
     $pdf->Image('../../movil/imagen/logonuevo.png',$posx,$posy,$tamano);
-    $pdf->SetFont('Arial','',10);
+    $pdf->SetFont('Arial','',$tamLetraEncab);
     $pdf->Cell(35);
+    $pdf->SetFont('Arial','B',$tamLetraEncab);
     $pdf->Cell(35,6,'Razon Social:',1,0,'');
-    $pdf->Cell(80,6,substr($infoCliente['nombre'],0,40),1,0,'');
+    $pdf->SetFont('Arial','',$tamLetraEncab);
+    $pdf->Cell(80,6,substr($infoCliente['nombre'],0,35),1,0,'');
     $pdf->Cell(10);
     $pdf->Cell(25,6,'No: '.$_REQUEST['idDiagnostico'],1,1,'');
     
@@ -163,9 +168,9 @@ $pdf->AddPage();
     $pdf->Cell(23,$alto,'D. DESCARGA',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, $infoBombaLider['diametroDescarga'],1,0,'L');
 
-    $pdf->Cell($valorCelda1,$alto,'MANOVACUOMETRO',1,0,'L');
+    $pdf->Cell($valorCelda1,$alto,'MANOVACUOME',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, $infoBombaJockey['manovacumetro'],1,0,'L');
-    $pdf->Cell(23,$alto,'RODAMIENTEOS DE MOTOR',1,0,'L');
+    $pdf->Cell(23,$alto,'ROD. DE MOTOR',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, $infoBombaJockey['rodamientosMotor'],1,1,'L');
 
 
@@ -176,7 +181,7 @@ $pdf->AddPage();
 
     $pdf->Cell($valorCelda1,$alto,'EMPAQUETADURA',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, $infoBombaJockey['empaquetadura'],1,0,'L');
-    $pdf->Cell(23,$alto,'COMP VENTILADOR',1,0,'L');
+    $pdf->Cell(23,$alto,'COMP VENTILA',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, $infoBombaJockey['comprobacionVentilador'],1,1,'L');
 
     $pdf->Cell($valorCelda1,$alto,'CAB PRUEBAS',1,0,'L');
@@ -185,7 +190,7 @@ $pdf->AddPage();
     $pdf->Cell($valorCelda2,$alto, $infoBombaLider['fugas'],1,0,'L');
 
     
-    $pdf->Cell($valorCelda1,$alto,'VALVULAS DE CORTE',1,0,'L');
+    $pdf->Cell($valorCelda1,$alto,'VALVULAS CORTE',1,0,'L');
     $pdf->Cell($valorCelda2,$alto,$infoBombaJockey['valvulasDeCorte'] ,1,0,'L');
     $pdf->Cell(23,$alto,'',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, '',1,1,'L');
@@ -201,9 +206,9 @@ $pdf->AddPage();
     $pdf->Cell(95,$alto,'INFORMACION PARA MANIPULACION ',1,1,'C');
     $pdf->SetFont('Arial','B',$tamLetra);
 
-    $pdf->Cell($valorCelda1,$alto,'MANOVACUOMETRO',1,0,'L');
+    $pdf->Cell($valorCelda1,$alto,'MANOVACUOMET',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, $infoBombaLider['manovacumetro'],1,0,'L');
-    $pdf->Cell(23,$alto,'RODAMIENTEOS DE MOTOR',1,0,'L');
+    $pdf->Cell(23,$alto,'ROD.DE MOTOR',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, $infoBombaLider['rodamientosMotor'],1,0,'L');
 
     $pdf->Cell(($valorCelda1*2),$alto,'INSTRUCCIONES DE  MANIPULACION ',1,0,'L');
@@ -211,7 +216,7 @@ $pdf->AddPage();
 
     $pdf->Cell($valorCelda1,$alto,'EMPAQUETADURA',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, $infoBombaLider['empaquetadura'],1,0,'L');
-    $pdf->Cell(23,$alto,'COMP VENTILADOR',1,0,'L');
+    $pdf->Cell(23,$alto,'COMP VENTILAD',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, $infoBombaLider['comprobacionVentilador'],1,0,'L');
 
     $pdf->Cell(($valorCelda1*2),$alto,'DEMARCACION ELEMENTOS ',1,0,'L');
@@ -227,7 +232,7 @@ $pdf->AddPage();
 
     $pdf->Cell($valorCelda1,$alto,'VALVULAS ALIVIO',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, $infoBombaLider['valvulaAlivio'],1,0,'L');
-    $pdf->Cell(23,$alto,'RETORNO TANQUE',1,0,'L');
+    $pdf->Cell(23,$alto,'RETORNO TANQ',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, $infoBombaLider['retornoTanque'],1,0,'L');
 
     $pdf->Cell(($valorCelda1*2),$alto,'AREA EN ORDEN Y ASEADA ',1,0,'L');
@@ -254,12 +259,12 @@ $pdf->AddPage();
 
     $pdf->Cell($valorCelda1,$alto,'GUARDAMOTOR',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, $infoBombaLider['guardamotor'],1,0,'L');
-    $pdf->Cell(23,$alto,'FUSIBLES/MINIBRE',1,0,'L');
+    $pdf->Cell(23,$alto,'FUSIBLES/MINIBR',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, $infoBombaLider['fusibles'],1,0,'L');
     
     $pdf->Cell($valorCelda1,$alto,'GUARDAMOTOR',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, $infoBombaJockey['guardamotor'],1,0,'L');
-    $pdf->Cell(23,$alto,'FUSIBLES/MINIBREAKERS',1,0,'L');
+    $pdf->Cell(23,$alto,'FUSIBLES/MINIBR',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, $infoBombaJockey['fusibles'],1,1,'L');
 
 
@@ -280,7 +285,7 @@ $pdf->AddPage();
 
     $pdf->Cell($valorCelda1,$alto,'CAUDALIMETRO',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, $infoBombaLider['caudalimetrotablero'],1,0,'L');
-    $pdf->Cell(23,$alto,'TABLERO LIBREALARMAS',1,0,'L');
+    $pdf->Cell(23,$alto,'TAB. LIBRE ALA',1,0,'L');
     $pdf->Cell($valorCelda2,$alto, $infoBombaLider['tablero'],1,0,'L');
 
     $pdf->Cell(($valorCelda1*2),$alto,'TRANSDUCTOR',1,0,'L');
@@ -305,6 +310,29 @@ $pdf->AddPage();
 
 
     $pdf->MultiCell(190,$alto, $infoDiagnostico['observaciones'], 1, 'J');
+
+    $pdf->Ln(2);
+    $posicionVertical = $pdf->GetY();
+    $pdf->Cell(190,6,'IMAGENES DIAGNOSTICO',1,1,'C');
+    
+    $raiz123 = dirname(dirname(dirname(__file__)));
+    $imagenes = $imagenModel->traerImagenesDiagnosticoCi($_REQUEST['idDiagnostico']);
+    $posInicial = 20;
+    $tamano= 40;
+    $variaY = 20;
+    $n=1;
+    foreach($imagenes as $imagen)
+    {
+        $rutaImagen = '../../'.$imagen['rutaImagen'].'/'.$imagen['nombre'];
+        // $pdf->Cell(180,6,   $rutaImagen,1,1,'C');
+        $pdf->Ln(2);
+        $pdf->Image($rutaImagen,'70',$posicionVertical+10 ,'',$tamano);
+        $posicionVertical = $posicionVertical + $tamano+2;
+        // $posVertical = $tamano * $n;
+        // $n=$n+1;
+    }
+
+
     // foreach($conceptosTableroEbAp as $concepto)
     // {
     //     $pdf->Cell(60,$alto,$concepto['descripcion'],1,0,'L');
@@ -359,6 +387,8 @@ $pdf->AddPage();
 
     // $pdf->Cell(180,6,'Concepto Tecnico Agua Potable:',1,1,'C');
     // $pdf->MultiCell(180,6,$infoDiagnostico['conceptoTecnico'],0,'J','');
+
+
 
     $pdf->Output();
     ?>
