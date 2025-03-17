@@ -10,6 +10,7 @@ require_once($ruta .'/diagnosticoEbAll/models/DiagnosticoEbAllModel.php');
 require_once($raiz.'/diagnosticoEbAll/models/ConceptoTableroEbAllModel.php'); 
 require_once($raiz.'/clientes/models/ClienteModel.php'); 
 require_once($raiz.'/diagnosticoEbAll/models/TableroDiagnosticoEbAllModel.php'); 
+require_once($raiz.'/diagnosticoEbAll/models/ImagenDiagnosticoEbAllModel.php'); 
 require_once($raiz.'/movil/model/UsuarioModel.php'); 
 
 $diagnosticoModel = new DiagnosticoEbAllModel();
@@ -17,6 +18,7 @@ $clienteModel = new ClienteModel();
 $usuarioModel = new UsuarioModel();
 $conceptoTableroModel = new ConceptoTableroEbAllModel();
 $tableroDiagnosticoModel = new TableroDiagnosticoEbAllModel();
+$imagenModel = new ImagenDiagnosticoEbAllModel();
 
 $infoDiagnostico = $diagnosticoModel->traerDiagnosticoId($_REQUEST['idDiagnostico']); 
 $numeroTableros = $infoDiagnostico['numeroTableros']; 
@@ -136,5 +138,28 @@ $pdf->AddPage();
     $pdf->MultiCell(180,6,$infoDiagnostico['conceptoTecnico'],0,'J','');
     // $vertical =  $pdf->GetY();
     // $pdf->SetY($vertical+5,'');
+
+    $pdf->Ln(2);
+    $posicionVertical = $pdf->GetY();
+    $pdf->Cell(190,6,'IMAGENES DIAGNOSTICO',1,1,'C');
+    
+    $raiz123 = dirname(dirname(dirname(__file__)));
+    $imagenes = $imagenModel->traerImagenesDiagnosticoId($_REQUEST['idDiagnostico']);
+    $posInicial = 20;
+    $tamano= 40;
+    $variaY = 20;
+    $n=1;
+    foreach($imagenes as $imagen)
+    {
+        $rutaImagen = '../../'.$imagen['rutaImagen'].'/'.$imagen['nombre'];
+        // $pdf->Cell(180,6,   $rutaImagen,1,1,'C');
+        $pdf->Ln(2);
+        $pdf->Image($rutaImagen,'70',$posicionVertical+10 ,'',$tamano);
+        $posicionVertical = $posicionVertical + $tamano+2;
+        // $posVertical = $tamano * $n;
+        // $n=$n+1;
+    }
+
+
     $pdf->Output();
     ?>
