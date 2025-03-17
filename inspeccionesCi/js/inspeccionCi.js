@@ -41,15 +41,19 @@ function grabarDiagnosticoInspeccion()
         grabarDiagnosticoInspeccionBombaJockey();
     }, 100);
 
+    // setTimeout(() => {
+    //     mostrarConceptosFormatoInspeccion(idDiagnostico);
+    // }, 100);
     setTimeout(() => {
-        mostrarConceptosFormatoInspeccion(idDiagnostico);
-    }, 100);
+        mostrarInspeccionesCi();
+    }, 200);
+
+
    
 }
 
 function grabarDiagnosticoInspeccionBombaLider()
 {
-    
     var idDiagnostico = document.getElementById('idDiagnostico').value;
     var operativaAutomatico = document.getElementById('operativaAutomatico').value;
     var equipoListado = document.getElementById('equipoListado').value;
