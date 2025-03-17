@@ -10,6 +10,7 @@ require_once($ruta .'/diagnosticoEbAp/models/DiagnosticoEbApModel.php');
 require_once($raiz.'/diagnosticoEbAp/models/ConceptoTableroEbApModel.php'); 
 require_once($raiz.'/clientes/models/ClienteModel.php'); 
 require_once($raiz.'/diagnosticoEbAp/models/TableroDiagnosticoEbApModel.php'); 
+require_once($raiz.'/diagnosticoEbAp/models/ImagenDiagnosticoEbApModel.php'); 
 require_once($raiz.'/movil/model/UsuarioModel.php'); 
 
 $diagnosticoModel = new DiagnosticoEbApModel();
@@ -17,6 +18,7 @@ $clienteModel = new ClienteModel();
 $usuarioModel = new UsuarioModel();
 $conceptoTableroModel = new ConceptoTableroEbApModel();
 $tableroDiagnosticoModel = new TableroDiagnosticoEbApModel();
+$imagenModel = new ImagenDiagnosticoEbApModel();
 
 $infoDiagnostico = $diagnosticoModel->traerDiagnosticoId($_REQUEST['idDiagnostico']); 
 $numeroTableros = $infoDiagnostico['numeroTableros']; 
@@ -130,11 +132,32 @@ $pdf->AddPage();
     $pdf->Cell(120,6,$infoDiagnostico['marcaTablero'],0,1,'');
     
     $pdf->Cell(30,6,'Material tuberia:',0,0,'');
-    $pdf->Cell(120,6,$infoDiagnostico['materialTuberia'],0,1,'');
+    $pdf->Cell(120,6,$infoDiagnostico['materialTuberia'],0,1,'1');
 
     $pdf->Cell(180,6,'Concepto Tecnico Agua Potable:',1,1,'C');
-    $pdf->MultiCell(180,6,$infoDiagnostico['conceptoTecnico'],0,'J','');
+    $pdf->MultiCell(180,6,$infoDiagnostico['conceptoTecnico'],0,'J','1');
     // $vertical =  $pdf->GetY();
     // $pdf->SetY($vertical+5,'');
+    $pdf->Ln(2);
+    $posicionVertical = $pdf->GetY();
+    $pdf->Cell(180,6,'IMAGENES DIAGNOSTICO',1,1,'C');
+    // $pdf->MultiCell(180,6,$posicionVertical,0,'J','1');
+
+    $raiz123 = dirname(dirname(dirname(__file__)));
+    $imagenes = $imagenModel->traerImagenesDiagnosticoId($_REQUEST['idDiagnostico']);
+    $posInicial = 20;
+    $tamano= 60;
+    $variaY = 20;
+    $n=1;
+    foreach($imagenes as $imagen)
+    {
+        $rutaImagen = '../../'.$imagen['rutaImagen'].'/'.$imagen['nombre'];
+        // $pdf->Cell(180,6,   $rutaImagen,1,1,'C');
+        $pdf->Ln(2);
+        $pdf->Image($rutaImagen,'30',$variaY,'',$tamano);
+        $variaY = $variaY + $tamano+2;
+        // $posVertical = $tamano * $n;
+        // $n=$n+1;
+    }
     $pdf->Output();
     ?>
