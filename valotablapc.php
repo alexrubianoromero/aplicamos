@@ -43,9 +43,9 @@ $nombrebase = "base_demo";
 
 
 $servidor = "localhost";
-$usuario = "ctwtvsxj_admin";
-$clave  = "ElMejorProgramador***";
-$nombrebase = "ctwtvsxj_base_aplicamos";
+$usuario = "";
+$clave  = "";
+$nombrebase = "";
 
 
 $conexion =mysql_connect($servidor,$usuario,$clave);

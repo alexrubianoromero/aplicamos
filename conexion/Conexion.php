@@ -8,9 +8,9 @@ class Conexion{
     // private $conect;
     
         private $host = "localhost";
-        private $user = "ctwtvsxj_admin";
-        private $password = "ElMejorProgramador***";
-        private $db = "ctwtvsxj_base_aplicamos";
+        private $user = "";
+        private $password = "";
+        private $db = "";
         // private $conect;
 
     public function __construct(){
