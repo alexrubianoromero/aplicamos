@@ -324,6 +324,8 @@ $pdf->AddPage();
     foreach($imagenes as $imagen)
     {
         $rutaImagen = '../../'.$imagen['rutaImagen'].'/'.$imagen['nombre'];
+        $pdf->setY($posicionVertical +10);
+        $pdf->Cell(100,6,$imagen['observaciones'],0,'','1');
         // $pdf->Cell(180,6,   $rutaImagen,1,1,'C');
         $pdf->Ln(2);
         $pdf->Image($rutaImagen,'70',$posicionVertical+10 ,'',$tamano);

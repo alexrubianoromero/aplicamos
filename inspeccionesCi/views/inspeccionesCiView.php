@@ -1602,6 +1602,7 @@ class inspeccionesCiView extends vista
             // echo '<img src="'.$rutaImagen.'" > '; 
             // echo '<img src="../'.$imagen['rutaImagen']."/".$imagen['nombre'].'"  width="200px"> '; 
             echo '<img src="../'.$imagen['rutaImagen']."/".$imagen['nombre'].'"  width="90%"> '; 
+            echo '<div>'.$imagen['observaciones'].'</div>';
             echo '</div>';
         }
         
@@ -1618,6 +1619,8 @@ class inspeccionesCiView extends vista
                     <br><br>
                     <div id="div_muestre_resultado"></div>
                     <span id="demo"></span> -->
+                    <textarea class="form-control" id="observacionesDeLaImagen" placeholder="Observaciones Imagen " ></textarea>
+                    <br>
                     <form  enctype="multipart/form-data"/>
                     <input name="archivo" id="archivo" type="file"/>
                     <!-- <input type="submit" name="subir" value="Subir imagen"/> -->

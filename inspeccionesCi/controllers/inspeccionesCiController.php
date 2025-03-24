@@ -164,9 +164,10 @@ class inspeccionesCiController extends vista
         //subir el archivo
         $this->subirArchivoDevolucionCi($nombreArchivo);
         //insertar en  la tabla de imagenes
-        $this->imagenModel->grabaregistroImagenesDiagnosticoCi($request['idDiagnostico'],$nombreArchivo,'imagenes/imagenesDiagnosticoCi');
+        $maxId = $this->imagenModel->grabaregistroImagenesDiagnosticoCi($request['idDiagnostico'],$nombreArchivo,'imagenes/imagenesDiagnosticoCi');
         // $this->dosisAplicadaModel->eliminarDosisAplicada($request['idSosisAplicada']);
         // echo 'Registro ELiminado';
+        $this->imagenModel->actualizarObservacionesImagen($maxId,$request['observaciones']);
 
     }
 
