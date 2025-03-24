@@ -134,11 +134,12 @@ $pdf->AddPage();
     $pdf->Cell(30,6,'Material tuberia:',0,0,'');
     $pdf->Cell(120,6,$infoDiagnostico['materialTuberia'],0,1,'');
 
-    $pdf->Cell(180,6,'Concepto Tecnico Agua Potable:',1,1,'C');
-    $pdf->MultiCell(180,6,$infoDiagnostico['conceptoTecnico'],0,'J','');
+    $pdf->Cell(190,6,'Concepto Tecnico Agua Potable:',1,1,'C');
+    $pdf->MultiCell(190,6,$infoDiagnostico['conceptoTecnico'],0,'J','');
     // $vertical =  $pdf->GetY();
     // $pdf->SetY($vertical+5,'');
-
+    
+    $pdf->SetAutoPageBreak();
     $pdf->Ln(2);
     $posicionVertical = $pdf->GetY();
     $pdf->Cell(190,6,'IMAGENES DIAGNOSTICO',1,1,'C');
@@ -155,7 +156,15 @@ $pdf->AddPage();
         // $pdf->Cell(180,6,   $rutaImagen,1,1,'C');
         $pdf->Ln(2);
         $pdf->Image($rutaImagen,'70',$posicionVertical+10 ,'',$tamano);
+        $pdf->setY($posicionVertical +10);
+        $pdf->Cell(100,6,$imagen['observaciones'],0,'','1');
+
         $posicionVertical = $posicionVertical + $tamano+2;
+
+        $pdf->Cell(30);
+        $variaY = $variaY + $tamano +4;
+        // $posVertical = $tamano * $n;
+        $n=$n+2;
         // $posVertical = $tamano * $n;
         // $n=$n+1;
     }

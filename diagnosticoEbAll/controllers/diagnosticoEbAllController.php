@@ -113,9 +113,10 @@ class diagnosticoEbAllController
         //subir el archivo
         $this->subirArchivoDevolucion($nombreArchivo);
         //insertar en  la tabla de imagenes
-        $this->imagenDiagnosticoModel->grabaregistroImagenesDiagnosticoAll($request['idDiagnostico'],$nombreArchivo,'imagenes/imagenesDiagnosticoEbAll');
+        $maxId = $this->imagenDiagnosticoModel->grabaregistroImagenesDiagnosticoAll($request['idDiagnostico'],$nombreArchivo,'imagenes/imagenesDiagnosticoEbAll');
         // $this->dosisAplicadaModel->eliminarDosisAplicada($request['idSosisAplicada']);
         // echo 'Registro ELiminado';
+        $this->imagenDiagnosticoModel->actualizarObservacionesImagen($maxId,$request['observaciones']);
 
     }
 
