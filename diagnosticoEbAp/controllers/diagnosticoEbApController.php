@@ -130,9 +130,12 @@ class diagnosticoEbApController extends vista
         //subir el archivo
         $this->subirArchivoDevolucion($nombreArchivo);
         //insertar en  la tabla de imagenes
-        $this->imagenDiagnosticoModel->grabaregistroImagenesDiagnostico($request['idDiagnostico'],$nombreArchivo,'imagenes/imagenesDiagnosticoEbAp');
+        $maxId = $this->imagenDiagnosticoModel->grabaregistroImagenesDiagnostico($request['idDiagnostico'],$nombreArchivo,'imagenes/imagenesDiagnosticoEbAp');
         // $this->dosisAplicadaModel->eliminarDosisAplicada($request['idSosisAplicada']);
         // echo 'Registro ELiminado';
+        //actualizar las observaciones de la imagen
+        $this->imagenDiagnosticoModel->actualizarObservacionesImagen($maxId,$request['observaciones']);
+        
 
     }
 

@@ -17,7 +17,7 @@ class ImagenDiagnosticoEbApModel extends Conexion
 
     public function traerImagenesDiagnosticoId($idDiagnostico)
     {
-        $sql="select * from imagenesDiagnosticoEbAp where idDiagnostico =  '".$idDiagnostico."'  ";
+        $sql="select * from imagenesDiagnosticoEbAp where idDiagnostico =  '".$idDiagnostico."'  order by id desc";
         $consulta = mysql_query($sql,$this->connectMysql()); 
         $imagenes = $this->get_table_assoc($consulta);
         return $imagenes; 
@@ -30,6 +30,21 @@ class ImagenDiagnosticoEbApModel extends Conexion
         values ('".$idDiagnostico."','".$nombreIma."','".$ruta."')";
         // die($sql); 
         $consulta = mysql_query($sql,$this->connectMysql());
+        $maxId = $this->traerUltimoIdImagen();
+        return $maxId;
+    }
+    public function traerUltimoIdImagen(){
+        $sql ="select max(id) as maxId from imagenesDiagnosticoEbAp ";
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+        $arreglo = mysql_fetch_assoc($consulta);
+        return $arreglo['maxId']; 
+    }
+    public function actualizarObservacionesImagen($maxId,$observaciones)
+    {
+        $sql = "update imagenesDiagnosticoEbAp set observaciones  = '".$observaciones."'  
+         where id = '".$maxId."'   ";
+        //  die($sql); 
+         $consulta = mysql_query($sql,$this->connectMysql()); 
     }
 
 

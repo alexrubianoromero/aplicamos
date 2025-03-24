@@ -55,6 +55,8 @@ las imagenes del  diagnostico se deben adjuntar al pdf al final
 creacion de tabla bomba lider que es parte de un diagnostico ci contra incendios
 voy a mirar que por lo menos grabe la primera parte de la informacion osea informacion bomba lider 
 
+se debe crear un nuevo campo en la tabla de las imagenes llamado observaciones 
+
 
 
 

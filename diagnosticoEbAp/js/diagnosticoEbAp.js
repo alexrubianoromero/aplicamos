@@ -311,34 +311,52 @@ function realizarCargaArchivo(idDiagnostico)
     // var idItemDev = document.getElementById('idItemDev').value;
     // var obseDevolucion = document.getElementById('obseDevolucion').value;
     // alert(idDiagnostico);
-    var inputFile = document.getElementById('archivo');
-    if (inputFile.files.length > 0) {
-        let formData = new FormData();
-        formData.append("archivo", inputFile.files[0]); // En la posición 0; es decir, el primer elemento
-        formData.append("opcion", 'realizarCargaArchivo'); // En la posición 0; es decir, el primer elemento
-        formData.append("idDiagnostico", idDiagnostico); // En la posición 0; es decir, el primer elemento
-        // formData.append("idPedidoDev", idPedidoDev); // En la posición 0; es decir, el primer elemento
-        // formData.append("idItemDev", idItemDev); // En la posición 0; es decir, el primer elemento
-        // formData.append("obseDevolucion", obseDevolucion); // En la posición 0; es decir, el primer elemento
-        // '../diagnosticoEbAp/diagnosticoEbAp.php';
-        fetch("../diagnosticoEbAp/diagnosticoEbAp.php", {
-            method: 'POST',
-            body: formData,
-        })
+    var valida = validaObservacionesImagen();
+    if(valida)
+    {
+        var inputFile = document.getElementById('archivo');
+        var observaciones = document.getElementById('observacionesDeLaImagen').value;
+        if (inputFile.files.length > 0) {
+            let formData = new FormData();
+            formData.append("archivo", inputFile.files[0]); // En la posición 0; es decir, el primer elemento
+            formData.append("opcion", 'realizarCargaArchivo'); // En la posición 0; es decir, el primer elemento
+            formData.append("idDiagnostico", idDiagnostico); // En la posición 0; es decir, el primer elemento
+            formData.append("observaciones", observaciones); // En la posición 0; es decir, el primer elemento
+            // formData.append("idPedidoDev", idPedidoDev); // En la posición 0; es decir, el primer elemento
+            // formData.append("idItemDev", idItemDev); // En la posición 0; es decir, el primer elemento
+            // formData.append("obseDevolucion", obseDevolucion); // En la posición 0; es decir, el primer elemento
+            // '../diagnosticoEbAp/diagnosticoEbAp.php';
+            fetch("../diagnosticoEbAp/diagnosticoEbAp.php", {
+                method: 'POST',
+                body: formData,
+            })
             .then(respuesta => respuesta.text())
             .then(decodificado => {
                 console.log(decodificado.archivo);
                 document.getElementById("cuerpoModalVerImagenesDiagnostico").innerHTML = 'Imagen Almacenada!!';
             });
-    } else {
-        alert("Selecciona un archivo");
+        } else {
+            alert("Selecciona un archivo");
+        }
+        
+        setTimeout(() => {
+            verimagenesDiagnosticoEbAp(idDiagnostico); 
+        }, 300);
     }
-
-    setTimeout(() => {
-        verimagenesDiagnosticoEbAp(idDiagnostico); 
-    }, 300);
 }
 
+
+
+function validaObservacionesImagen()
+{
+    if(document.getElementById("observacionesDeLaImagen").value == '')
+    {
+       alert("Digite Observaciones Imagen") ;  
+       document.getElementById("observacionesDeLaImagen").focus();
+       return 0;
+    }
+    return 1;
+}
 
 // let form = document.getElementById('formularioDiagnostico');
 

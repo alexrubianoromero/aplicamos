@@ -146,7 +146,7 @@ $pdf->AddPage();
     $raiz123 = dirname(dirname(dirname(__file__)));
     $imagenes = $imagenModel->traerImagenesDiagnosticoId($_REQUEST['idDiagnostico']);
     $posInicial = 20;
-    $tamano= 60;
+    $tamano= 50;
     $variaY = 20;
     $n=1;
     foreach($imagenes as $imagen)
@@ -154,10 +154,13 @@ $pdf->AddPage();
         $rutaImagen = '../../'.$imagen['rutaImagen'].'/'.$imagen['nombre'];
         // $pdf->Cell(180,6,   $rutaImagen,1,1,'C');
         $pdf->Ln(2);
-        $pdf->Image($rutaImagen,'30',$variaY,'',$tamano);
-        $variaY = $variaY + $tamano+2;
+        $pdf->Image($rutaImagen,'30',$variaY+2,'',$tamano);
+        $pdf->setY($variaY+$tamano+1 );
+        $pdf->Cell(30);
+        $pdf->Cell(100,6,$imagen['observaciones'],0,'','1');
+        $variaY = $variaY + $tamano +4;
         // $posVertical = $tamano * $n;
-        // $n=$n+1;
+        $n=$n+2;
     }
     $pdf->Output();
     ?>
