@@ -45,6 +45,7 @@ class diagnosticoEbAllView
                 ?>
             </div>
             <?php    $this->modalVerImagenesDiagnosticoCi();  ?>    
+            <?php    $this->modalEnviarCorreo();  ?>    
 
         </div>
         <?php
@@ -72,7 +73,29 @@ class diagnosticoEbAllView
           </div>
         <?php
     } 
-
+    public function modalEnviarCorreo (){
+        ?>
+         <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
+         Launch demo modal
+         </button> -->
+          <div  class="modal fade " id="modalEnviarCorreo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                  <div class="modal-header" id="headerNuevoCliente">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Envio de Correo </h4>
+                  </div>
+                  <div id="cuerpoModalEnviarCorreo" class="modal-body">
+                  </div>
+                  <div class="modal-footer" id="footerNuevoCliente">
+                      <button type="button" class="btn btn-default" data-dismiss="modal" onclick = "">Cerrar</button>
+                      <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                  </div>
+                  </div>
+              </div>
+          </div>
+        <?php
+    } 
 
     function mostrarDiagnosticos()
     {
@@ -97,7 +120,7 @@ class diagnosticoEbAllView
             echo '<td><button class="btn btn-warning btn-sm"
             data-toggle="modal"   
             data-target="#modalEnviarCorreo"
-            onclick = "enviarCorreoConDiagnostico('.$diagnostico['id'].'); "
+            onclick = "enviarCorreoConDiagnosticoEbAll('.$diagnostico['id'].'); "
             ">Correo</button></td>';
 
             echo '<td><button class="btn btn-success btn-sm"

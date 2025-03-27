@@ -4,14 +4,21 @@ require_once($raiz.'/diagnosticoEbAll/views/diagnosticoEbAllView.php');
 require_once($raiz.'/diagnosticoEbAll/models/DiagnosticoEbAllModel.php'); 
 require_once($raiz.'/diagnosticoEbAll/models/TableroDiagnosticoEbAllModel.php'); 
 require_once($raiz.'/diagnosticoEbAll/models/ImagenDiagnosticoEbAllModel.php'); 
+require_once($raiz.'/movil/model/EmpresaModel.php');
+require_once($raiz.'/correo/EnviarCorreoPhpMailer.class.php'); 
+require_once($raiz.'/correo/model/CorreoModel.php'); 
+require_once($raiz.'/vista/vista.php'); 
 // die($raiz); 
 
-class diagnosticoEbAllController 
+class diagnosticoEbAllController  extends vista
 {
     protected $view;
     protected $model;
     protected $tableroDiagnosticoModel;
     protected $imagenDiagnosticoModel;
+    protected $enviarCorreo; 
+    protected $CorreoModel; 
+    protected $EmpresaModel; 
 
     public function __construct()
     {
@@ -21,6 +28,8 @@ class diagnosticoEbAllController
         $this->model = new DiagnosticoEbAllModel();
         $this->tableroDiagnosticoModel = new TableroDiagnosticoEbAllModel();
         $this->imagenDiagnosticoModel = new ImagenDiagnosticoEbAllModel();
+        $this->EmpresaModel = new EmpresaModel();
+        $this->CorreoModel = new CorreoModel();
        
 
         if($_REQUEST['opcion']=='pantallaDiagnosticoEbAll')
@@ -69,9 +78,9 @@ class diagnosticoEbAllController
         {
             $this->traerUltimoDiagnosticoClienteEbAll($_REQUEST);
         }
-        if($_REQUEST['opcion']=='enviarCorreoConDiagnostico')
+        if($_REQUEST['opcion']=='enviarCorreoConDiagnosticoEbAll')
         {
-            $this->enviarCorreoConDiagnostico($_REQUEST);
+            $this->enviarCorreoConDiagnosticoEbAll($_REQUEST);
         }
 
         if($_REQUEST['opcion']=='verimagenesDiagnosticoEbAll')
@@ -164,14 +173,24 @@ class diagnosticoEbAllController
         $this->view->mostrarDiagnosticos();
     }
 
-    public function enviarCorreoConDiagnostico($request)
+    public function enviarCorreoConDiagnosticoEbAll($request)
     {
+        $infoCorreo = $this->CorreoModel->traerInfoConfigCorreo();
+        //    echo '<pre>'; 
+        //     print_r($infoCorreo); 
+        //     echo'</pre>';
+        //     die(); 
+        // die('llego a controlador de enviar correo ');
+        $infoEmpresa = $this->EmpresaModel->traerInfoEmpresa(); 
         //definir la funcionalidad para enviar correo 
-        $email = 'alexrubianoromero@gmail.com';
+        $email = $infoEmpresa['correoEnviarInfo'];
+        // die ('email cliente '.$email);
         $infoCliente = $this->model->traerInfoClienteIdDiagnostico($request['idDiagnostico']); 
         // $this->printR($infoCliente['idcliente']); 
-        $body = $this->bodyCorreo($infoCliente['idcliente'],$request['idDiagnostico']);
-        // die($body); 
+        $body = $this->bodyCorreo($infoCliente['idcliente'],$request['idDiagnostico'],$infoCorreo['rutaPdfDiagAp']);
+        // die('enviar correo controller12');
+        //  die($body); 
+        // die('correo cliente '.$infoCliente['email']);
         $this->enviarCorreo = new EnviarCorreoPhpMailer($infoCliente['email'],$body);
     }
 

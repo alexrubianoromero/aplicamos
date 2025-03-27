@@ -64,4 +64,17 @@ class DiagnosticoEbAllModel extends Conexion
         $consulta = mysql_query($sql,$this->connectMysql()); 
     }
 
+    public function traerInfoClienteIdDiagnostico($idDiagnostico)
+    {
+        $sql = "select c.* from diagnosticoEbAll d 
+        inner join cliente0 c on (c.idcliente = d.idCliente)
+        where d.id = '".$idDiagnostico."'
+        "; 
+        // die($sql); 
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+        $infoCLiente = mysql_fetch_assoc($consulta);
+        return $infoCLiente;
+    }
+    
+
 }
