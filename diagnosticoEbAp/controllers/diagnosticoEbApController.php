@@ -166,12 +166,13 @@ class diagnosticoEbApController extends vista
         $infoEmpresa = $this->EmpresaModel->traerInfoEmpresa(); 
         //definir la funcionalidad para enviar correo 
         $email = $infoEmpresa['correoEnviarInfo'];
-        // die ($email);
+        // die ('email cliente '.$email);
         $infoCliente = $this->model->traerInfoClienteIdDiagnostico($request['idDiagnostico']); 
         // $this->printR($infoCliente['idcliente']); 
         $body = $this->bodyCorreo($infoCliente['idcliente'],$request['idDiagnostico'],$infoCorreo['rutaPdfDiagAp']);
         // die('enviar correo controller12');
         //  die($body); 
+        // die('correo cliente '.$infoCliente['email']);
         $this->enviarCorreo = new EnviarCorreoPhpMailer($infoCliente['email'],$body);
     }
     //esa funcion es para mostrar toda la informacion del ultimo diagnostico del cliente 

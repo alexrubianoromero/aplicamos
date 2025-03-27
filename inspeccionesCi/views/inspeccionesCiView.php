@@ -588,7 +588,7 @@ class inspeccionesCiView extends vista
             <div class="col-lg-3">
                 <select  id="operativaAutomatico" class="form-control">
                     <option value="">Sel...</option>
-                    <option selected value="SI">SI</option>
+                    <option  value="SI">SI</option>
                     <option value="NO">NO</option>
                     
                 </select>
@@ -598,15 +598,15 @@ class inspeccionesCiView extends vista
 
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Equipo Listado</label>
-                <input id="equipoListado"  type="text" class="form-control" placeholder = " " value="1">
+                <input id="equipoListado"  type="text" class="form-control" placeholder = " " value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Modelo</label>
-                <input type="text"  class="form-control" placeholder = "" id="modelo" value="2">
+                <input type="text"  class="form-control" placeholder = "" id="modelo" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Marca bomba</label>
-                <input type="text"  class="form-control" id="marcaBomba" value="3">
+                <input type="text"  class="form-control" id="marcaBomba" value="">
             </div>
         </div>
         
@@ -614,21 +614,21 @@ class inspeccionesCiView extends vista
 
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Potencia(HP)</label>
-                <input type="text"  class="form-control" id="potencia" value="4">
+                <input type="text"  class="form-control" id="potencia" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
             <label for="" >Transferencia</label>
-            <input type="text"  class="form-control" id="transferencia" value="5">
+            <input type="text"  class="form-control" id="transferencia" value="">
         </div>
         <div class="col-lg-<?php  echo $ancho; ?>">
             <label for="" >Ubicacion</label>
-            <input type="text"  class="form-control" id="ubicacion" value="6">
+            <input type="text"  class="form-control" id="ubicacion" value="">
         </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Tipo de Bomba</label>
                 <select name="" id="tipoBomba" class="form-control">
                     <option value="">Seleccione...</option>
-                    <option selected value="Vertical">Vertical</option>
+                    <option value="Vertical">Vertical</option>
                     <option value="Horizontal">Horizontal</option>
                     <option value="Eje Libre">Eje Libre</option>
                     <option value="Carcaza Partida">Carcaza Partida</option>
@@ -638,31 +638,31 @@ class inspeccionesCiView extends vista
             
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Tipo Succion(+-)</label>
-                <input type="text"  class="form-control" id="tipoSuccion" value="7">
+                <input type="text"  class="form-control" id="tipoSuccion" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >U Prue Pitometrica</label>
-                <input type="text"  class="form-control" id="ultimaPitometrica" value="8">
+                <input type="text"  class="form-control" id="ultimaPitometrica" value="">
             </div>
 
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Q MAX(GPM)</label>
-                <input type="text"  class="form-control" id = "qmaxGpm" value="9">
+                <input type="text"  class="form-control" id = "qmaxGpm" value="">
             </div>
         </div>
         
         <div class="row">
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >PRESION MAX(PSI)</label>
-                <input type="text"  class="form-control" id="presionMAxPsi" value="10">
+                <input type="text"  class="form-control" id="presionMAxPsi" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Q NOMINAL (GPM)</label>
-                <input type="text"  class="form-control" id="qNominalGpm" value="11">
+                <input type="text"  class="form-control" id="qNominalGpm" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >PRESION AL 150%(PSI)</label>
-                <input type="text"  class="form-control" id="presionAl150" value="12">
+                <input type="text"  class="form-control" id="presionAl150" value="">
             </div>
         </div>
         <div class="row">
@@ -670,15 +670,15 @@ class inspeccionesCiView extends vista
         
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >DIAMETRO DE SUCCION</label>
-                <input type="text"  class="form-control" id="diametroSuccion" value="13">
+                <input type="text"  class="form-control" id="diametroSuccion" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >DIAMETRO DE DESCARGA</label>
-                <input type="text"  class="form-control" id="diametroDescarga" value="14">
+                <input type="text"  class="form-control" id="diametroDescarga" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >MATERIAL DE LA TUBERIA</label>
-                <input type="text"  class="form-control" id="materialTuberia" value="15">
+                <input type="text"  class="form-control" id="materialTuberia" value="">
             </div>
         </div>
         <div class="row">
@@ -686,26 +686,26 @@ class inspeccionesCiView extends vista
         
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >FUGAS</label>
-                <input type="text"  class="form-control" id="fugas" value="16">
+                <input type="text"  class="form-control" id="fugas" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >CABEZAL PRUEBAS</label>
                 <select name="" id="tipoCabezal" class="form-control">
                     <option  value="">Seleccione...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >TANQUE INDEPENDIENTE</label>
-                <input type="text"  class="form-control"  id="tanqueIndependiente" value="17">
+                <input type="text"  class="form-control"  id="tanqueIndependiente" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >MANOMETRO</label>
                 <select name="" id="nanomentro" class="form-control">
                     <option  value="">Seleccione...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
@@ -719,7 +719,7 @@ class inspeccionesCiView extends vista
                 <label for="" >SELLO MECANICO / P.ESTOPA</label>
                 <select name="" id="selloMecanico" class="form-control">
                     <option value="">Seleccione...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
@@ -729,7 +729,7 @@ class inspeccionesCiView extends vista
                 <!-- <input type="text"  class="form-control" id="manovacumetro" value="19"> -->
                 <select name="" id="manovacumetro" class="form-control">
                     <option value="">Seleccione...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
@@ -739,7 +739,7 @@ class inspeccionesCiView extends vista
                 <!-- <input type="text"  class="form-control" id="rodamientosMotor" value="20"> -->
                 <select name="" id="rodamientosMotor" class="form-control">
                     <option value="">Seleccione...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
@@ -753,7 +753,7 @@ class inspeccionesCiView extends vista
                 <!-- <input type="text"  class="form-control" id="empaquetadura" value="21"> -->
                 <select name="" id="empaquetadura" class="form-control">
                     <option value="">Seleccione...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
@@ -763,7 +763,7 @@ class inspeccionesCiView extends vista
                 <!-- <input type="text"  class="form-control" id="comprobacionVentilador" value="22"> -->
                 <select name="" id="comprobacionVentilador" class="form-control">
                     <option value="">Seleccione...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
@@ -774,7 +774,7 @@ class inspeccionesCiView extends vista
                 <!-- <input type="text"  class="form-control" id="valvulasDeCorte" value="23"> -->
                 <select name="" id="valvulasDeCorte" class="form-control">
                     <option value="">Seleccione...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
@@ -799,7 +799,7 @@ class inspeccionesCiView extends vista
                 <!-- <input type="text"  class="form-control" id="valvulaAlivio" value="25"> -->
                 <select name="" id="valvulaAlivio" class="form-control">
                     <option value="">Seleccione...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
@@ -809,7 +809,7 @@ class inspeccionesCiView extends vista
                 <!-- <input type="text"  class="form-control" id="retornoTanque" value="26"> -->
                 <select name="" id="retornoTanque" class="form-control">
                     <option value="">Seleccione...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option  value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
@@ -818,7 +818,7 @@ class inspeccionesCiView extends vista
                 <label for="" >CONDICIONES OPERACION</label>
                 <select name="" id="idCondicionOperacion" class="form-control">
                         <option value="">Seleccione...</option>
-                        <option selected value="BUENO">BUENO</option>
+                        <option  value="BUENO">BUENO</option>
                         <option value="REGULAR">REGULAR</option>
                         <option value="MALO">MALO</option>
                 </select>
@@ -1016,7 +1016,7 @@ class inspeccionesCiView extends vista
             <div class="col-lg-3">
                 <select name="" id="operativaAutomaticoJockey" class="form-control">
                     <option value="">Sel...</option>
-                    <option selected value="SI">SI</option>
+                    <option  value="SI">SI</option>
                     <option value="NO">NO</option>
                     
                 </select>
@@ -1026,16 +1026,16 @@ class inspeccionesCiView extends vista
 
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Equipo Listado</label>
-                <input id="equipoListadoJockey"  type="text" class="form-control" placeholder = " " value ="1">
+                <input id="equipoListadoJockey"  type="text" class="form-control" placeholder = " " value ="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Modelo</label>
-                <input type="text"  class="form-control" placeholder = "" id="modeloJockey" value ="2">
+                <input type="text"  class="form-control" placeholder = "" id="modeloJockey" value ="">
                 
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Marca bomba</label>
-                <input type="text"  class="form-control" id="marcaBombaJockey" value ="3">
+                <input type="text"  class="form-control" id="marcaBombaJockey" value ="">
             </div>
         </div>
 
@@ -1043,7 +1043,7 @@ class inspeccionesCiView extends vista
 
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Potencia(HP)</label>
-                <input type="text"  class="form-control" id="potenciaJockey" value ="4">
+                <input type="text"  class="form-control" id="potenciaJockey" value ="">
             </div>
 
 
@@ -1051,7 +1051,7 @@ class inspeccionesCiView extends vista
                 <label for="" >Tipo de Bomba</label>
                 <select name="" id="tipoBombaJockey" class="form-control">
                     <option value="">Seleccione...</option>
-                    <option selected value="Vertical">Vertical</option>
+                    <option  value="Vertical">Vertical</option>
                     <option value="Horizontal">Horizontal</option>
                  
                     
@@ -1060,22 +1060,22 @@ class inspeccionesCiView extends vista
             
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Q MAX(GPM)</label>
-                <input type="text"  class="form-control" id="qmaxGpmJockey" value ="5">
+                <input type="text"  class="form-control" id="qmaxGpmJockey" value ="">
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >PRESION MAX(PSI)</label>
-                <input type="text"  class="form-control" id="presionMAxPsiJockey" value ="6">
+                <input type="text"  class="form-control" id="presionMAxPsiJockey" value ="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >Q NOMINAL(GPM)</label>
-                <input type="text"  class="form-control" id="qNominalGpmJockey" value ="7">
+                <input type="text"  class="form-control" id="qNominalGpmJockey" value ="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >PRESION AL 150%(PSI)</label>
-                <input type="text"  class="form-control" id="presionAl150Jockey" value ="8">
+                <input type="text"  class="form-control" id="presionAl150Jockey" value ="">
             </div>
         </div>
             
@@ -1083,15 +1083,15 @@ class inspeccionesCiView extends vista
            
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >DIAMETRO DE SUCCION</label>
-                <input type="text"  class="form-control" id="diametroSuccionJockey" value ="9">
+                <input type="text"  class="form-control" id="diametroSuccionJockey" value ="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>"> 
                 <label for="" >DIAMETRO DE DESCARGA</label>
-                <input type="text"  class="form-control" id="diametroDescargaJockey" value ="10">
+                <input type="text"  class="form-control" id="diametroDescargaJockey" value ="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >MATERIAL DE LA TUBERIA</label>
-                <input type="text"  class="form-control" id="materialTuberiaJockey" value ="11">
+                <input type="text"  class="form-control" id="materialTuberiaJockey" value ="">
             </div>
         </div>
         <div class="row">
@@ -1099,14 +1099,14 @@ class inspeccionesCiView extends vista
         
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >FUGAS</label>
-                <input type="text"  class="form-control" id="fugasJockey" value ="12">
+                <input type="text"  class="form-control" id="fugasJockey" value ="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >MANOMETRO</label>
                 <!-- <input type="text"  class="form-control" id="nanomentroJockey" value ="13"> -->
                 <select name="" id="nanomentroJockey" class="form-control">
                     <option  value="">Seleccione...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option  value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
@@ -1130,7 +1130,7 @@ class inspeccionesCiView extends vista
                 <!-- <input type="text"  class="form-control" id="manovacumetroJockey" value ="14"> -->
                 <select name="" id="manovacumetroJockey" class="form-control">
                     <option value="">Sel...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
@@ -1140,7 +1140,7 @@ class inspeccionesCiView extends vista
             <!-- <input type="text"  class="form-control" id="rodamientosMotorJockey" value ="15"> -->
             <select name="" id="rodamientosMotorJockey" class="form-control">
                     <option value="">Sel...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
@@ -1150,7 +1150,7 @@ class inspeccionesCiView extends vista
                 <!-- <input type="text"  class="form-control" id="empaquetaduraJockey" value ="16"> -->
                 <select name="" id="empaquetaduraJockey" class="form-control">
                     <option value="">Sel...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
@@ -1164,7 +1164,7 @@ class inspeccionesCiView extends vista
                 <!-- <input type="text"  class="form-control" id="comprobacionVentiladorJockey" value ="17"> -->
                 <select name="" id="comprobacionVentiladorJockey" class="form-control">
                     <option value="">Sel...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
@@ -1174,7 +1174,7 @@ class inspeccionesCiView extends vista
                 <!-- <input type="text"  class="form-control" id="valvulasDeCorteJockey" value ="18"> -->
                 <select name="" id="valvulasDeCorteJockey" class="form-control">
                     <option value="">Sel...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
@@ -1188,25 +1188,25 @@ class inspeccionesCiView extends vista
         <div class="row form-group">
             <label class="col-lg-9">INSTRUCCIONES DE MANIPULACION</label>
             <div class="col-lg-3">
-                <input type="text" class="form-control" id="instrucciones" value ="19">
+                <input type="text" class="form-control" id="instrucciones" value ="">
             </div>
         </div>
         <div class="row form-group">
             <label class="col-lg-9">DEMARCACION DE LOS ELEMENTOS</label>
             <div class="col-lg-3">
-                <input type="text" class="form-control" id="demarcacion" value ="20">
+                <input type="text" class="form-control" id="demarcacion" value ="">
             </div>
         </div>
         <div class="row form-group">
             <label class="col-lg-9">LUZ DE EMERGENCIA</label>
             <div class="col-lg-3">
-                <input type="text" class="form-control" id="luzemergecia" value ="21">
+                <input type="text" class="form-control" id="luzemergecia" value ="">
             </div>
         </div>
         <div class="row form-group">
             <label class="col-lg-9">AREA EN ORDEN Y ASEADA</label>
             <div class="col-lg-3">
-                <input type="text" class="form-control" id="areaenorden" value ="22">
+                <input type="text" class="form-control" id="areaenorden" value ="">
             </div>
         </div>
     </div>
@@ -1276,29 +1276,29 @@ class inspeccionesCiView extends vista
             
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >CONTACTOR</label>
-                <input type="text"  class="form-control" id="contactorLider" value="1">
+                <input type="text"  class="form-control" id="contactorLider" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >INDICADOR LUMINOSO</label>
-                <input type="text"  class="form-control" id="indicadorLider" value="2">
+                <input type="text"  class="form-control" id="indicadorLider" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >GUARDAMOTOR</label>
-                <input type="text"  class="form-control" id="guardamotorLider" value="3">
+                <input type="text"  class="form-control" id="guardamotorLider" value="">
             </div>
         </div>
         <div class="row">
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >FUSIBLES/MINIBREAKERS</label>
-                <input type="text"  class="form-control" id="fusiblesLider" value="4">
+                <input type="text"  class="form-control" id="fusiblesLider" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >TEMPORIZADOR</label>
-                <input type="text"  class="form-control" id="temporizadorLider" value="5">
+                <input type="text"  class="form-control" id="temporizadorLider" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >PRESOSTATOS</label>
-                <input type="text"  class="form-control" id="presostatosLider" value="6">
+                <input type="text"  class="form-control" id="presostatosLider" value="">
             </div>
         </div>
         <div class="row">
@@ -1315,11 +1315,11 @@ class inspeccionesCiView extends vista
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >TABLERO LIBRE DE ALARMAS</label>
-                <input type="text"  class="form-control" id="tableroLider" value="8">
+                <input type="text"  class="form-control" id="tableroLider" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >DISPLAY DEL TABLERO</label>
-                <input type="text"  class="form-control" id="displayLider" value="9">
+                <input type="text"  class="form-control" id="displayLider" value="">
             </div>
         </div>
         <?php
@@ -1381,35 +1381,35 @@ class inspeccionesCiView extends vista
             
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >CONTACTOR</label>
-                <input type="text"  class="form-control" id="contactorJockey"  value="1">
+                <input type="text"  class="form-control" id="contactorJockey"  value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>"> 
                 <label for="" >INDICADOR LUMINOSO</label>
-                <input type="text"  class="form-control" id="indicadorJockey" value="2">
+                <input type="text"  class="form-control" id="indicadorJockey" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >GUARDAMOTOR</label>
-                <input type="text"  class="form-control" id="guardamotorJockey" value="3">
+                <input type="text"  class="form-control" id="guardamotorJockey" value="">
             </div>
         </div>
         <div class="row">
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >FUSIBLES/MINIBREAKERS</label>
-                <input type="text"  class="form-control" id="fusiblesJockey" value="4">
+                <input type="text"  class="form-control" id="fusiblesJockey" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >TEMPORIZADOR</label>
-                <input type="text"  class="form-control" id="temporizadorJockey" value="5">
+                <input type="text"  class="form-control" id="temporizadorJockey" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >PRESOSTATOS</label>
-                <input type="text"  class="form-control" id="presostatosJockey" value="6">
+                <input type="text"  class="form-control" id="presostatosJockey" value="">
             </div>
         </div>
         <div class="row">
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >TRANSDUCTOR</label>
-                <input type="text"  class="form-control" id="transductorJockey" value="7">
+                <input type="text"  class="form-control" id="transductorJockey" value="">
             </div>
           
         </div>

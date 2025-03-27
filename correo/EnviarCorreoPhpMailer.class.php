@@ -49,6 +49,7 @@ class EnviarCorreoPhpMailer
             $this->mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
             $this->mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
             //Recipients
+            // die('email cliente phpMaile '.$this->email);
             $this->mail->setFrom($infoEmpresa['correoEnviarInfo'], $infoConfCorreo['anombredequienllega']);
             $this->mail->addAddress($this->email);     //Add a recipient
             //Attachments
