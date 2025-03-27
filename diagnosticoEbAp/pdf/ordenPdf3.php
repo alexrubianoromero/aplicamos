@@ -1,6 +1,19 @@
 <?php
 
 // $raiz= $_SERVER['DOCUMENT_ROOT'];
+//             echo '<pre>';
+//             print_r($_REQUEST); 
+//             echo '</pre>';
+// die();
+
+// $pathInfo = $_SERVER['PATH_INFO'];
+// $pathInfo = str_replace("/","", $pathInfo);
+// $_REQUEST['idDiagnostico']=$pathInfo;
+
+$_REQUEST['idDiagnostico'] = $_REQUEST['id']; 
+
+// die('resultado : '.$pathInfo);
+
 date_default_timezone_set('America/Bogota');
 // die($raiz);
 $ruta = dirname(dirname(dirname(__FILE__)));
@@ -162,5 +175,8 @@ $pdf->AddPage();
         // $posVertical = $tamano * $n;
         $n=$n+2;
     }
+
+    $ruta_guardado = __DIR__ . '/mi_archivo.pdf';
     $pdf->Output();
+    // $pdf->Output('./miarchivo.pdf','F');
     ?>

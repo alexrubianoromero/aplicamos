@@ -199,7 +199,7 @@ class diagnosticoEbApView
                     ">Imagenes</button></td>';
 
             echo '<td><button class ="btn btn-primary btn-sm" onclick ="verDiagnostico('.$diagnostico['id'].')">Ver</button></td>';
-            echo '<td><a href="../diagnosticoEbAp/pdf/ordenPdf3.php?idDiagnostico='.$diagnostico['id'].'" target="_blank" >PDF</a></td>';
+            echo '<td><a href="../diagnosticoEbAp/pdf/ordenPdf3.php/?id='.$diagnostico['id'].'" target="_blank" >PDF</a></td>';
             echo '</tr>';    
         }
         echo '</table>';

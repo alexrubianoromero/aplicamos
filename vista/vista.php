@@ -71,9 +71,10 @@ public function draw_table($datos)
                     // die(); 
                     $body = '
                             Aplicamos Ingenieria informa atentamente que seha realizado el siguiente diagnostico
-                             
+                            <br><br>
+                            Para descargarlo por favor haga click en el siguiente enlace:  
                             
-                            '.$rutaCorreo.$idDiagnostico.'
+                            <a style="font-size:30px;" href ="'.$rutaCorreo.$idDiagnostico.'" target="_blank">Ver pdf diagnostico</a>
                             ';
                     return $body;
 
