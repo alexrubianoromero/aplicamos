@@ -131,7 +131,7 @@ class diagnosticoEbAllView
 
 
             echo '<td><button class ="btn btn-primary" onclick ="verDiagnosticoEbAll('.$diagnostico['id'].')">Ver</button></td>';
-            echo '<td><a href="../diagnosticoEbAll/pdf/ordenPdf3.php?idDiagnostico='.$diagnostico['id'].'" target="_blank" >PDF</a></td>';
+            echo '<td><a href="../diagnosticoEbAll/pdf/ordenPdf3.php?id='.$diagnostico['id'].'" target="_blank" >PDF</a></td>';
             echo '</tr>';    
         }
         echo '</table>';

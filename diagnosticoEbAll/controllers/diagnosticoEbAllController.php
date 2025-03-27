@@ -187,7 +187,7 @@ class diagnosticoEbAllController  extends vista
         // die ('email cliente '.$email);
         $infoCliente = $this->model->traerInfoClienteIdDiagnostico($request['idDiagnostico']); 
         // $this->printR($infoCliente['idcliente']); 
-        $body = $this->bodyCorreo($infoCliente['idcliente'],$request['idDiagnostico'],$infoCorreo['rutaPdfDiagAp']);
+        $body = $this->bodyCorreo($infoCliente['idcliente'],$request['idDiagnostico'],$infoCorreo['rutaPdfDiagAll']);
         // die('enviar correo controller12');
         //  die($body); 
         // die('correo cliente '.$infoCliente['email']);

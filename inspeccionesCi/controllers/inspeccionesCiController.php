@@ -208,7 +208,7 @@ class inspeccionesCiController extends vista
     }
    
 
-    public function enviarCorreoConDiagnostico($request)
+    public function enviarCorreoConDiagnosticoCi($request)
     {
         $infoCorreo = $this->CorreoModel->traerInfoConfigCorreo();
         //    echo '<pre>'; 
@@ -221,8 +221,9 @@ class inspeccionesCiController extends vista
         $email = $infoEmpresa['correoEnviarInfo'];
         // die ('email cliente '.$email);
         $infoCliente = $this->model->traerInfoClienteIdDiagnosticoCi($request['idDiagnostico']); 
+        // die($infoCorreo['rutaPdfDiagCi']);
         // $this->printR($infoCliente['idcliente']); 
-        $body = $this->bodyCorreo($infoCliente['idcliente'],$request['idDiagnostico'],$infoCorreo['rutaPdfDiagAp']);
+        $body = $this->bodyCorreo($infoCliente['idcliente'],$request['idDiagnostico'],$infoCorreo['rutaPdfDiagCi']);
         // die('enviar correo controller12');
         //  die($body); 
         // die('correo cliente '.$infoCliente['email']);

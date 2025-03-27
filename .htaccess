@@ -5,6 +5,8 @@ RewriteEngine on
 
 
 RewriteRule ^diag/([0-9]+)$ diagnosticoEbAp/pdf/ordenPdf3.php?id=$1
+RewriteRule ^diagEbAll/([0-9]+)$ diagnosticoEbAll/pdf/ordenPdf3.php?id=$1
+RewriteRule ^diagCi/([0-9]+)$ inspeccionesCi/pdf/inspeccionCiPdf.php?id=$1
 
 
 

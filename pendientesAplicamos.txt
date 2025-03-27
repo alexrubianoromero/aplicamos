@@ -56,6 +56,13 @@ creacion de tabla bomba lider que es parte de un diagnostico ci contra incendios
 voy a mirar que por lo menos grabe la primera parte de la informacion osea informacion bomba lider 
 
 se debe crear un nuevo campo en la tabla de las imagenes llamado observaciones 
+hay que crear dos campos mas enla configuracion del correo para que funcione lo de la ruta del pdf
+
+update  `correoConfig` set rutaPdfDiagAll  = 'https://www.aplicamosingenieria.net/aplicamos123/diagEbAll/';
+
+update  `correoConfig` set rutaPdfDiagCi  = 'https://www.aplicamosingenieria.net/aplicamos123/diagCi/';
+
+
 
 
 

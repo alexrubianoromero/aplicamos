@@ -1,6 +1,7 @@
 <?php
 
 // $raiz= $_SERVER['DOCUMENT_ROOT'];
+$_REQUEST['idDiagnostico'] = $_REQUEST['id']; 
 date_default_timezone_set('America/Bogota');
 // die($raiz);
 $ruta = dirname(dirname(dirname(__FILE__)));

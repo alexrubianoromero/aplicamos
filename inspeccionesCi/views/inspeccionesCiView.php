@@ -204,7 +204,7 @@ class inspeccionesCiView extends vista
                     onclick = " verimagenesDiagnosticoCi('.$diagnostico['id'].'); "
                     ">Imagenes</button></td>';        
             // echo '<td><button class ="btn btn-primary btn-sm" onclick ="verDiagnostico('.$diagnostico['id'].')">Ver</button></td>';
-            echo '<td><a href="../inspeccionesCi/pdf/inspeccionCiPdf.php?idDiagnostico='.$diagnostico['id'].'" target="_blank" >PDF</a></td>';
+            echo '<td><a href="../inspeccionesCi/pdf/inspeccionCiPdf.php?id='.$diagnostico['id'].'" target="_blank" >PDF</a></td>';
             echo '</tr>';    
         }
         echo '</table>';

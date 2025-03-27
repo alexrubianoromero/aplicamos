@@ -170,7 +170,7 @@ class diagnosticoEbApController extends vista
         $infoCliente = $this->model->traerInfoClienteIdDiagnostico($request['idDiagnostico']); 
         // $this->printR($infoCliente['idcliente']); 
         $body = $this->bodyCorreo($infoCliente['idcliente'],$request['idDiagnostico'],$infoCorreo['rutaPdfDiagAp']);
-        // die('enviar correo controller12');
+        // die('enviar correo controller12'.$infoCorreo['rutaPdfDiagAp']);
         //  die($body); 
         // die('correo cliente '.$infoCliente['email']);
         $this->enviarCorreo = new EnviarCorreoPhpMailer($infoCliente['email'],$body);

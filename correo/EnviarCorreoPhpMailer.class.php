@@ -52,6 +52,8 @@ class EnviarCorreoPhpMailer
             // die('email cliente phpMaile '.$this->email);
             $this->mail->setFrom($infoEmpresa['correoEnviarInfo'], $infoConfCorreo['anombredequienllega']);
             $this->mail->addAddress($this->email);     //Add a recipient
+            $this->mail->addCC($infoConfCorreo['conCopiaA']);    // Copia visible
+            // $this->mail->addBCC('copiaoculta@ejemplo.com'); // Copia oculta
             //Attachments
             // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
             // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
