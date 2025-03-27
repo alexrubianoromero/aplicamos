@@ -195,7 +195,7 @@ class inspeccionesCiView extends vista
             echo '<th><button class="btn btn-warning btn-sm"
                     data-toggle="modal"   
                     data-target="#modalEnviarCorreo"
-                    onclick = "enviarCorreoConDiagnostico('.$diagnostico['id'].'); "
+                    onclick = "enviarCorreoConDiagnosticoCi('.$diagnostico['id'].'); "
                     ">Correo</button></th>';
 
                     echo '<td><button class="btn btn-success btn-sm"

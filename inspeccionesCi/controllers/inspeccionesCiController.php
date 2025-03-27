@@ -9,7 +9,9 @@ require_once($raiz.'/inspeccionesCi/models/ImagenDiagnosticoCiModel.php');
 // require_once($raiz.'/diagnosticoEbAp/models/ImagenDiagnosticoEbApModel.php'); 
 // require_once($raiz.'/diagnosticoEbAp/models/TableroDiagnosticoEbApModel.php'); 
 // require_once($raiz.'/clientes/vista/ClientesVista.php'); 
-// require_once($raiz.'/correo/EnviarCorreoPhpMailer.class.php'); 
+require_once($raiz.'/movil/model/EmpresaModel.php');
+require_once($raiz.'/correo/model/CorreoModel.php'); 
+require_once($raiz.'/correo/EnviarCorreoPhpMailer.class.php'); 
 require_once($raiz.'/vista/vista.php'); 
 // die($raiz); 
 
@@ -22,6 +24,9 @@ class inspeccionesCiController extends vista
     protected $infoLiderModel;
     protected $infoJockeyModel;
     protected $imagenModel; 
+    protected $enviarCorreo; 
+    protected $EmpresaModel; 
+    protected $CorreoModel; 
     // protected $tableroDiagnosticoModel;
     // protected $imagenDiagnosticoModel;
     // protected $enviarCorreo; 
@@ -42,6 +47,9 @@ class inspeccionesCiController extends vista
         $this->infoLiderModel = new InfoBombaLiderModel();
         $this->infoJockeyModel = new InfoBombaJockeyModel();
         $this->imagenModel = new ImagenDiagnosticoCiModel();
+        $this->EmpresaModel = new EmpresaModel();
+        $this->CorreoModel = new CorreoModel();
+      
         // $this->tableroDiagnosticoModel = new TableroDiagnosticoEbApModel();
         // $this->imagenDiagnosticoModel = new ImagenDiagnosticoEbApModel();
       
@@ -144,6 +152,13 @@ class inspeccionesCiController extends vista
         {
             $this->realizarCargaArchivoCi($_REQUEST);
         }
+
+        if($_REQUEST['opcion']=='enviarCorreoConDiagnosticoCi')
+        {
+            $this->enviarCorreoConDiagnosticoCi($_REQUEST);
+        }
+
+
         
           
     } //este debe ser el fin de construct
@@ -191,23 +206,28 @@ class inspeccionesCiController extends vista
             $ultDiagnostico = $this->model->traerUltimoFormatoInspeccionCliente($request['idCliente']);
             $this->view ->mostrarUltimoFormatoInspeccionCliente($ultDiagnostico);
     }
-        // public function enviarCorreoConDiagnostico($request)
-        // {
-            //     //definir la funcionalidad para enviar correo 
-    //     $email = 'alexrubianoromero@gmail.com';
-    //     $infoCliente = $this->model->traerInfoClienteIdDiagnostico($request['idDiagnostico']); 
-    //     // $this->printR($infoCliente['idcliente']); 
-    //     $body = $this->bodyCorreo($infoCliente['idcliente'],$request['idDiagnostico']);
-    //     // die($body); 
-    //     $this->enviarCorreo = new EnviarCorreoPhpMailer($infoCliente['email'],$body);
-    // }
-    // //esa funcion es para mostrar toda la informacion del ultimo diagnostico del cliente 
-    // public function traerInfoCompletaUltimoDiagnostico($request)
-    // {
-    //     // $infoDiagnostico = $this->model->traerDiagnosticoId($request['idDiagnostico']);
-    //     //podria ser ver diagnostico 
-    //     $this->view->verDiagnostico($request['idDiagnostico']);
-    // }
+   
+
+    public function enviarCorreoConDiagnostico($request)
+    {
+        $infoCorreo = $this->CorreoModel->traerInfoConfigCorreo();
+        //    echo '<pre>'; 
+        //     print_r($infoCorreo); 
+        //     echo'</pre>';
+        //     die(); 
+        // die('llego a controlador de enviar correo ');
+        $infoEmpresa = $this->EmpresaModel->traerInfoEmpresa(); 
+        //definir la funcionalidad para enviar correo 
+        $email = $infoEmpresa['correoEnviarInfo'];
+        // die ('email cliente '.$email);
+        $infoCliente = $this->model->traerInfoClienteIdDiagnosticoCi($request['idDiagnostico']); 
+        // $this->printR($infoCliente['idcliente']); 
+        $body = $this->bodyCorreo($infoCliente['idcliente'],$request['idDiagnostico'],$infoCorreo['rutaPdfDiagAp']);
+        // die('enviar correo controller12');
+        //  die($body); 
+        // die('correo cliente '.$infoCliente['email']);
+        $this->enviarCorreo = new EnviarCorreoPhpMailer($infoCliente['email'],$body);
+    }
 
     // public function filtrarDiagnosticosEbApPorFecha($request)
     // {
