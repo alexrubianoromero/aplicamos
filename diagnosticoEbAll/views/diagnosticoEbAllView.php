@@ -266,15 +266,23 @@ class diagnosticoEbAllView
                 {
                     echo '<tr>'; 
                     echo '<td>'.$concepto['descripcion'].'</td>';
-                    echo '<td><select id="concepto'.$concepto['id'].'" name="concepto'.$concepto['id'].'" class="form-control">
+                    echo '<td>';
+                    if($concepto['campoValor']==1)
+                    {
+                        echo '<input type="text" id="concepto'.$concepto['id'].'"  class="form-control" placeholder="campovalor ">  ';
+                    }
+                    else
+                    {
+                    echo '<select id="concepto'.$concepto['id'].'" name="concepto'.$concepto['id'].'" class="form-control">
                                     <option value ="">Seleccione...</option>
                                     <option value ="B">Bueno</option>
                                     <option value ="R">Regular</option>
                                     <option value ="M">Malo</option>
                                     <option value ="A">Ausente</option>
                                     <option value ="NA">No Aplica</option>
-                                    </select>
-                            </td>';
+                                    </select>';
+                    }              
+                    echo '</td>';
                     echo '</tr>';  
                 }
                 ?>
