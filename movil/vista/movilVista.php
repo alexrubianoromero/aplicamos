@@ -99,11 +99,11 @@ class movilVista{
             <!-- <img src="planeta.png"> -->
             <div class="row" id="div_botones_inicio"> 
                 <div class = "form_group ">
-                    <input style="background-color:gray;" value="prueba" type = "text" class = "form-control botoninicio " id="txtUsuario" placeholder = "Usuario" > 
+                    <input style="background-color:gray;" value="" type = "text" class = "form-control botoninicio " id="txtUsuario" placeholder = "Usuario" > 
                 </div>
                 <br><br><br>
                 <div class = "form_group ">
-                    <input style="background-color:gray;"  value="4321" type = "password" class = "form-control botoninicio" id="txtClave" placeholder = "Clave"> 
+                    <input style="background-color:gray;"  value="" type = "password" class = "form-control botoninicio" id="txtClave" placeholder = "Clave"> 
                 </div>
                 <br><br><br><br>
                 <div class = "form_group ">
@@ -178,23 +178,23 @@ class movilVista{
                 </button>';
             }    
             
-            if($_SESSION['nivel'] > 2 || $request['nivel']>2)
-            {
+            // if($_SESSION['nivel'] > 2 || $request['nivel']>2)
+            // {
                 echo     '<br>';
              echo '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaDiagEbAp();"><span align="left"> EB AGUA POTABLE<span> 
                 </button>';
-            }    
+            // }    
                 
             echo  '<br>';
 
             echo    '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaDiagEbAll();"> EB AGUAS LLUVIAS
                 </button>';
-                if($_SESSION['nivel'] > 2 || $request['nivel']>2 )
-                {
+                // if($_SESSION['nivel'] > 2 || $request['nivel']>2 )
+                // {
                 echo    '<br>';
              echo    '<button class = "btn btn-primary bontonesmenu"  onclick="pantallaInspeccionCI();"> CONTRA INCENDIOS 
                 </button>';
-            }
+            // }
 
             
             // if($_SESSION['nivel'] > 2 || $request['nivel']>2)

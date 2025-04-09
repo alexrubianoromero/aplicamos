@@ -11,7 +11,7 @@
 // $_REQUEST['idDiagnostico']=$pathInfo;
 
 $_REQUEST['idDiagnostico'] = $_REQUEST['id']; 
-
+mysqli_set_charset($conexion, "utf8");
 // die('resultado : '.$pathInfo);
 
 date_default_timezone_set('America/Bogota');
@@ -146,11 +146,12 @@ $pdf->AddPage();
     
     $pdf->Cell(30,6,'Material tuberia:',0,0,'');
     $pdf->Cell(120,6,$infoDiagnostico['materialTuberia'],0,1,'1');
-
+    $pdf->AddPage();
     $pdf->Cell(180,6,'Concepto Tecnico Agua Potable:',1,1,'C');
-    $pdf->MultiCell(180,6,$infoDiagnostico['conceptoTecnico'],0,'J','1');
+    $pdf->MultiCell(180,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$infoDiagnostico['conceptoTecnico']),0,'J','0');
     // $vertical =  $pdf->GetY();
     // $pdf->SetY($vertical+5,'');
+    $pdf->AddPage();
     $pdf->Ln(2);
     $posicionVertical = $pdf->GetY();
     $pdf->Cell(180,6,'IMAGENES DIAGNOSTICO',1,1,'C');

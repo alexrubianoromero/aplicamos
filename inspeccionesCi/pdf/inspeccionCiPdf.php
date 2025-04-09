@@ -310,7 +310,7 @@ $pdf->AddPage();
     // $pdf->SetFont('Arial','B',$tamLetra);
 
 
-    $pdf->MultiCell(190,$alto, $infoDiagnostico['observaciones'], 1, 'J');
+    $pdf->MultiCell(190,$alto, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$infoDiagnostico['observaciones']), 1, 'J');
 
     $pdf->Ln(2);
     $posicionVertical = $pdf->GetY();

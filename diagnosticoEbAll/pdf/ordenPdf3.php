@@ -139,7 +139,7 @@ $pdf->AddPage();
     $pdf->Cell(120,6,$infoDiagnostico['materialTuberia'],0,1,'');
 
     $pdf->Cell(190,6,'Concepto Tecnico Agua Potable:',1,1,'C');
-    $pdf->MultiCell(190,6,$infoDiagnostico['conceptoTecnico'],0,'J','');
+    $pdf->MultiCell(190,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$infoDiagnostico['conceptoTecnico']),0,'J','');
     // $vertical =  $pdf->GetY();
     // $pdf->SetY($vertical+5,'');
     
