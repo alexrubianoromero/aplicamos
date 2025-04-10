@@ -22,6 +22,20 @@ class ImagenDiagnosticoEbApModel extends Conexion
         $imagenes = $this->get_table_assoc($consulta);
         return $imagenes; 
     }
+    public function traerInfoImagenId($idImagen)
+    {
+        $sql="select * from imagenesDiagnosticoEbAp where id =  '".$idImagen."' ";
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+        $imagen =   mysql_fetch_assoc($consulta);
+        return $imagen; 
+    }
+    public function modificarObservacionesImagen($request)
+    {
+        $sql="update imagenesDiagnosticoEbAp set observaciones = '".$request['observaciones']."'    
+        where id =  '".$request['idImagen']."' ";
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+        
+    }
 
 
     public function grabaregistroImagenesDiagnostico($idDiagnostico,$nombreIma,$ruta)

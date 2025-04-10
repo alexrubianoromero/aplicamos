@@ -67,7 +67,20 @@ class DiagnosticoEbAPModel extends Conexion
     
     public function actualizarInfoEnDiagnostico($request)
     {
-        $sql ="update  diagnosticoEbAp  set conceptoTecnico = '".$request['conceptoTecnico']."'   
+        $sql ="update  diagnosticoEbAp  set 
+            conceptoTecnico = '".$request['conceptoTecnico']."' 
+            ,variador = '".$request['checkVariador']."' 
+            ,arranqueDirecto = '".$request['checkArranque']."' 
+            ,estrellaTriangulo = '".$request['checkEstrella']."' 
+            ,hidroflow = '".$request['checkHidroflow']."' 
+            ,capacidad = '".$request['capacidad']."' 
+            ,marcaBombas = '".$request['marcaBomba']."' 
+            ,hp = '".$request['hp']."' 
+            ,fugas = '".$request['fugas']."' 
+            ,marcaTablero = '".$request['marcasTableros']."' 
+            ,presionTrabajo = '".$request['presiondetrabajoOn']."' 
+            ,presionTrabajoOff = '".$request['presiondetrabajoOff']."' 
+            ,materialTuberia = '".$request['materialTuberia']."' 
         where  id = '".$request['idDiagnostico']."' ";
         $consulta = mysql_query($sql,$this->connectMysql()); 
     }

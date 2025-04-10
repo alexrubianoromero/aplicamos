@@ -214,6 +214,41 @@ function enviarCorreoConDiagnostico(idDiagnostico)
     +'&idDiagnostico='+idDiagnostico
     );
 }
+function formuModificarObservaImagen(idImagen)
+{
+    // var idCliente = document.getElementById('idCliente').value;
+    const http=new XMLHttpRequest();
+    const url = '../diagnosticoEbAp/diagnosticoEbAp.php';
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status ==200){
+            console.log(this.responseText);
+            document.getElementById("cuerpoModalVerImagenesDiagnostico").innerHTML  = this.responseText;
+        }
+    };
+    http.open("POST",url);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send("opcion=formuModificarObservaImagen"
+    +'&idImagen='+idImagen
+    );
+}
+function modificarObservacionesImagen(idImagen)
+{
+    var observaciones = document.getElementById('observacionesImagen').value;
+    const http=new XMLHttpRequest();
+    const url = '../diagnosticoEbAp/diagnosticoEbAp.php';
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status ==200){
+            console.log(this.responseText);
+            document.getElementById("cuerpoModalVerImagenesDiagnostico").innerHTML  = this.responseText;
+        }
+    };
+    http.open("POST",url);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send("opcion=modificarObservacionesImagen"
+    +'&idImagen='+idImagen
+    +'&observaciones='+observaciones
+    );
+}
 
 
 function grabarDiagnosticoEbAp(){
@@ -251,8 +286,22 @@ function grabarDiagnosticoEbAp(){
     var concepto28 = document.getElementById('concepto28').value;
     var concepto29 = document.getElementById('concepto29').value;
     var concepto30 = document.getElementById('concepto30').value;
-
     var conceptoTecnico = document.getElementById('conceptoTecnico').value;
+
+    var checkVariador = 0; if(document.getElementById('checkVariador').checked){ checkVariador=1; }
+    var checkArranque = 0; if(document.getElementById('checkArranque').checked){ checkArranque=1; }
+    var checkEstrella = 0; if(document.getElementById('checkEstrella').checked){ checkEstrella=1; }
+    var checkHidroflow = 0; if(document.getElementById('checkHidroflow').checked){ checkHidroflow=1; }
+    var capacidad = document.getElementById('capacidad').value;
+    var marcaBomba = document.getElementById('marcaBomba').value;
+    var hp = document.getElementById('hp').value;
+    var fugas = document.getElementById('fugas').value;
+    var marcasTableros = document.getElementById('marcasTableros').value;
+    var presiondetrabajoOn = document.getElementById('presiondetrabajoOn').value;
+    var presiondetrabajoOff = document.getElementById('presiondetrabajoOff').value;
+    var materialTuberia = document.getElementById('materialTuberia').value;
+
+
     
     
     const http=new XMLHttpRequest();
@@ -300,6 +349,21 @@ function grabarDiagnosticoEbAp(){
     +'&concepto30='+concepto30
 
     +'&conceptoTecnico='+conceptoTecnico
+
+    +'&checkVariador='+checkVariador
+    +'&checkArranque='+checkArranque
+    +'&checkEstrella='+checkEstrella
+    +'&checkHidroflow='+checkHidroflow
+    +'&capacidad='+capacidad
+    +'&marcaBomba='+marcaBomba
+    +'&hp='+hp
+    +'&fugas='+fugas
+    +'&marcasTableros='+marcasTableros
+    +'&presiondetrabajoOn='+presiondetrabajoOn
+    +'&presiondetrabajoOff='+presiondetrabajoOff
+    +'&presiondetrabajoOn='+presiondetrabajoOn
+    +'&materialTuberia='+materialTuberia
+
     );
 }
 

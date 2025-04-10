@@ -139,7 +139,9 @@ $pdf->AddPage();
     $pdf->Cell(20,6,'Fugas:',0,0,'');
     $pdf->Cell(20,6,$infoDiagnostico['fugas'],0,0,'');
     $pdf->Cell(30,6,'Presion de trabajo:',0,0,'');
-    $pdf->Cell(20,6,$infoDiagnostico['presionTrabajo'],0,1,'');
+    $pdf->Cell(20,6,$infoDiagnostico['presionTrabajo'],0,0,'');
+    $pdf->Cell(35,6,'Presion de trabajo Off:',0,0,'');
+    $pdf->Cell(20,6,$infoDiagnostico['presionTrabajoOff'],0,1,'');
     
     $pdf->Cell(30,6,'Marca del tablero:',0,0,'');
     $pdf->Cell(120,6,$infoDiagnostico['marcaTablero'],0,1,'');

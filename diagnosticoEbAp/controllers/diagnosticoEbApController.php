@@ -113,9 +113,21 @@ class diagnosticoEbApController extends vista
         {
             $this->realizarCargaArchivo($_REQUEST);
         }
+        if($_REQUEST['opcion']=='formuModificarObservaImagen')
+        {
+            $this->view->formuModificarObservaImagen($_REQUEST['idImagen']);
+        }
+        if($_REQUEST['opcion']=='modificarObservacionesImagen')
+        {
+            $this->modificarObservacionesImagen($_REQUEST);
+        }
         
     }
-    
+    public function modificarObservacionesImagen($request)
+    {
+        $this->imagenDiagnosticoModel->modificarObservacionesImagen($request);
+    }
+
     public function realizarCargaArchivo($request)
     {
         //traerinfoGanado

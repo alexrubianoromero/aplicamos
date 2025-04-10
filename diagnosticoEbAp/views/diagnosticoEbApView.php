@@ -6,6 +6,7 @@ require_once($raiz.'/diagnosticoEbAp/models/ConceptoTableroEbApModel.php');
 require_once($raiz.'/clientes/models/ClienteModel.php'); 
 require_once($raiz.'/diagnosticoEbAp/models/TableroDiagnosticoEbApModel.php'); 
 require_once($raiz.'/movil/model/UsuarioModel.php'); 
+require_once($raiz.'/diagnosticoEbAp/models/ImagenDiagnosticoEbApModel.php'); 
 
 class diagnosticoEbApView
 {
@@ -14,6 +15,7 @@ class diagnosticoEbApView
     protected $conceptoTableroModel;
     protected $tableroDiagnosticoModel;
     protected $usuarioModel;
+    protected $imagenDiagnosticoModel;
 
     public function __construct()
     {
@@ -22,6 +24,7 @@ class diagnosticoEbApView
         $this->conceptoTableroModel = new ConceptoTableroEbApModel();
         $this->tableroDiagnosticoModel = new TableroDiagnosticoEbApModel();
         $this->usuarioModel = new UsuarioModel();
+        $this->imagenDiagnosticoModel = new ImagenDiagnosticoEbApModel();
     }
 
 
@@ -395,8 +398,8 @@ class diagnosticoEbApView
                 <div  align="left">
                     <select id="fugas" name="fugas"  class="form-control" >
                         <option value="">...</option>
-                        <option value="S">Si</option>
-                        <option value="N">No</option>
+                        <option value="SI">Si</option>
+                        <option value="NO">No</option>
                     </select>
                 </div>
             </div>
@@ -577,12 +580,17 @@ class diagnosticoEbApView
             // $rutaImagen = $raiz123.'/imagenes/imagenesDiagnosticoEbAp/'.$imagen['rutaImagen'];
             $rutaImagen = $raiz123.$imagen['rutaImagen'];
             // echo '<div style="border:1px solid; width:200px; display:inline">'; 
-            echo '<br>';
+            echo '<br><br>';
             echo '<div  class="row" >'; 
             // echo '<img src="'.$rutaImagen.'" > '; 
             // echo '<img src="../'.$imagen['rutaImagen']."/".$imagen['nombre'].'"  width="200px"> '; 
             echo '<img src="../'.$imagen['rutaImagen']."/".$imagen['nombre'].'"  width="90%"> '; 
             echo '<div>'.$imagen['observaciones'].'</div>';
+            echo '<div><button 
+                        onclick="formuModificarObservaImagen('.$imagen['id'].');" 
+                        class="btn btn-primary">Modificar Observaciones
+                        </button>
+                </div>';
             echo '</div>';
         }
         
@@ -613,6 +621,21 @@ class diagnosticoEbApView
                             onclick="realizarCargaArchivo(<?php echo $idDiagnostico; ?>);"
                             >SUBIR IMAGEN </button>
             </div>
+        <?php
+    }
+
+    function formuModificarObservaImagen($id)
+    {
+        $infoImagen=  $this->imagenDiagnosticoModel->traerInfoImagenId($id);
+        ?>
+        <div>
+            <input type="hidden" id="idImagen" value="<?php   echo $id  ?>">
+
+                <label></label>
+                <input class="form-control" type="text" id="observacionesImagen" value = "<?php   echo $infoImagen['observaciones'] ?>">
+
+            </div>
+            <div><button class="btn btn-primary" onclick="modificarObservacionesImagen(<?php echo $id; ?>);">Modificar</button></div>
         <?php
     }
 
