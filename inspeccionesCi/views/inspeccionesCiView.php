@@ -1603,6 +1603,11 @@ class inspeccionesCiView extends vista
             // echo '<img src="../'.$imagen['rutaImagen']."/".$imagen['nombre'].'"  width="200px"> '; 
             echo '<img src="../'.$imagen['rutaImagen']."/".$imagen['nombre'].'"  width="90%"> '; 
             echo '<div>'.$imagen['observaciones'].'</div>';
+            echo '<div><button 
+                    onclick="formuModificarObservaImagenCi('.$imagen['id'].');" 
+                    class="btn btn-primary">Modificar Observaciones
+                    </button>
+            </div>';
             echo '</div>';
         }
         
@@ -1630,6 +1635,21 @@ class inspeccionesCiView extends vista
                             onclick="realizarCargaArchivoCi(<?php echo $idDiagnostico; ?>);"
                             >SUBIR IMAGEN </button>
             </div>
+        <?php
+    }
+
+    function formuModificarObservaImagenCi($id)
+    {
+        $infoImagen=   $this->imagenModel->traerInfoImagenId($id);
+        ?>
+        <div>
+            <input type="hidden" id="idImagen" value="<?php   echo $id  ?>">
+
+                <label></label>
+                <input class="form-control" type="text" id="observacionesImagen" value = "<?php   echo $infoImagen['observaciones'] ?>">
+
+            </div>
+            <div><button class="btn btn-primary" onclick="modificarObservacionesImagenCi(<?php echo $id; ?>);">Modificar</button></div>
         <?php
     }
 

@@ -22,6 +22,13 @@ class ImagenDiagnosticoEbAllModel extends Conexion
         $imagenes = $this->get_table_assoc($consulta);
         return $imagenes; 
     }
+    public function traerInfoImagenId($idImagen)
+    {
+        $sql="select * from imagenesDiagnosticoEbAll where id =  '".$idImagen."' ";
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+        $imagen =   mysql_fetch_assoc($consulta);
+        return $imagen; 
+    }
 
 
     public function grabaregistroImagenesDiagnosticoAll($idDiagnostico,$nombreIma,$ruta)
@@ -47,6 +54,14 @@ class ImagenDiagnosticoEbAllModel extends Conexion
          where id = '".$maxId."'   ";
         //  die($sql); 
          $consulta = mysql_query($sql,$this->connectMysql()); 
+    }
+
+    public function modificarObservacionesImagenEbAll($request)
+    {
+        $sql="update imagenesDiagnosticoEbAll set observaciones = '".$request['observaciones']."'    
+        where id =  '".$request['idImagen']."' ";
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+        
     }
 
 

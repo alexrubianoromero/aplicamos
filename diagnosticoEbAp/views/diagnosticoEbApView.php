@@ -303,7 +303,11 @@ class diagnosticoEbApView
                 <input type="hidden" id="idDiagnostico" name="idDiagnostico" value="<?php echo $idDiagnostico ?>" >
 
                 <?php
-                  $this->formuTablerosEbAp();
+                    //hay que controlar si es el primer tablero osea numero tableros0  o si es 
+                    // numerotableros >0
+                    if($infoDiagnostico['numeroTableros']==0){$this->formuTablerosEbAp();}
+                    else { $this->formuTablerosEbAp($idDiagnostico);}
+                     
                   ?>
             </form>
         </div>
@@ -314,8 +318,17 @@ class diagnosticoEbApView
      <?php               
     }
 
-    public function formuTablerosEbAp()
+    public function formuTablerosEbAp($idDiagnostico=0)
     {
+        //si ya tiene un tablero entonces debe traer la informacion completa de la parte de abajo de diagmostico
+        if($idDiagnostico>0){
+            $infoDiagnostico = $this->model->traerDiagnosticoId($idDiagnostico);
+            // echo '<pre>'; 
+            //  print_r($infoDiagnostico); 
+            //  echo'</pre>';
+            //  die();
+        }
+
         $conceptos = $this->conceptoTableroModel->traerTablerosEbAp()
         ?>
         <div class="row" style="color:black;" >
@@ -358,15 +371,21 @@ class diagnosticoEbApView
         <div class="row mt-3">
             <div class="col-lg-3" align="left">
                 <label for="checkVariador">VARIADOR</label>
-                <input type="checkbox" id="checkVariador" name ="checkVariador" >
+                <?php  if($infoDiagnostico['variador']==1){$checkeado = 'checked';}else{ $checkeado =''; }
+                    echo '<input type="checkbox" id="checkVariador" name ="checkVariador" '.$checkeado.' >';
+                ?>
             </div>    
             <div class="col-lg-3" align="left">
                 <label for="checkArranque">ARRANQUE DIRECTO:</label>
-                <input type="checkbox" id="checkArranque" name="checkArranque" >
+                <?php  if($infoDiagnostico['arranqueDirecto']==1){$checkeado = 'checked';}else{ $checkeado =''; }
+                     echo '<input type="checkbox" id="checkArranque" name ="checkArranque" '.$checkeado.'>'; 
+                ?>
             </div>    
             <div class="col-lg-3" align="left">
                 <label for="checkEstrella">ESTRELLA TRIANGULO:</label>
-                <input type="checkbox" id="checkEstrella" name="checkEstrella" >   
+                <?php  if($infoDiagnostico['estrellaTriangulo']==1){$checkeado = 'checked';}else{ $checkeado =''; }
+                   echo '<input type="checkbox" id="checkEstrella" name ="checkEstrella"  '.$checkeado.' >'; 
+                ?>
             </div>    
             <div class="col-lg-3" align="left">
             </div>    
@@ -376,36 +395,38 @@ class diagnosticoEbApView
         <div class="row mt-3">
             <div class="col-lg-2" align="left">
                 <label for="checkHidroflow" >HIDROFLOW:</label>
-                <input type="checkbox" id="checkHidroflow" name="checkHidroflow">
+                <?php  if($infoDiagnostico['hidroflow']==1){$checkeado = 'checked';}else{ $checkeado =''; }
+                     echo '<input type="checkbox" id="checkHidroflow" name ="checkHidroflow" '.$checkeado.'>'; 
+                ?>
             </div>
             <div class="col-lg-2" align="left">
                 <label>CAPACIDAD:</label>
-                <input type="text" id="capacidad" class="form-control" >
+                <input type="text" id="capacidad" class="form-control" value="<?php echo $infoDiagnostico['capacidad']  ?>" >
             </div>
             <div class="col-lg-8 form-group" align="left">
                 <label>MARCA DE LAS BOMBAS:</label>
-                <input type="text" id="marcaBomba" name="marcaBomba" class="form-control" >
+                <input type="text" id="marcaBomba" name="marcaBomba" class="form-control" value="<?php echo $infoDiagnostico['marcaBombas']  ?>">
             </div>
         </div>   
          
         <div class="row mt-1">    
             <div class="col-lg-1" align="left">
                 <label>HP:</label>
-                <input type="text" id="hp" name="hp" class="form-control" >
+                <input type="text" id="hp" name="hp" class="form-control" value="<?php echo $infoDiagnostico['hp']  ?>">
             </div>
-            <div class="col-lg-1" align="left">
+            <div class="col-lg-2" align="left">
                 <label >FUGAS:</label>
                 <div  align="left">
                     <select id="fugas" name="fugas"  class="form-control" >
                         <option value="">...</option>
-                        <option value="SI">Si</option>
-                        <option value="NO">No</option>
+                        <option value="SI" <?php if($infoDiagnostico['fugas']== 'SI' ){ echo 'selected';}  ?> >SI</option>
+                        <option value="NO" <?php if($infoDiagnostico['fugas']== 'NO' ){ echo 'selected';}  ?> >NO</option>
                     </select>
                 </div>
             </div>
             <div class="col-lg-3" align="left">
                 <label>MARCA DEL TABLERO:</label>
-                <input type="text" id="marcasTableros" name="marcasTableros" class="form-control" >
+                <input type="text" id="marcasTableros" name="marcasTableros" class="form-control" value="<?php echo $infoDiagnostico['marcaTablero']  ?>">
             </div>
             
             <div class="col-lg-6" align="left">
@@ -416,13 +437,13 @@ class diagnosticoEbApView
                 <div class="col-lg-3">
                     <label class="col-lg-1">ON</label>
                     <div class="col-lg-8">
-                        <input type="text" id="presiondetrabajoOn" name="presiondetrabajoOn" class="form-control" >
+                        <input type="text" id="presiondetrabajoOn" name="presiondetrabajoOn" class="form-control" value="<?php echo $infoDiagnostico['presionTrabajo']  ?>">
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <label class="col-lg-2">OFF</label>
                     <div class="col-lg-8">
-                        <input type="text" id="presiondetrabajoOff" name="presiondetrabajoOff" class="form-control" >
+                        <input type="text" id="presiondetrabajoOff" name="presiondetrabajoOff" class="form-control" value="<?php echo $infoDiagnostico['presionTrabajoOff']  ?>">
                     </div>
                 </div>
             </div>
@@ -432,13 +453,15 @@ class diagnosticoEbApView
         <div class="row mt-3">
             <div class="col-lg-3">
                 <label for="">MATERIAL TUBERIA</label>
-                <input type="text" id="materialTuberia" name="materialTuberia" class="form-control" >
+                <input type="text" id="materialTuberia" name="materialTuberia" class="form-control"   value="<?php echo $infoDiagnostico['materialTuberia']  ?>">
 
             </div>
         </div>
         <br>
         <div class="row mt-3">
-            <textarea id="conceptoTecnico" name="conceptoTecnico" class ="form-control" rows="5" placeholder = "   CONCEPTO TECNICO AGUA POTABLE "></textarea>
+            <textarea id="conceptoTecnico" name="conceptoTecnico" class ="form-control" rows="5" placeholder = "   CONCEPTO TECNICO AGUA POTABLE ">
+            <?php echo $infoDiagnostico['conceptoTecnico']  ?>
+            </textarea>
         </div> 
       <?php
     }

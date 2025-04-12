@@ -665,6 +665,44 @@ function validaObservacionesImagen()
     return 1;
 }
 
+function formuModificarObservaImagenCi(idImagen)
+{
+    // var idCliente = document.getElementById('idCliente').value;
+    const http=new XMLHttpRequest();
+    const url = '../inspeccionesCi/inspeccionesCi.php';
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status ==200){
+            console.log(this.responseText);
+            document.getElementById("cuerpoModalVerImagenesDiagnosticoCi").innerHTML  = this.responseText;
+        }
+    };
+    http.open("POST",url);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send("opcion=formuModificarObservaImagenCi"
+    +'&idImagen='+idImagen
+    );
+}
+
+function modificarObservacionesImagenCi(idImagen)
+{
+    var observaciones = document.getElementById('observacionesImagen').value;
+    const http=new XMLHttpRequest();
+    const url = '../inspeccionesCi/inspeccionesCi.php';
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status ==200){
+            console.log(this.responseText);
+            document.getElementById("cuerpoModalVerImagenesDiagnosticoCi").innerHTML  = this.responseText;
+        }
+    };
+    http.open("POST",url);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send("opcion=modificarObservacionesImagenCi"
+    +'&idImagen='+idImagen
+    +'&observaciones='+observaciones
+    );
+}
+
+
 // function mostrarDiagnosticos(){
 //     const http=new XMLHttpRequest();
 //     const url = '../diagnosticoEbAp/diagnosticoEbAp.php';
@@ -827,6 +865,7 @@ function enviarCorreoConDiagnosticoCi(idDiagnostico)
     +'&idDiagnostico='+idDiagnostico
     );
 }
+
 
 
 // function grabarDiagnosticoEbAp(){

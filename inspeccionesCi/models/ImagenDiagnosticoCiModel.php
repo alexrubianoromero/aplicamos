@@ -49,6 +49,23 @@ class ImagenDiagnosticoCiModel extends Conexion
          $consulta = mysql_query($sql,$this->connectMysql()); 
     }
 
+    public function traerInfoImagenId($idImagen)
+    {
+        $sql="select * from imagenesDiagnosticoCi where id =  '".$idImagen."' ";
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+        $imagen =   mysql_fetch_assoc($consulta);
+        return $imagen; 
+    }
+
+    public function modificarObservacionesImagenCi($request)
+    {
+        $sql="update imagenesDiagnosticoCi set observaciones = '".$request['observaciones']."'    
+        where id =  '".$request['idImagen']."' ";
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+        
+    }
+
+
 
  
 

@@ -6,6 +6,7 @@ require_once($raiz.'/diagnosticoEbAll/models/ConceptoTableroEbAllModel.php');
 require_once($raiz.'/clientes/models/ClienteModel.php'); 
 require_once($raiz.'/diagnosticoEbAll/models/TableroDiagnosticoEbAllModel.php'); 
 require_once($raiz.'/movil/model/UsuarioModel.php'); 
+require_once($raiz.'/diagnosticoEbAll/models/ImagenDiagnosticoEbAllModel.php'); 
 
 class diagnosticoEbAllView
 {
@@ -14,6 +15,7 @@ class diagnosticoEbAllView
     protected $conceptoTableroModel;
     protected $tableroDiagnosticoModel;
     protected $usuarioModel;
+    protected $imagenDiagnosticoModel;
 
     public function __construct()
     {
@@ -22,6 +24,7 @@ class diagnosticoEbAllView
         $this->conceptoTableroModel = new ConceptoTableroEbAllModel();
         $this->tableroDiagnosticoModel = new TableroDiagnosticoEbAllModel();
         $this->usuarioModel = new UsuarioModel();
+        $this->imagenDiagnosticoModel = new ImagenDiagnosticoEbAllModel();
     }
 
     public function pantallaDiagnosticoEbAll()
@@ -46,6 +49,7 @@ class diagnosticoEbAllView
             </div>
             <?php    $this->modalVerImagenesDiagnosticoCi();  ?>    
             <?php    $this->modalEnviarCorreo();  ?>    
+            <?php    $this->modalVerImagenesDiagnostico();  ?>    
 
         </div>
         <?php
@@ -86,6 +90,30 @@ class diagnosticoEbAllView
                       <h4 class="modal-title" id="myModalLabel">Envio de Correo </h4>
                   </div>
                   <div id="cuerpoModalEnviarCorreo" class="modal-body">
+                  </div>
+                  <div class="modal-footer" id="footerNuevoCliente">
+                      <button type="button" class="btn btn-default" data-dismiss="modal" onclick = "">Cerrar</button>
+                      <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                  </div>
+                  </div>
+              </div>
+          </div>
+        <?php
+    } 
+
+    public function modalVerImagenesDiagnostico(){
+        ?>
+         <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
+         Launch demo modal
+         </button> -->
+          <div  class="modal fade " id="modalVerImagenesDiagnostico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                  <div class="modal-header" id="headerNuevoCliente">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Imagenes </h4>
+                  </div>
+                  <div id="cuerpoModalVerImagenesDiagnostico" class="modal-body">
                   </div>
                   <div class="modal-footer" id="footerNuevoCliente">
                       <button type="button" class="btn btn-default" data-dismiss="modal" onclick = "">Cerrar</button>
@@ -462,6 +490,12 @@ class diagnosticoEbAllView
             // echo '<img src="../'.$imagen['rutaImagen']."/".$imagen['nombre'].'"  width="200px"> '; 
             echo '<img src="../'.$imagen['rutaImagen']."/".$imagen['nombre'].'"  width="90%"> '; 
             echo '<div>'.$imagen['observaciones'].'</div>';
+            echo '<div><button 
+                        onclick="formuModificarObservaImagen('.$imagen['id'].');" 
+                        class="btn btn-primary">Modificar Observaciones
+                        </button>
+                </div>';
+
             echo '</div>';
         }
         
@@ -491,6 +525,21 @@ class diagnosticoEbAllView
                             onclick="realizarCargaArchivoEbAll(<?php echo $idDiagnostico; ?>);"
                             >SUBIR IMAGEN </button>
             </div>
+        <?php
+    }
+
+    function formuModificarObservaImagen($id)
+    {
+        $infoImagen=  $this->imagenDiagnosticoModel->traerInfoImagenId($id);
+        ?>
+        <div>
+            <input type="hidden" id="idImagen" value="<?php   echo $id  ?>">
+
+                <label></label>
+                <input class="form-control" type="text" id="observacionesImagen" value = "<?php   echo $infoImagen['observaciones'] ?>">
+
+            </div>
+            <div><button class="btn btn-primary" onclick="modificarObservacionesImagenEbAll(<?php echo $id; ?>);">Modificar</button></div>
         <?php
     }
 

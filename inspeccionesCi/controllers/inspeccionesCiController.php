@@ -158,12 +158,27 @@ class inspeccionesCiController extends vista
             $this->enviarCorreoConDiagnosticoCi($_REQUEST);
         }
 
+        if($_REQUEST['opcion']=='formuModificarObservaImagenCi')
+        {
+            $this->view->formuModificarObservaImagenCi($_REQUEST['idImagen']);
+        }
+        if($_REQUEST['opcion']=='modificarObservacionesImagenCi')
+        {
+            $this->modificarObservacionesImagenCi($_REQUEST);
+        }
 
         
           
     } //este debe ser el fin de construct
-        
+    
+    
+    public function modificarObservacionesImagenCi($request)
+    {
+        $this->imagenModel->modificarObservacionesImagenCi($request);
+    }
+    
 
+    
     public function realizarCargaArchivoCi($request)
     {
         //traerinfoGanado
