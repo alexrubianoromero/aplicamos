@@ -491,7 +491,7 @@ class diagnosticoEbAllView
             echo '<img src="../'.$imagen['rutaImagen']."/".$imagen['nombre'].'"  width="90%"> '; 
             echo '<div>'.$imagen['observaciones'].'</div>';
             echo '<div><button 
-                        onclick="formuModificarObservaImagen('.$imagen['id'].');" 
+                        onclick="formuModificarObservaImagenEbAll('.$imagen['id'].');" 
                         class="btn btn-primary">Modificar Observaciones
                         </button>
                 </div>';

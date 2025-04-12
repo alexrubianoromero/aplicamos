@@ -295,7 +295,7 @@ function validaObservacionesImagen()
     return 1;
 }
 
-function formuModificarObservaImagen(idImagen)
+function formuModificarObservaImagenEbAll(idImagen)
 {
     // var idCliente = document.getElementById('idCliente').value;
     const http=new XMLHttpRequest();
