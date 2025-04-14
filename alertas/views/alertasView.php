@@ -38,8 +38,9 @@ class alertasView
                             class="btn btn-primary" 
                             onclick="formuNuevaAlerta();"
                              data-toggle="modal"   
-                            data-target="#modalAlertas"
-                            >Nueva Alerta</button>
+                            data-target="#modalAlertas">
+                            Nueva Alerta
+                        </button>
                     </div>
                     <div id="div_resultados_alertas">
                         <?php  $this->mostrarAlertas();  ?>

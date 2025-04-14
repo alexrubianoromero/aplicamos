@@ -107,46 +107,46 @@ $pdf->AddPage();
         
     }
     // $pdf->Ln(5);
-    $pdf->Cell(25,6,'VARIADOR:',0,0,'');
-    $infoDiagnostico['variador']==1?$valor = 'X': $valor='';
-    $pdf->Cell(15,6,$valor,0,0,'');
-    $pdf->Cell(40,6,'ARRANQUE DIRECTO:',0,0,'');
-    $infoDiagnostico['arranqueDirecto']==1?$valor = 'X': $valor='';
-    $pdf->Cell(15,6,$valor,0,0,'');
-    $pdf->Cell(40,6,'ESTRELLA TRIANGULO:',0,0,'');
-    $infoDiagnostico['estrellaTriangulo']==1?$valor = 'X': $valor='';
-    $pdf->Cell(15,6,$valor,0,1,'');
+    // $pdf->Cell(25,6,'VARIADOR:',0,0,'');
+    // $infoDiagnostico['variador']==1?$valor = 'X': $valor='';
+    // $pdf->Cell(15,6,$valor,0,0,'');
+    // $pdf->Cell(40,6,'ARRANQUE DIRECTO:',0,0,'');
+    // $infoDiagnostico['arranqueDirecto']==1?$valor = 'X': $valor='';
+    // $pdf->Cell(15,6,$valor,0,0,'');
+    // $pdf->Cell(40,6,'ESTRELLA TRIANGULO:',0,0,'');
+    // $infoDiagnostico['estrellaTriangulo']==1?$valor = 'X': $valor='';
+    // $pdf->Cell(15,6,$valor,0,1,'');
 
-    $pdf->Cell(25,6,'Hidroflow:',0,0,'');
-    $infoDiagnostico['hidroflow']==1?$valor = 'X': $valor='';
-    $pdf->Cell(15,6,$valor,0,0,'');
-    $pdf->Cell(20,6,'Capacidad:',0,0,'');
-    $pdf->Cell(20,6,$infoDiagnostico['capacidad'],0,0,'');
-    $pdf->Cell(25,6,'Marca Bombas:',0,0,'');
-    $pdf->Cell(15,6,$infoDiagnostico['marcaBombas'],0,1,'');
+    // $pdf->Cell(25,6,'Hidroflow:',0,0,'');
+    // $infoDiagnostico['hidroflow']==1?$valor = 'X': $valor='';
+    // $pdf->Cell(15,6,$valor,0,0,'');
+    // $pdf->Cell(20,6,'Capacidad:',0,0,'');
+    // $pdf->Cell(20,6,$infoDiagnostico['capacidad'],0,0,'');
+    // $pdf->Cell(25,6,'Marca Bombas:',0,0,'');
+    // $pdf->Cell(15,6,$infoDiagnostico['marcaBombas'],0,1,'');
     
-    $pdf->Cell(25,6,'HP:',0,0,'');
-    $pdf->Cell(15,6,$infoDiagnostico['hp'],0,0,'');
-    $pdf->Cell(20,6,'Fugas:',0,0,'');
-    $pdf->Cell(20,6,$infoDiagnostico['fugas'],0,0,'');
-    $pdf->Cell(30,6,'Presion de trabajo:',0,0,'');
-    $pdf->Cell(20,6,$infoDiagnostico['presionTrabajo'],0,1,'');
+    // $pdf->Cell(25,6,'HP:',0,0,'');
+    // $pdf->Cell(15,6,$infoDiagnostico['hp'],0,0,'');
+    // $pdf->Cell(20,6,'Fugas:',0,0,'');
+    // $pdf->Cell(20,6,$infoDiagnostico['fugas'],0,0,'');
+    // $pdf->Cell(30,6,'Presion de trabajo:',0,0,'');
+    // $pdf->Cell(20,6,$infoDiagnostico['presionTrabajo'],0,1,'');
     
-    $pdf->Cell(30,6,'Marca del tablero:',0,0,'');
-    $pdf->Cell(120,6,$infoDiagnostico['marcaTablero'],0,1,'');
+    // $pdf->Cell(30,6,'Marca del tablero:',0,0,'');
+    // $pdf->Cell(120,6,$infoDiagnostico['marcaTablero'],0,1,'');
     
-    $pdf->Cell(30,6,'Material tuberia:',0,0,'');
-    $pdf->Cell(120,6,$infoDiagnostico['materialTuberia'],0,1,'');
+    // $pdf->Cell(30,6,'Material tuberia:',0,0,'');
+    // $pdf->Cell(120,6,$infoDiagnostico['materialTuberia'],0,1,'');
 
-    $pdf->Cell(190,6,'Concepto Tecnico Agua Potable:',1,1,'C');
-    $pdf->MultiCell(190,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$infoDiagnostico['conceptoTecnico']),0,'J','');
+    $pdf->Cell(195,6,'Concepto Tecnico Agua Potable:',1,1,'C');
+    $pdf->MultiCell(195,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$infoDiagnostico['conceptoTecnico']),1,'J','');
     // $vertical =  $pdf->GetY();
     // $pdf->SetY($vertical+5,'');
     
     $pdf->SetAutoPageBreak();
     $pdf->Ln(2);
     $posicionVertical = $pdf->GetY();
-    $pdf->Cell(190,6,'IMAGENES DIAGNOSTICO',1,1,'C');
+    $pdf->Cell(195,6,'IMAGENES DIAGNOSTICO',1,1,'C');
     
     $raiz123 = dirname(dirname(dirname(__file__)));
     $imagenes = $imagenModel->traerImagenesDiagnosticoId($_REQUEST['idDiagnostico']);

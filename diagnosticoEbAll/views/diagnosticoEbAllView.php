@@ -269,10 +269,10 @@ class diagnosticoEbAllView
 
                 <form id="formularioDiagnostico" name ="formularioDiagnostico">
                     <input type="hidden" id="idDiagnostico" name="idDiagnostico" value="<?php echo $idDiagnostico ?>" >
-
                     <?php
-                    $this->formuTablerosEbAll();
-                    ?>
+                    if($infoDiagnostico['numeroTableros']==0){$this->formuTablerosEbAll();}
+                    else { $this->formuTablerosEbAll($idDiagnostico);}
+                  ?>
                 </form>
             </div>
             <div class="row">
@@ -282,8 +282,15 @@ class diagnosticoEbAllView
         <?php               
     }
 
-    public function formuTablerosEbAll()
+    public function formuTablerosEbAll($idDiagnostico=0)
     {
+        if($idDiagnostico>0){
+            $infoDiagnostico = $this->model->traerDiagnosticoId($idDiagnostico);
+            // echo '<pre>'; 
+            //  print_r($infoDiagnostico); 
+            //  echo'</pre>';
+            //  die();
+        }
         $conceptos = $this->conceptoTableroModel->traerTablerosEbAll()
         ?>
         <div class="row" style="color:black;" >
@@ -316,47 +323,8 @@ class diagnosticoEbAllView
                 ?>
                 </table>
         </div>    
-        <!-- <div class="row">
-            <div class="col-lg-4">
-                <label>Variador:</label>
-                <input type="checkbox" id="checkVariador" name ="checkVariador">
-            </div>
-            <div class="col-lg-4">
-                <label>Arranque Directo:</label>
-                <input type="checkbox" id="checkArranque" name="checkArranque">
-            </div>
-            <div class="col-lg-4">
-                <label>Estrella Triangulo:</label>
-                <input type="checkbox" id="checkEstrella" name="checkEstrella">
-            </div>
-        </div>      
+                
 
-        <div class="row">
-            <div class="col-lg-2">
-                <label>Hidroflow:</label>
-                <input type="checkbox" id="checkHidroflow" name="checkHidroflow">
-            </div>
-            <div class="col-lg-2">
-                <label>Capacidad:</label>
-                <input type="text" id="capacidad" size="4px">
-            </div>
-            <div class="col-lg-2">
-                <label>Marca de las bombas:</label>
-                <input type="text" id="marcaBomba" name="marcaBomba"  size="4px">
-            </div>
-            <div class="col-lg-2">
-                <label>HP:</label>
-                <input type="text" id="hp" name="hp"  size="4px">
-            </div>
-            <div class="col-lg-4">
-                <label>Fugas:</label>
-                <select id="fugas" name="fugas">
-                    <option value="">...</option>
-                    <option value="S">Si</option>
-                    <option value="N">No</option>
-                </select>
-            </div>
-        </div>       -->
         <div class="row">
          
             <textarea id="conceptoTecnico" name="conceptoTecnico" class ="form-control" rows="5" placeholder = "   CONCEPTO TECNICO AGUAS LLUVIAS  "></textarea>
@@ -426,7 +394,7 @@ class diagnosticoEbAllView
                 </tbody>
             </table>
        </div>
-
+                    <!-- aqui deberia colocar lo que falta si es el caso   -->
        <div class="row">
            <textarea class="form-control" rows="5"><?php echo $infoDiagnostico['conceptoTecnico']  ?></textarea>
        </div>
