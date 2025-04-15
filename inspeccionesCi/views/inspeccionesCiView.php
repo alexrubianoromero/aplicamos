@@ -214,6 +214,7 @@ class inspeccionesCiView extends vista
     public function formuNuevaInspeccionCi()
     {
          $clientes = $this->ClienteModel->traerClientes(); 
+         $usuarios = $this->usuarioModel->traerUsuarios();
         //  $this->printR($clientes); 
        
         ?>
@@ -237,6 +238,24 @@ class inspeccionesCiView extends vista
                     </select>
                 </div>
             </div>
+            <div class="row mt-3">
+                <label for="" class="col-lg-3">
+                    Tecnico :
+                </label>
+                <div class="col-lg-9">
+                    <select id="idUsuario" name="idUsuario" style="color:black;" class="form-control" onchange="traerUltimoDiagnosticoCliente();">
+                        <option value= "">Sleccione...</option>
+                        <?php
+                        foreach($usuarios as $usuario)
+                        {
+                            echo '<option value="'.$usuario['id_usuario'].'" >'.$usuario['login'].'</option>';
+                        }
+
+                        ?>
+                    </select>
+                </div>
+            </div>
+
             <br>
             <div id="div_ultimo_diagnostico_cliente">
 

@@ -56,7 +56,8 @@ class diagnosticoEbApController extends vista
         }
         if($_REQUEST['opcion']=='crearEncabezadoDiagnosticoEbAp')
         {
-            $maximoId = $this->model->crearEncabezadoDiagnosticoEbAp($_REQUEST,$_SESSION['id_usuario']);
+            // $maximoId = $this->model->crearEncabezadoDiagnosticoEbAp($_REQUEST,$_SESSION['id_usuario']);
+            $maximoId = $this->model->crearEncabezadoDiagnosticoEbAp($_REQUEST,$_REQUEST['idUsuario']);
             $this->view->mostrarConceptosDiagnosticoEbAp($maximoId);
         }
         if($_REQUEST['opcion']=='formuAdicionarTableroEbAp')

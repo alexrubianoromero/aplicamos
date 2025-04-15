@@ -119,11 +119,11 @@ function formuAdicionarTableroEbAp(idDiagnostico){
 
 function crearEncabezadoDiagnosticoEbAp()
 {
-
     var idCliente = document.getElementById('idCliente').value;
-    if(idCliente =='')
-    { alert('Escoja un cliente'); }else
-    {
+    var idUsuario = document.getElementById('idUsuario').value;
+    var valida = validaInfoNuevoDiagnosticoEbAp();
+    if(valida)
+    { 
         const http=new XMLHttpRequest();
         const url = '../diagnosticoEbAp/diagnosticoEbAp.php';
         http.onreadystatechange = function(){
@@ -136,10 +136,30 @@ function crearEncabezadoDiagnosticoEbAp()
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         http.send("opcion=crearEncabezadoDiagnosticoEbAp"
         +'&idCliente='+idCliente
+        +'&idUsuario='+idUsuario
         );
     }
 
 }
+
+
+function validaInfoNuevoDiagnosticoEbAp()
+{
+    if(document.getElementById("idCliente").value == '')
+    {
+       alert("Escoja un cliente") ;  
+       document.getElementById("idCliente").focus();
+       return 0;
+    }
+    if(document.getElementById("idUsuario").value == '')
+    {
+       alert("Escoja un usuario") ;  
+       document.getElementById("idUsuario").focus();
+       return 0;
+    }
+    return 1;
+}
+
 function filtrarDiagnosticosEbApPorFecha(idCliente)
 {
     var fechain = document.getElementById('fechain').value;

@@ -62,11 +62,10 @@ function formuAdicionarTableroEbAll(idDiagnostico){
 function crearEncabezadoDiagnosticoEbAll()
 {
     var idCliente = document.getElementById('idCliente').value;
-    if(idCliente == '')
-    {
-      alert('Por favor escoja un cliente');   
-    }else{
-
+    var idUsuario = document.getElementById('idUsuario').value;
+    var valida = validaInfoNuevoDiagnosticoEbAll();
+    if(valida)
+    {    
         const http=new XMLHttpRequest();
         const url = '../diagnosticoEbAll/diagnosticoEbAll.php';
         http.onreadystatechange = function(){
@@ -79,10 +78,28 @@ function crearEncabezadoDiagnosticoEbAll()
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         http.send("opcion=crearEncabezadoDiagnosticoEbAll"
         +'&idCliente='+idCliente
+        +'&idUsuario='+idUsuario
         );
     }
 }
-    
+  
+function validaInfoNuevoDiagnosticoEbAll()
+{
+    if(document.getElementById("idCliente").value == '')
+    {
+       alert("Escoja un cliente") ;  
+       document.getElementById("idCliente").focus();
+       return 0;
+    }
+    if(document.getElementById("idUsuario").value == '')
+    {
+       alert("Escoja un usuario") ;  
+       document.getElementById("idUsuario").focus();
+       return 0;
+    }
+    return 1;
+}
+
 function grabarDiagnosticoEbAll(){
     // alert('grabar diagnostico');
 

@@ -58,6 +58,16 @@ class UsuarioModel extends Conexion
         return $datosUser;
     }
 
+    public function traerUsuarios()
+    {
+        $sql = "select * from usuarios 
+            where login <> 'superadmin'
+            order by login  ";
+        $consulta = mysql_query($sql,$this->connectMysql());
+        $usuarios = $this->get_table_assoc($consulta);
+        return $usuarios; 
+    }
+
 }
 
 ?>

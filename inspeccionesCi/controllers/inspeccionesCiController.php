@@ -73,7 +73,8 @@ class inspeccionesCiController extends vista
         if($_REQUEST['opcion']=='crearEncabezadoInspeccionIncencio')
         {
             //esto esta en desarrollo
-            $maximoId = $this->model->crearEncabezadoInspeccionIncencio($_REQUEST,$_SESSION['id_usuario']);
+            // $maximoId = $this->model->crearEncabezadoInspeccionIncencio($_REQUEST,$_SESSION['id_usuario']);
+            $maximoId = $this->model->crearEncabezadoInspeccionIncencio($_REQUEST,$_REQUEST['idUsuario']);
             // $this->printR($maximoId); 
             $this->view->mostrarConceptosFormatoInspeccion($maximoId);
         }

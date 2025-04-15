@@ -523,8 +523,9 @@ function validaCamposBombaLider()
 function crearEncabezadoInspeccionIncencio()
 {
     var idCliente = document.getElementById('idCliente').value;
-    if(idCliente =='')
-    { alert('Escoja un cliente'); }else
+    var idUsuario = document.getElementById('idUsuario').value;
+    var valida = validaInfoNuevaInspeccionCi();
+    if(valida)
     {
         const http=new XMLHttpRequest();
         const url = '../inspeccionesCi/inspeccionesCi.php';
@@ -538,9 +539,27 @@ function crearEncabezadoInspeccionIncencio()
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         http.send("opcion=crearEncabezadoInspeccionIncencio"
         +'&idCliente='+idCliente
+        +'&idUsuario='+idUsuario
         );
     }
 
+}
+
+function validaInfoNuevaInspeccionCi()
+{
+    if(document.getElementById("idCliente").value == '')
+    {
+       alert("Escoja un cliente") ;  
+       document.getElementById("idCliente").focus();
+       return 0;
+    }
+    if(document.getElementById("idUsuario").value == '')
+    {
+       alert("Escoja un usuario") ;  
+       document.getElementById("idUsuario").focus();
+       return 0;
+    }
+    return 1;
 }
 
 function mostrarConceptosFormatoInspeccion(idDiagnostico)
