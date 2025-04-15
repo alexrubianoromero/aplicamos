@@ -100,6 +100,14 @@ class InspeccionCiModel extends Conexion
         $infoCLiente = mysql_fetch_assoc($consulta);
         return $infoCLiente;
     }
+
+    function actualizarObservacionesDiagCi($idDiagnostico,$observaciones)
+    {
+        $sql = "update inspeccionesCi set observaciones = '".$observaciones."' where id= '".$idDiagnostico."' " ; 
+        $consulta = mysql_query($sql,$this->connectMysql()); 
+    }
+
+
     // public function actualizarNumeroTablero($idDiagnostico,$numero)
     // {
     //     $sql = "update diagnosticoEbAp set numeroTableros  =  '".$numero."'  where id='".$idDiagnostico."'    ";

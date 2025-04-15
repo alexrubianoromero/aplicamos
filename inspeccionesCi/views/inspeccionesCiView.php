@@ -803,7 +803,7 @@ class inspeccionesCiView extends vista
                 <!-- <input type="text"  class="form-control" id="caudalimetro" value="24"> -->
                 <select name="" id="caudalimetro" class="form-control">
                     <option value="">Seleccione...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
@@ -1135,7 +1135,7 @@ class inspeccionesCiView extends vista
                 <label for="" >SELLO MECANICO</label>
                 <select name="" id="selloMecanicoJockey" class="form-control">
                     <option value="">Sel...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>
@@ -1326,7 +1326,7 @@ class inspeccionesCiView extends vista
                 <!-- <input type="text"  class="form-control" id="caudalimetrotableroLider" value="7"> -->
                 <select name="" id="caudalimetrotableroLider" class="form-control">
                     <option value="">Seleccione...</option>
-                    <option selected value="BUENO">BUENO</option>
+                    <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
                     <option value="MALO">MALO</option>
                 </select>

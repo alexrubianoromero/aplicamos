@@ -34,22 +34,22 @@ function traerUltimoFormatoInspeccionCliente()
 function grabarDiagnosticoInspeccion()
 {
     var idDiagnostico = document.getElementById('idDiagnostico').value;
-
-    grabarDiagnosticoInspeccionBombaLider();
     
-    setTimeout(() => {
-        grabarDiagnosticoInspeccionBombaJockey();
-    }, 100);
-
-    // setTimeout(() => {
-    //     mostrarConceptosFormatoInspeccion(idDiagnostico);
-    // }, 100);
-    setTimeout(() => {
-        mostrarInspeccionesCi();
-    }, 200);
-
-
-   
+    var valida = validaCamposBombaLider();
+    if(valida)
+        {
+            grabarDiagnosticoInspeccionBombaLider();
+            var valida2 = validaCamposBomabJockey();
+            if(valida2)
+            {
+                grabarDiagnosticoInspeccionBombaJockey();
+                if(valida && valida2)
+                {
+                    mostrarInspeccionesCi();    
+                }
+            }    
+        }
+        
 }
 
 function grabarDiagnosticoInspeccionBombaLider()
@@ -96,11 +96,10 @@ function grabarDiagnosticoInspeccionBombaLider()
     var caudalimetrotablero = document.getElementById('caudalimetrotableroLider').value;
     var tablero = document.getElementById('tableroLider').value;
     var display = document.getElementById('displayLider').value;
-
-    var valida = validaCamposBombaLider();
-    
-    if(valida)
-    {
+    //quito el valida porque lo voy a realizar en  grabarDiagnosticoInspeccion
+    // var valida = validaCamposBombaLider();
+    // if(valida)
+    // {
 
         
         const http=new XMLHttpRequest();
@@ -160,7 +159,7 @@ function grabarDiagnosticoInspeccionBombaLider()
         //aqui debe seguir la otra accion despues de grabar
      
 
-    }
+    // }
 }
 
 function grabarDiagnosticoInspeccionBombaJockey()
@@ -200,13 +199,15 @@ function grabarDiagnosticoInspeccionBombaJockey()
     var temporizador = document.getElementById('temporizadorJockey').value;
     var presostatos = document.getElementById('presostatosJockey').value;
     var transductor = document.getElementById('transductorJockey').value;
+
+    var observacionesICI = document.getElementById('observacionesICI').value;
+
  
 
+    // var valida = validaCamposBomabJockey();
     
     // if(valida)
     // {
-
-        
         const http=new XMLHttpRequest();
         const url = '../inspeccionesCi/inspeccionesCi.php';
         http.onreadystatechange = function(){
@@ -251,6 +252,7 @@ function grabarDiagnosticoInspeccionBombaJockey()
             +'&temporizador='+temporizador
             +'&presostatos='+presostatos
             +'&transductor='+transductor
+            +'&observacionesICI='+observacionesICI
            
         );
 
@@ -519,6 +521,235 @@ function validaCamposBombaLider()
 
     return true;
 }
+
+
+
+function validaCamposBomabJockey()
+{
+    if(document.getElementById("operativaAutomaticoJockey").value=='')
+    {
+        alert('Por favor digite operativaAutomatico bonba Jockey ');
+        document.getElementById("operativaAutomaticoJockey").focus();
+        return false;
+    }
+    
+    if(document.getElementById("equipoListadoJockey").value=='')
+    {
+        alert('Por favor digite equipoListado Jockey ');
+        document.getElementById("equipoListadoJockey").focus();
+        return false;
+    }
+
+    if(document.getElementById("modeloJockey").value=='')
+    {
+        alert('Por favor digite modelo Jockey ');
+        document.getElementById("modeloJockey").focus();
+        return false;
+    }
+
+    if(document.getElementById("marcaBombaJockey").value=='')
+    {
+        alert('Por favor digite marcaBomba Jockey ');
+        document.getElementById("marcaBombaJockey").focus();
+        return false;
+    }
+
+    if(document.getElementById("potenciaJockey").value=='')
+    {
+        alert('Por favor digite potencia Jockey ');
+        document.getElementById("potenciaJockey").focus();
+        return false;
+    }
+    if(document.getElementById("tipoBombaJockey").value=='')
+    {
+        alert('Por favor digite tipoBomba Jockey ');
+        document.getElementById("tipoBombaJockey").focus();
+        return false;
+    }
+  
+    if(document.getElementById("tipoBomba").value=='')
+    {
+        alert('Por favor digite tipoBomba ');
+        document.getElementById("tipoBomba").focus();
+        return false;
+    }
+  
+    if(document.getElementById("qmaxGpmJockey").value=='')
+    {
+        alert('Por favor digite qmaxGpm Jockey ');
+        document.getElementById("qmaxGpmJockey").focus();
+        return false;
+    }
+    if(document.getElementById("presionMAxPsiJockey").value=='')
+    {
+        alert('Por favor digite presionMAxPsi Jockey ');
+        document.getElementById("presionMAxPsiJockey").focus();
+        return false;
+    }
+    if(document.getElementById("qNominalGpmJockey").value=='')
+    {
+        alert('Por favor digite qNominalGpm Jockey ');
+        document.getElementById("qNominalGpmJockey").focus();
+        return false;
+    }
+    if(document.getElementById("presionAl150Jockey").value=='')
+    {
+        alert('Por favor digite presionAl150 Jockey ');
+        document.getElementById("presionAl150Jockey").focus();
+        return false;
+    }
+    if(document.getElementById("diametroSuccionJockey").value=='')
+    {
+        alert('Por favor digite diametroSuccion Jockey ');
+        document.getElementById("diametroSuccionJockey").focus();
+        return false;
+    }
+    if(document.getElementById("diametroDescargaJockey").value=='')
+    {
+        alert('Por favor digite diametroDescarga Jockey ');
+        document.getElementById("diametroDescargaJockey").focus();
+        return false;
+    }
+    if(document.getElementById("materialTuberiaJockey").value=='')
+    {
+        alert('Por favor digite materialTuberia Jockey ');
+        document.getElementById("materialTuberiaJockey").focus();
+        return false;
+    }
+    if(document.getElementById("fugasJockey").value=='')
+    {
+        alert('Por favor digite fugas Jockey ');
+        document.getElementById("fugasJockey").focus();
+        return false;
+    }
+   
+    if(document.getElementById("nanomentroJockey").value=='')
+    {
+        alert('Por favor digite nanomentro Jockey ');
+        document.getElementById("nanomentroJockey").focus();
+        return false;
+    }
+    if(document.getElementById("selloMecanicoJockey").value=='')
+    {
+        alert('Por favor digite selloMecanico Jockey ');
+        document.getElementById("selloMecanicoJockey").focus();
+        return false;
+    }
+    if(document.getElementById("manovacumetroJockey").value=='')
+    {
+        alert('Por favor digite manovacumetro Jockey ');
+        document.getElementById("manovacumetroJockey").focus();
+        return false;
+    }
+    if(document.getElementById("rodamientosMotorJockey").value=='')
+    {
+        alert('Por favor digite rodamientosMotor Jockey ');
+        document.getElementById("rodamientosMotorJockey").focus();
+        return false;
+    }
+    if(document.getElementById("empaquetaduraJockey").value=='')
+    {
+        alert('Por favor digite empaquetadura Jockey ');
+        document.getElementById("empaquetaduraJockey").focus();
+        return false;
+    }
+    if(document.getElementById("comprobacionVentiladorJockey").value=='')
+    {
+        alert('Por favor digite comprobacionVentilador Jockey ');
+        document.getElementById("comprobacionVentiladorJockey").focus();
+        return false;
+    }
+ 
+    if(document.getElementById("valvulasDeCorteJockey").value=='')
+    {
+        alert('Por favor digite valvulasDeCorteJockey ');
+        document.getElementById("valvulasDeCorteJockey").focus();
+        return false;
+    }
+    if(document.getElementById("valvulasDeCorte").value=='')
+    {
+        alert('Por favor digite valvulasDeCorte ');
+        document.getElementById("valvulasDeCorte").focus();
+        return false;
+    }
+    if(document.getElementById("instrucciones").value=='')
+    {
+        alert('Por favor digite instrucciones ');
+        document.getElementById("instrucciones").focus();
+        return false;
+    }
+
+    if(document.getElementById("demarcacion").value=='')
+    {
+        alert('Por favor digite demarcacion ');
+        document.getElementById("demarcacion").focus();
+        return false;
+    }
+    if(document.getElementById("luzemergecia").value=='')
+    {
+        alert('Por favor digite luzemergecia ');
+        document.getElementById("luzemergecia").focus();
+        return false;
+    }
+    if(document.getElementById("areaenorden").value=='')
+    {
+        alert('Por favor digite areaenorden ');
+        document.getElementById("areaenorden").focus();
+        return false;
+    }
+
+    if(document.getElementById("contactorJockey").value=='')
+    {
+        alert('Por favor digite contactor Jockey ');
+        document.getElementById("contactorJockey").focus();
+        return false;
+    }
+    if(document.getElementById("indicadorJockey").value=='')
+    {
+        alert('Por favor digite indicadorJockey ');
+        document.getElementById("indicadorJockey").focus();
+        return false;
+    }
+    if(document.getElementById("guardamotorJockey").value=='')
+    {
+        alert('Por favor digite guardamotorJockey ');
+        document.getElementById("guardamotorJockey").focus();
+        return false;
+    }
+    if(document.getElementById("fusiblesJockey").value=='')
+    {
+        alert('Por favor digite fusiblesJockey ');
+        document.getElementById("fusiblesJockey").focus();
+        return false;
+    }
+    if(document.getElementById("temporizadorJockey").value=='')
+    {
+        alert('Por favor digite temporizadorJockey ');
+        document.getElementById("temporizadorJockey").focus();
+        return false;
+    }
+    if(document.getElementById("presostatosJockey").value=='')
+    {
+        alert('Por favor digite presostatosJockey ');
+        document.getElementById("presostatosJockey").focus();
+        return false;
+    }
+    if(document.getElementById("transductorJockey").value=='')
+    {
+        alert('Por favor digite transductorJockey ');
+        document.getElementById("transductorJockey").focus();
+        return false;
+    }
+    if(document.getElementById("observacionesICI").value=='')
+    {
+        alert('Por favor digite observaciones diagnostico ');
+        document.getElementById("observacionesICI").focus();
+        return false;
+    }
+
+    return true;
+}
+
 
 function crearEncabezadoInspeccionIncencio()
 {

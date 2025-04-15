@@ -116,6 +116,8 @@ class inspeccionesCiController extends vista
                 $this->model->asignarIdBombaJockeyAInspeccion($_REQUEST['idDiagnostico'],$idBombaJockey);
             }
 
+            $this->model->actualizarObservacionesDiagCi($_REQUEST['idDiagnostico'],$_REQUEST['observacionesICI']);
+
         }
 
 
