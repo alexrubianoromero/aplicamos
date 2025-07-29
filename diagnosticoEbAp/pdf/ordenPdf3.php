@@ -10,7 +10,8 @@
 // $pathInfo = str_replace("/","", $pathInfo);
 // $_REQUEST['idDiagnostico']=$pathInfo;
 
-$_REQUEST['idDiagnostico'] = $_REQUEST['id']; 
+// $_REQUEST['idDiagnostico'] = $_REQUEST['id']; 
+$_REQUEST['idDiagnostico'] = ''; 
 mysqli_set_charset($conexion, "utf8");
 // die('resultado : '.$pathInfo);
 
