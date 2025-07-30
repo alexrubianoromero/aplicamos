@@ -62,6 +62,8 @@ update  `correoConfig` set rutaPdfDiagAll  = 'https://www.aplicamosingenieria.ne
 
 update  `correoConfig` set rutaPdfDiagCi  = 'https://www.aplicamosingenieria.net/aplicamos123/diagCi/';
 
+debo crear un nuevo campo en la base de datos de usuarios que se llame anulado 
+
 
 
 

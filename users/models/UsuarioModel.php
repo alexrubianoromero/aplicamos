@@ -61,7 +61,7 @@ class UsuarioModel extends Conexion
 
     public function getUsers()
     {
-        $sql = "select * from usuarios ";
+        $sql = "select * from usuarios where anulado = '0' ";
         $consulta = mysql_query($sql,$this->connectMysql());
         $users = $this->get_table_assoc($consulta);
         return $users;
@@ -121,7 +121,15 @@ class UsuarioModel extends Conexion
         {
             $sql = "update usuarios set clave = '".$request['nuevaClave']."'   where id_usuario = '".$_SESSION['id_usuario']."'   "; 
             $consulta = mysql_query($sql,$this->connectMysql());
-    }
+        }
+
+        public function eliminarUsuarioSistema($idUser)
+        {
+            $sql = "update  usuarios set anulado = '1'  where id_usuario =  '".$idUser."'   "; 
+            // die($sql);
+            $consulta = mysql_query($sql,$this->connectMysql());
+        }    
+
 }  
 
 ?>

@@ -51,6 +51,7 @@ class usersView
                         <th>Nombre</th>
                         <th>Usuario</th>
                         <th>Perfil</th>
+                        <th>Eliminar</th>
                         <!-- <th>Sucursal</th> -->
                     </thead>
                     <tbody>
@@ -64,7 +65,12 @@ class usersView
                           echo '<td>'.$user['nombre'].' '.$user['apellido']. '</td>';
                           echo '<td>'.$user['login'].'</td>';
                           echo '<td>'.$infoPerfil['nombre_perfil'].'</td>';
-                        //   echo '<td>'.$infoSucursal['nombre'].'</td>';
+                          echo '<td><button 
+                                         data-toggle="modal" 
+                                        data-target="#modalEliminarUsuario"
+                                        class="btn btn-primary btn-sm" 
+                                        onclick="eliminarUsuarioSistema('.$user['id_usuario'].')"
+                                        >Eliminar</button></td>';
                           echo '</tr>';  
                         }
                         ?>
@@ -74,6 +80,7 @@ class usersView
             
             
             <?php  $this->modalUsuario();  ?>
+            <?php  $this->modalEliminarUsuario();  ?>
             
             
         </div>
@@ -103,6 +110,28 @@ class usersView
                   <div class="modal-footer" id="footerNuevoCliente">
                     <button onclick="pantallaUsuarios();" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button onclick ="crearUsuario();" type="button" class="btn btn-primary">Crear Usuario</button>
+                  </div>
+                  </div>
+              </div>
+          </div>
+        <?php
+    }
+    public function modalEliminarUsuario(){
+        ?>
+         <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
+         Launch demo modal
+         </button> -->
+          <div style="color:black;" class="modal fade " id="modalEliminarUsuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                  <div class="modal-header" id="headerNuevoCliente">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Eliminar Usuario</h4>
+                  </div>
+                  <div id="modalBodyEliminarUsuario" class="modal-body">
+                  </div>
+                  <div class="modal-footer" id="footerNuevoCliente">
+                    <button onclick="pantallaUsuarios();" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                   </div>
                   </div>
               </div>

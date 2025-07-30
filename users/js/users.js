@@ -150,6 +150,33 @@ function mostrarUsuarios()
     );
 }
 
+function eliminarUsuarioSistema(idUser)
+{
+    var confirmacion = confirm("Esta seguro de  eliminar el usuario ");
+    if(confirmacion)
+    {
+        const http=new XMLHttpRequest();
+        const url = '../users/users.php';
+        http.onreadystatechange = function(){
+            
+            if(this.readyState == 4 && this.status ==200){
+                document.getElementById("modalBodyEliminarUsuario").innerHTML  = this.responseText;
+            }
+        };
+        http.open("POST",url);
+        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        http.send('opcion=eliminarUsuarioSistema'
+              +'&idUser='+idUser
+        );
+    }
+    // setTimeout(() => {
+    //     mostrarUsuarios();
+    // }, 500);
+}
+
+
+
+
 
 
 

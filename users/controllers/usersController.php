@@ -44,6 +44,16 @@ class usersController
             // echo '<pre>'; print_r($_REQUEST) ;echo '</pre>';
             $this->realizarCambiarClave($_REQUEST);
         }
+        if($_REQUEST['opcion']=='eliminarUsuarioSistema'){
+            // echo '<pre>'; print_r($_REQUEST) ;echo '</pre>';
+            $this->eliminarUsuarioSistema($_REQUEST['idUser']);
+        }
+    }
+
+    public function eliminarUsuarioSistema($idUser)
+    {
+            $this->model->eliminarUsuarioSistema($idUser);
+            echo 'Usuario Eliminado';
     }
 
     public function realizarCambiarClave($request)
