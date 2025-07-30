@@ -315,7 +315,17 @@ class inspeccionesCiView extends vista
        </div>
         <?php
     }
-
+    public function colocarOptionsDelSelect()
+    {
+      ?>
+          <option value="">Seleccione...</option>  
+          <option value="BUENO">BUENO</option>
+          <option value="REGULAR">REGULAR</option>
+          <option value="MALO">MALO</option>
+          <option value="AUSENTE">AUSENTE</option>
+          <option value="NO APLICA">NO APLICA</option>
+      <?php
+    }
     public function mostrarConceptosFormatoInspeccion($idDiagnostico)
     {
         $infoDiagnostico = $this->model->traerFormatoInspeccionId($idDiagnostico); 
@@ -510,12 +520,13 @@ class inspeccionesCiView extends vista
                 <input type="text"  class="form-control" id="fugas">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
-                <label for="" >CABEZAL PRUEBAS</label>
+                <label for="" >CABEZAL PRUEBAS.</label>
                 <select name="" id="tipoCabezal" class="form-control">
-                    <option value="">Seleccione...</option>
+                    <?php  $this->colocarOptionsDelSelect(); ?>
+                    <!-- <option value="">Seleccione...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
                 </select>
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
@@ -717,12 +728,13 @@ class inspeccionesCiView extends vista
                 <input type="text"  class="form-control" id="fugas" value="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
-                <label for="" >CABEZAL PRUEBAS</label>
+                <label for="" >CABEZAL PRUEBAS..</label>
                 <select name="" id="tipoCabezal" class="form-control">
-                    <option  value="">Seleccione...</option>
+                    <!-- <option  value="">Seleccione...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
+                    <?php  $this->colocarOptionsDelSelect(); ?>
                 </select>
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
@@ -732,10 +744,11 @@ class inspeccionesCiView extends vista
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >MANOMETRO</label>
                 <select name="" id="nanomentro" class="form-control">
-                    <option  value="">Seleccione...</option>
+                    <!-- <option  value="">Seleccione...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
+                       <?php  $this->colocarOptionsDelSelect(); ?>
                 </select>
             </div>
         </div>
@@ -746,30 +759,33 @@ class inspeccionesCiView extends vista
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >SELLO MECANICO / P.ESTOPA</label>
                 <select name="" id="selloMecanico" class="form-control">
-                    <option value="">Seleccione...</option>
+                       <?php  $this->colocarOptionsDelSelect(); ?>
+                    <!-- <option value="">Seleccione...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
                 </select>
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >MANOVACUOMETRO</label>
                 <!-- <input type="text"  class="form-control" id="manovacumetro" value="19"> -->
                 <select name="" id="manovacumetro" class="form-control">
-                    <option value="">Seleccione...</option>
+                    <!-- <option value="">Seleccione...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
+                       <?php  $this->colocarOptionsDelSelect(); ?>
                 </select>
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >RODAMIENTOS DE MOTOR</label>
                 <!-- <input type="text"  class="form-control" id="rodamientosMotor" value="20"> -->
                 <select name="" id="rodamientosMotor" class="form-control">
-                    <option value="">Seleccione...</option>
+                    <!-- <option value="">Seleccione...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
+                       <?php  $this->colocarOptionsDelSelect(); ?>
                 </select>
             </div>
         </div>
@@ -780,20 +796,22 @@ class inspeccionesCiView extends vista
                 <label for="" >EMPAQUETADURA</label>
                 <!-- <input type="text"  class="form-control" id="empaquetadura" value="21"> -->
                 <select name="" id="empaquetadura" class="form-control">
-                    <option value="">Seleccione...</option>
+                    <!-- <option value="">Seleccione...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
+                       <?php  $this->colocarOptionsDelSelect(); ?>
                 </select>
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >COMPROBACION VENTILADOR</label>
                 <!-- <input type="text"  class="form-control" id="comprobacionVentilador" value="22"> -->
                 <select name="" id="comprobacionVentilador" class="form-control">
-                    <option value="">Seleccione...</option>
+                    <!-- <option value="">Seleccione...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
+                       <?php  $this->colocarOptionsDelSelect(); ?>
                 </select>
 
             </div>
@@ -801,20 +819,22 @@ class inspeccionesCiView extends vista
                 <label for="" >VALVULAS CORTE </label>
                 <!-- <input type="text"  class="form-control" id="valvulasDeCorte" value="23"> -->
                 <select name="" id="valvulasDeCorte" class="form-control">
-                    <option value="">Seleccione...</option>
+                    <!-- <option value="">Seleccione...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
+                       <?php  $this->colocarOptionsDelSelect(); ?>
                 </select>
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >CAUDALIMETRO</label>
                 <!-- <input type="text"  class="form-control" id="caudalimetro" value="24"> -->
                 <select name="" id="caudalimetro" class="form-control">
-                    <option value="">Seleccione...</option>
+                    <!-- <option value="">Seleccione...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
+                       <?php  $this->colocarOptionsDelSelect(); ?>
                 </select>
             </div>
         </div>
@@ -826,29 +846,32 @@ class inspeccionesCiView extends vista
                 <label for="" >VALVULA DE ALIVIO</label>
                 <!-- <input type="text"  class="form-control" id="valvulaAlivio" value="25"> -->
                 <select name="" id="valvulaAlivio" class="form-control">
-                    <option value="">Seleccione...</option>
+                    <!-- <option value="">Seleccione...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
+                       <?php  $this->colocarOptionsDelSelect(); ?>
                 </select>
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >RETORNO TANQUE</label>
                 <!-- <input type="text"  class="form-control" id="retornoTanque" value="26"> -->
                 <select name="" id="retornoTanque" class="form-control">
-                    <option value="">Seleccione...</option>
+                    <!-- <option value="">Seleccione...</option>
                     <option  value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
+                       <?php  $this->colocarOptionsDelSelect(); ?>
                 </select>
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >CONDICIONES OPERACION</label>
                 <select name="" id="idCondicionOperacion" class="form-control">
-                        <option value="">Seleccione...</option>
+                        <!-- <option value="">Seleccione...</option>
                         <option  value="BUENO">BUENO</option>
                         <option value="REGULAR">REGULAR</option>
-                        <option value="MALO">MALO</option>
+                        <option value="MALO">MALO</option> -->
+                           <?php  $this->colocarOptionsDelSelect(); ?>
                 </select>
             </div>
 
@@ -958,17 +981,18 @@ class inspeccionesCiView extends vista
                 <input type="text"  class="form-control" id="fugasJockey">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
-                <label for="" >MANOMETRO</label>
+                <label for="" >MANOMETRO.</label>
                 <input type="text"  class="form-control" id="nanomentroJockey">
             </div>
             
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >SELLO MECANICO</label>
                 <select name="" id="selloMecanicoJockey" class="form-control">
-                    <option value="">Sel...</option>
+                      <?php  $this->colocarOptionsDelSelect(); ?>
+                    <!-- <option value="">Sel...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
                 </select>
             </div>
         </div>
@@ -1130,23 +1154,25 @@ class inspeccionesCiView extends vista
                 <input type="text"  class="form-control" id="fugasJockey" value ="">
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
-                <label for="" >MANOMETRO</label>
+                <label for="" >MANOMETRO..</label>
                 <!-- <input type="text"  class="form-control" id="nanomentroJockey" value ="13"> -->
                 <select name="" id="nanomentroJockey" class="form-control">
-                    <option  value="">Seleccione...</option>
+                     <?php  $this->colocarOptionsDelSelect(); ?>
+                    <!-- <option  value="">Seleccione...</option>
                     <option  value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
                 </select>
             </div>
             
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >SELLO MECANICO</label>
                 <select name="" id="selloMecanicoJockey" class="form-control">
-                    <option value="">Sel...</option>
+                        <?php  $this->colocarOptionsDelSelect(); ?>
+                    <!-- <option value="">Sel...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
                 </select>
             </div>
         </div>
@@ -1157,30 +1183,33 @@ class inspeccionesCiView extends vista
                 <label for="" >MANOVACUOMETRO</label>
                 <!-- <input type="text"  class="form-control" id="manovacumetroJockey" value ="14"> -->
                 <select name="" id="manovacumetroJockey" class="form-control">
-                    <option value="">Sel...</option>
+                        <?php  $this->colocarOptionsDelSelect(); ?>
+                    <!-- <option value="">Sel...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
                 </select>
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
             <label for="" >RODAMIENTOS DE MOTOR</label>
             <!-- <input type="text"  class="form-control" id="rodamientosMotorJockey" value ="15"> -->
             <select name="" id="rodamientosMotorJockey" class="form-control">
-                    <option value="">Sel...</option>
+                    <?php  $this->colocarOptionsDelSelect(); ?>
+                    <!-- <option value="">Sel...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
                 </select>
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >EMPAQUETADURA</label>
                 <!-- <input type="text"  class="form-control" id="empaquetaduraJockey" value ="16"> -->
                 <select name="" id="empaquetaduraJockey" class="form-control">
-                    <option value="">Sel...</option>
+                        <?php  $this->colocarOptionsDelSelect(); ?>
+                    <!-- <option value="">Sel...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
                 </select>
             </div>
         </div>
@@ -1191,20 +1220,22 @@ class inspeccionesCiView extends vista
                 <label for="" >COMPROBACION VENTILADOR</label>
                 <!-- <input type="text"  class="form-control" id="comprobacionVentiladorJockey" value ="17"> -->
                 <select name="" id="comprobacionVentiladorJockey" class="form-control">
-                    <option value="">Sel...</option>
+                        <?php  $this->colocarOptionsDelSelect(); ?>
+                    <!-- <option value="">Sel...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
                 </select>
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
                 <label for="" >VALVULAS DE CORTE </label>
                 <!-- <input type="text"  class="form-control" id="valvulasDeCorteJockey" value ="18"> -->
                 <select name="" id="valvulasDeCorteJockey" class="form-control">
-                    <option value="">Sel...</option>
+                        <?php  $this->colocarOptionsDelSelect(); ?>
+                    <!-- <option value="">Sel...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
                 </select>
             </div>
             
@@ -1334,10 +1365,11 @@ class inspeccionesCiView extends vista
                 <label for="" >CAUDALIMETRO</label>
                 <!-- <input type="text"  class="form-control" id="caudalimetrotableroLider" value="7"> -->
                 <select name="" id="caudalimetrotableroLider" class="form-control">
-                    <option value="">Seleccione...</option>
+                    <!-- <option value="">Seleccione...</option>
                     <option value="BUENO">BUENO</option>
                     <option value="REGULAR">REGULAR</option>
-                    <option value="MALO">MALO</option>
+                    <option value="MALO">MALO</option> -->
+                      <?php  $this->colocarOptionsDelSelect(); ?>
                 </select>
 
             </div>
@@ -2024,7 +2056,7 @@ class inspeccionesCiView extends vista
                  <br><?php  echo $infoBombaLider['fugas'] ?>
             </div>
             <div class="col-lg-<?php  echo $ancho; ?>">
-                <label for="" >CABEZAL PRUEBAS</label>
+                <label for="" >CABEZAL PRUEBAS...</label>
                 <!-- <select name="" id="tipoCabezal" class="form-control">
                     <option value="">Seleccione...</option>
                     <option value="BUENO">BUENO</option>
