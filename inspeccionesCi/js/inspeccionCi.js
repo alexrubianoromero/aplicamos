@@ -1,3 +1,37 @@
+function verInspeccionCi(idInspeccionCi){
+    const http=new XMLHttpRequest();
+    const url = '../inspeccionesCi/inspeccionesCi.php';
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status ==200){
+              console.log(this.responseText);
+           document.getElementById("divResultadosDiagEbAp").innerHTML  = this.responseText;
+        }
+    };
+    http.open("POST",url);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send("opcion=verInspeccionCi"
+    +'&idInspeccionCi='+idInspeccionCi
+    );
+}
+
+function actualizarInspeccionCi(idInspeccionCi){
+    var observaciones = document.getElementById('observacionesInspeccion').value;
+    const http=new XMLHttpRequest();
+    const url = '../inspeccionesCi/inspeccionesCi.php';
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status ==200){
+              console.log(this.responseText);
+        //    document.getElementById("divResultadosDiagEbAp").innerHTML  = this.responseText;
+        alert('Observaciones actualizadas');
+        }
+    };
+    http.open("POST",url);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send("opcion=actualizarInspeccionCi"
+    +'&idInspeccionCi='+idInspeccionCi
+    +'&observaciones='+observaciones
+    );
+}
 function formuNuevaInspeccionCi(){
     // alert('inspeccion'); 
     const http=new XMLHttpRequest();

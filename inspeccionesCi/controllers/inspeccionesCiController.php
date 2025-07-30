@@ -64,10 +64,18 @@ class inspeccionesCiController extends vista
         {
             $this->view->pantallaInspeccionCI();
         }
+        if($_REQUEST['opcion']=='verInspeccionCi')
+        {
+            $this->view->verInspeccionCi($_REQUEST['idInspeccionCi']);
+        }
 
         if($_REQUEST['opcion']=='formuNuevaInspeccionCi')
         {
            $this->view->formuNuevaInspeccionCi();
+        }
+        if($_REQUEST['opcion']=='actualizarInspeccionCi')
+        {
+           $this->actualizarInspeccionCi($_REQUEST);
         }
      
         if($_REQUEST['opcion']=='crearEncabezadoInspeccionIncencio')
@@ -174,6 +182,11 @@ class inspeccionesCiController extends vista
           
     } //este debe ser el fin de construct
     
+    public function actualizarInspeccionCi($request)
+    {
+         $this->model->actualizarObservacionesDiagCi($request['idInspeccionCi'],$request['observaciones']); 
+           
+    }
     
     public function modificarObservacionesImagenCi($request)
     {

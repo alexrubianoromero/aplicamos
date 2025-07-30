@@ -7,6 +7,9 @@ require_once($raiz.'/clientes/models/ClienteModel.php');
 require_once($raiz.'/movil/model/UsuarioModel.php'); 
 require_once($raiz.'/inspeccionesCi/models/InspeccionCiModel.php'); 
 require_once($raiz.'/inspeccionesCi/models/ImagenDiagnosticoCiModel.php'); 
+require_once($raiz.'/inspeccionesCi/models/InfoBombaLiderModel.php'); 
+require_once($raiz.'/inspeccionesCi/models/InfoBombaJockeyModel.php'); 
+require_once($raiz.'/inspeccionesCi/models/ImagenDiagnosticoCiModel.php'); 
 require_once($raiz.'/vista/vista.php'); 
 
 class inspeccionesCiView extends vista
@@ -18,6 +21,9 @@ class inspeccionesCiView extends vista
     // protected $tableroDiagnosticoModel;
     protected $usuarioModel;
 
+     protected $infoLiderModel;
+    protected $infoJockeyModel;
+
     public function __construct()
     {
         $this->model = new InspeccionCiModel();
@@ -26,6 +32,8 @@ class inspeccionesCiView extends vista
         // $this->tableroDiagnosticoModel = new TableroDiagnosticoEbApModel();
         $this->usuarioModel = new UsuarioModel();
         $this->imagenModel = new ImagenDiagnosticoCiModel();
+           $this->infoLiderModel = new InfoBombaLiderModel();
+        $this->infoJockeyModel = new InfoBombaJockeyModel();
     }
 
 
@@ -182,7 +190,7 @@ class inspeccionesCiView extends vista
         echo '<th>Imagenes</th>';
         echo '<th>Correo</th>';
        
-        // echo '<th>Ver</th>';
+        echo '<th>Ver</th>';
         echo '<th>Pdf</th>';
         echo '</tr>';
         foreach($diagnosticos as $diagnostico)
@@ -204,6 +212,7 @@ class inspeccionesCiView extends vista
                     onclick = " verimagenesDiagnosticoCi('.$diagnostico['id'].'); "
                     ">Imagenes</button></td>';        
             // echo '<td><button class ="btn btn-primary btn-sm" onclick ="verDiagnostico('.$diagnostico['id'].')">Ver</button></td>';
+            echo '<td><button class ="btn btn-primary btn-sm" onclick ="verInspeccionCi('.$diagnostico['id'].')">Ver</button></td>';
             echo '<td><a href="../inspeccionesCi/pdf/inspeccionCiPdf.php?id='.$diagnostico['id'].'" target="_blank" >PDF</a></td>';
             echo '</tr>';    
         }
@@ -1672,5 +1681,648 @@ class inspeccionesCiView extends vista
         <?php
     }
 
+    
+    public function mostrarInfoEncabezadoCi($idDiagnostico)
+    {
+        $infoDiagnostico = $this->model->traerInspeccionId($idDiagnostico); 
+        $infoCLiente = $this->ClienteModel->traerClienteId($infoDiagnostico['idCliente']); 
+        // $infoTablerosDiagnostico = $this->tableroDiagnosticoModel->traerTablerosDiagnostico($idDiagnostico);   
+        $infoUsuario = $this->usuarioModel->traerusuarioId($infoDiagnostico['idAtendioVisita']);  
+        ?>
+        <div class="row mt-3" style="padding:5px; font-size:20px;" >
+            <div class="col-lg-3">
+                <img width="100"   src = "../movil/imagen/logonuevo.png">  
+                <!-- <label>Nit: 901077768-7</label>
+                <label>Nit: Cel : 3132140149</label> -->
+            </div>
+            <div class="col-lg-6" >
+                Razon Social: <?php echo $infoCLiente['nombre'] ?>
+                <br>
+                Direccion: <?php echo $infoCLiente['direccion'] ?>
+                <br>
+                
+                Atendio Visita: <?php echo $infoUsuario['nombre'] ?>
+            </div>
+            <div class="col-lg-3">
+                No : <?php  echo $idDiagnostico ?>
+                <br>
+                Fecha:   <?php  echo $infoDiagnostico['fecha'] ?>
+            </div>
+        </div>
+        <?php
+    }
+
+
+    public function verInspeccionCi($id)
+    {
+        $infoInspeccionCi =  $this->model->traerInspeccionId($id);
+        // echo 'Llego a ver inspeccion ci';
+        $this->mostrarInfoEncabezadoCi($id); 
+        // $infoBombaLider =  $this->infoLiderModel->traerInfoBombaLiderId($infoInspeccionCi['idInfoBombaLider']);
+        // $infoBombaJockey = $this->infoJockeyModel->traerInfoBombaJockeyId($infoInspeccionCi['idInfoBombaJockey']);
+        $this->mostrarInfoTablerosCi($infoInspeccionCi['idInfoBombaLider'],$infoInspeccionCi['idInfoBombaJockey']);
+        $this->verObservacionesInspeccion($infoInspeccionCi);
+    }
+
+   public function verObservacionesInspeccion($infoInspeccionCi)
+   {
+    ?>
+      <div>
+        <br>
+        <textarea class="form-control" rows="4" id="observacionesInspeccion"><?php echo  $infoInspeccionCi['observaciones'];?></textarea>
+      </div>  
+      <br>
+      <div>
+        <button class="btn btn-primary" onclick ="actualizarInspeccionCi(<?php  echo $infoInspeccionCi['id']; ?>);" >Actualizar Observaciones</button>
+      </div>
+      <br>
+    <?php  
+   } 
+
+   public function mostrarInfoTablerosCi($idBombaLider,$idBombaJockey)
+   {
+    ?>
+      <div class="row" align="center">
+
+          <div class="col-lg-5 " style="border:1px solid black; font-size:12px;">
+             <?php $this->verInformacionBombaLider($idBombaLider)  ?>
+           </div>
+            
+            <div class="col-lg-1" >
+            </div>
+                
+            <div class="col-lg-5" style="border:1px solid black; font-size:12px;">
+                <?php $this->verInformacionBombaJockey($idBombaJockey);  ?>
+            </div>
+     </div>  
+     <br>
+      <div class="row mt-3" align="center">
+              <div class="col-lg-5 " style="border:1px solid black; font-size:12px;">
+             <?php $this->verInfoTableroLider($idBombaLider);  ?>
+           </div>
+            
+            <div class="col-lg-1" >
+            </div>
+                
+            <div class="col-lg-5" style="border:1px solid black; font-size:12px;">
+                <?php $this->verInfoTableroJockey($idBombaJockey);  ?>
+            </div>
+      
+      </div>
+    <?php
+    }
+
+     public function verInfoTableroLider($idBombaLider)
+    {
+        $ancho= 4;
+         $infoBombaLider =  $this->infoLiderModel->traerInfoBombaLiderId($idBombaLider);
+        ?>
+        <div class="row">
+            <H3>INFORMACION TABLERO LIDER</H3>
+        </div>
+        <div class="row">
+            
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >CONTACTOR</label>
+                <!-- <input type="text"  class="form-control" id="contactorLider" value="<?php  echo $infoBombaLider['contactor']  ?>"> -->
+                  <br><?php  echo $infoBombaLider['contactor'] ?>                
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >INDICADOR LUMINOSO</label>
+                <!-- <input type="text"  class="form-control" id="indicadorLider"> -->
+                   <br><?php  echo $infoBombaLider['indicador'] ?>  
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >GUARDAMOTOR</label>
+                <!-- <input type="text"  class="form-control" id="guardamotorLider"> -->
+                   <br><?php  echo $infoBombaLider['guardamotor'] ?>  
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >FUSIBLES/MINIBREAKERS</label>
+                <!-- <input type="text"  class="form-control" id="fusiblesLider"> -->
+                   <br><?php  echo $infoBombaLider['fusibles'] ?>  
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >TEMPORIZADOR</label>
+                <!-- <input type="text"  class="form-control" id="temporizadorLider"> -->
+                   <br><?php  echo $infoBombaLider['contactor'] ?>  
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >PRESOSTATOS</label>
+                <!-- <input type="text"  class="form-control" id="presostatosLider"> -->
+                   <br><?php  echo $infoBombaLider['presostatos'] ?>  
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >CAUDALIMETRO</label>
+                <!-- <input type="text"  class="form-control" id="caudalimetrotableroLider"> -->
+                   <br><?php  echo $infoBombaLider['caudalimetrotablero'] ?>  
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >TABLERO LIBRE DE ALARMAS</label>
+                <!-- <input type="text"  class="form-control" id="tableroLider"> -->
+                   <br><?php  echo $infoBombaLider['tablero'] ?>  
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >DISPLAY DEL TABLERO</label>
+                <!-- <input type="text"  class="form-control" id="displayLider"> -->
+                   <br><?php  echo $infoBombaLider['display'] ?>  
+            </div>
+        </div>
+        <?php
+    }
+
+     public function verInfoTableroJockey($idBombaJockey)
+    {
+        $infoBombaJockey = $this->infoJockeyModel->traerInfoBombaJockeyId($idBombaJockey);
+        $ancho= 4;
+        ?>
+        <div class="row">
+            <H3>INFORMACION TABLERO JOCKEY</H3>
+        </div>
+        <div class="row">
+            
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >CONTACTOR</label>
+                <!-- <input type="text"  class="form-control" id="contactorJockey"> -->
+                  <br><?php  echo $infoBombaJockey['contactor'] ?>  
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >INDICADOR LUMINOSO</label>
+                <!-- <input type="text"  class="form-control" id="indicadorJockey"> -->
+                 <br><?php  echo $infoBombaJockey['indicador'] ?>  
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >GUARDAMOTOR</label>
+                <!-- <input type="text"  class="form-control" id="guardamotorJockey"> -->
+                 <br><?php  echo $infoBombaJockey['guardamotor'] ?>  
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >FUSIBLES/MINIBREAKERS</label>
+                <!-- <input type="text"  class="form-control" id="fusiblesJockey"> -->
+                 <br><?php  echo $infoBombaJockey['fusibles'] ?>  
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >TEMPORIZADOR</label>
+                <!-- <input type="text"  class="form-control" id="temporizadorJockey"> -->
+                 <br><?php  echo $infoBombaJockey['temporizador'] ?>  
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >PRESOSTATOS</label>
+                <!-- <input type="text"  class="form-control" id="presostatosJockey"> -->
+                 <br><?php  echo $infoBombaJockey['presostatos'] ?>  
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >TRANSDUCTOR</label>
+                <!-- <input type="text"  class="form-control" id="transductorJockey"> -->
+                 <br><?php  echo $infoBombaJockey['transductor'] ?>  
+            </div>
+          
+        </div>
+        <?php
+    }
+    
+    public function verInformacionBombaLider($idBombaLider)
+    {
+    $infoBombaLider =  $this->infoLiderModel->traerInfoBombaLiderId($idBombaLider);
+    $ancho = 4; 
+     ?>
+     <div >
+        <div><H3>INFORMACION BOMBA LIDER</H3></div>
+        <div class="row">
+            <label for="" class="col-lg-8">Se encuentra operativa en automatico</label>
+            <div class="col-lg-3">
+                <!-- <select  id="operativaAutomatico" class="form-control">
+                    <option value="">Sel...</option>
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
+                    
+                </select> -->
+                <label>
+                    <?php  echo $infoBombaLider['operativaAutomatico'] ?>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Equipo Listado:</label>
+                <!-- <input id="equipoListado"  type="text" class="form-control" placeholder = " "> -->
+                  <span>
+                    <br><?php  echo $infoBombaLider['equipoListado'] ?>
+                </span>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Modelo</label>
+                <!-- <input type="text"  class="form-control" placeholder = "" id="modelo"> -->
+                   <br><?php  echo $infoBombaLider['modelo'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Marca bomba</label>
+                <!-- <input type="text"  class="form-control" id="marcaBomba"> -->
+                <br><?php  echo $infoBombaLider['marcaBomba'] ?>
+            </div>
+        </div>
+        
+        <div class="row">
+
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Potencia(HP)</label>
+                <!-- <input type="text"  class="form-control" id="potencia"> -->
+                   <br><?php  echo $infoBombaLider['potencia'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+            <label for="" >Transferencia</label>
+            <!-- <input type="text"  class="form-control" id="transferencia"> -->
+             <br><?php  echo $infoBombaLider['transferencia'] ?>
+        </div>
+        <div class="col-lg-<?php  echo $ancho; ?>">
+            <label for="" >Ubicacion</label>
+            <!-- <input type="text"  class="form-control" id="ubicacion"> -->
+                  <br><?php  echo $infoBombaLider['ubicacion'] ?>
+        </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Tipo de Bomba</label>
+                <!-- <select name="" id="tipoBomba" class="form-control">
+                    <option value="">Seleccione...</option>
+                    <option value="Vertical">Vertical</option>
+                    <option value="Horizontal">Horizontal</option>
+                    <option value="Eje Libre">Eje Libre</option>
+                    <option value="Carcaza Partida">Carcaza Partida</option>
+                    
+                </select> -->
+                  <br><?php  echo $infoBombaLider['tipoBomba'] ?>
+            </div>
+            
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Tipo Succion(+-)</label>
+                <!-- <input type="text"  class="form-control" id="tipoSuccion"> -->
+                      <br><?php  echo $infoBombaLider['tipoSuccion'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >U Prue Pitometrica</label>
+                <!-- <input type="text"  class="form-control" id="ultimaPitometrica"> -->
+                 <br><?php  echo $infoBombaLider['ultimaPitometrica'] ?>
+            </div>
+
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Q MAX(GPM)</label>
+                <!-- <input type="text"  class="form-control" id = "qmaxGpm"> -->
+                      <br><?php  echo $infoBombaLider['qmaxGpm'] ?>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >PRESION MAX(PSI)</label>
+                <!-- <input type="text"  class="form-control" id="presionMAxPsi"> -->
+                          <br><?php  echo $infoBombaLider['presionMAxPsi'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Q NOMINAL (GPM)</label>
+                <!-- <input type="text"  class="form-control" id="qNominalGpm"> -->
+                 <br><?php  echo $infoBombaLider['qNominalGpm'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >PRESION AL 150%(PSI)</label>
+                <!-- <input type="text"  class="form-control" id="presionAl150"> -->
+                    <br><?php  echo $infoBombaLider['presionAl150'] ?>
+            </div>
+        </div>
+        <div class="row">
+
+        
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >DIAMETRO DE SUCCION</label>
+                <!-- <input type="text"  class="form-control" id="diametroSuccion"> -->
+                   <br><?php  echo $infoBombaLider['diametroSuccion'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >DIAMETRO DE DESCARGA</label>
+                <!-- <input type="text"  class="form-control" id="diametroDescarga"> -->
+                   <br><?php  echo $infoBombaLider['diametroDescarga'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >MATERIAL DE LA TUBERIA</label>
+                <!-- <input type="text"  class="form-control" id="materialTuberia"> -->
+                   <br><?php  echo $infoBombaLider['materialTuberia'] ?>
+            </div>
+        </div>
+        <div class="row">
+
+        
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >FUGAS</label>
+                <!-- <input type="text"  class="form-control" id="fugas"> -->
+                 <br><?php  echo $infoBombaLider['fugas'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >CABEZAL PRUEBAS</label>
+                <!-- <select name="" id="tipoCabezal" class="form-control">
+                    <option value="">Seleccione...</option>
+                    <option value="BUENO">BUENO</option>
+                    <option value="REGULAR">REGULAR</option>
+                    <option value="MALO">MALO</option>
+                </select> -->
+                 <br><?php  echo $infoBombaLider['tipoCabezal'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >TANQUE INDEPENDIENTE</label>
+                <!-- <input type="text"  class="form-control"  id="tanqueIndependiente"> -->
+                 <br><?php  echo $infoBombaLider['tanqueIndependiente'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >MANOMETRO</label>
+                <!-- <input type="text"  class="form-control" id="nanomentro"> -->
+                 <br><?php  echo $infoBombaLider['nanomentro'] ?>
+            </div>
+        </div>
+        <div class="row">
+
+         
+            
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >SELLO MECANICO / P.ESTOPA</label>
+                <!-- <select name="" id="selloMecanico" class="form-control">
+                    <option value="">Seleccione...</option>
+                    <option value="BUENO">BUENO</option>
+                    <option value="REGULAR">REGULAR</option>
+                    <option value="MALO">MALO</option>
+                </select> -->
+                  <br><?php  echo $infoBombaLider['selloMecanico'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >MANOVACUOMETRO</label>
+                <!-- <input type="text"  class="form-control" id="manovacumetro"> -->
+                <br><?php  echo $infoBombaLider['manovacumetro'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >RODAMIENTOS DE MOTOR</label>
+                <!-- <input type="text"  class="form-control" id="rodamientosMotor"> -->
+                <br><?php  echo $infoBombaLider['rodamientosMotor'] ?>
+            </div>
+        </div>
+
+        <div class="row">
+           
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >EMPAQUETADURA</label>
+                <!-- <input type="text"  class="form-control" id="empaquetadura"> -->
+                  <br><?php  echo $infoBombaLider['empaquetadura'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >COMPROBACION VENTILADOR</label>
+                <!-- <input type="text"  class="form-control" id="comprobacionVentilador"> -->
+                  <br><?php  echo $infoBombaLider['comprobacionVentilador'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >VALVULAS CORTE </label>
+                <!-- <input type="text"  class="form-control" id="valvulasDeCorte"> -->
+                  <br><?php  echo $infoBombaLider['valvulasDeCorte'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >CAUDALIMETRO</label>
+                <!-- <input type="text"  class="form-control" id="caudalimetro"> -->
+                  <br><?php  echo $infoBombaLider['caudalimetro'] ?>
+            </div>
+        </div>
+
+        <div class="row">
+
+          
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >VALVULA DE ALIVIO</label>
+                <!-- <input type="text"  class="form-control" id="valvulaAlivio"> -->
+                <!-- <select name="" id="valvulaAlivio" class="form-control">
+                        <option value="">Seleccione...</option>
+                        <option value="BUENO">BUENO</option>
+                        <option value="REGULAR">REGULAR</option>
+                        <option value="MALO">MALO</option>
+                </select> -->
+                   <br><?php  echo $infoBombaLider['caudalimetro'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >RETORNO TANQUE</label>
+                <!-- <input type="text"  class="form-control" id="retornoTanque"> -->
+                   <br><?php  echo $infoBombaLider['retornoTanque'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >CONDICIONES OPERACION</label>
+                <!-- <select name="" id="idCondicionOperacion" class="form-control">
+                        <option value="">Seleccione...</option>
+                        <option value="BUENO">BUENO</option>
+                        <option value="REGULAR">REGULAR</option>
+                        <option value="MALO">MALO</option>
+                </select> -->
+                   <br><?php  echo $infoBombaLider['idCondicionOperacion'] ?>
+            </div>
+        </div>
+     </div>
+     <?php
+    }
+
+     public function verInformacionBombaJockey($idfoBombaJockey)
+    {
+        $infoBombaJockey = $this->infoJockeyModel->traerInfoBombaJockeyId($idfoBombaJockey);
+        $ancho= 4;
+     ?>
+     <div >
+        <div><h3>INFORMACION BOMBA JOCKEY</h3></div>
+        <div class="row">
+        <div class="row">
+            <label for="" class="col-lg-8">Se encuentra operativa en automatico</label>
+            <div class="col-lg-3">
+                <!-- <select name="" id="operativaAutomaticoJockey" class="form-control">
+                    <option value="">Sel...</option>
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
+                    
+                </select> -->
+                <?php  echo $infoBombaJockey['operativaAutomatico'] ?>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Equipo Listado</label>
+                <!-- <input id="equipoListadoJockey"  type="text" class="form-control" placeholder = " "> -->
+                       <br><?php  echo $infoBombaJockey['equipoListado'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Modelo</label>
+                <!-- <input type="text"  class="form-control" placeholder = "" id="modeloJockey"> -->
+                     <br><?php  echo $infoBombaJockey['modelo'] ?>
+                
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Marca bomba</label>
+                <!-- <input type="text"  class="form-control" id="marcaBombaJockey"> -->
+                     <br><?php  echo $infoBombaJockey['marcaBomba'] ?>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Potencia(HP)</label>
+                <!-- <input type="text"  class="form-control" id="potenciaJockey"> -->
+                   <br><?php  echo $infoBombaJockey['potencia'] ?>
+            </div>
+
+
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Tipo de Bomba</label>
+                <!-- <select name="" id="tipoBombaJockey" class="form-control">
+                    <option value="">Seleccione...</option>
+                    <option value="Vertical">Vertical</option>
+                    <option value="Horizontal">Horizontal</option>
+                </select> -->
+                   <br><?php  echo $infoBombaJockey['tipoBomba'] ?>
+            </div>
+            
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Q MAX(GPM)</label>
+                <!-- <input type="text"  class="form-control" id="qmaxGpmJockey"> -->
+            </div>
+               <br><?php  echo $infoBombaJockey['qmaxGpm'] ?>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >PRESION MAX(PSI)</label>
+                <!-- <input type="text"  class="form-control" id="presionMAxPsiJockey"> -->
+                    <br><?php  echo $infoBombaJockey['presionMAxPsi'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >Q NOMINAL(GPM)</label>
+                <!-- <input type="text"  class="form-control" id="qNominalGpmJockey"> -->
+                    <br><?php  echo $infoBombaJockey['qNominalGpm'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >PRESION AL 150%(PSI)</label>
+                <!-- <input type="text"  class="form-control" id="presionAl150Jockey"> -->
+                    <br><?php  echo $infoBombaJockey['presionAl150'] ?>
+            </div>
+        </div>
+            
+        <div class="row">
+           
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >DIAMETRO DE SUCCION</label>
+                <!-- <input type="text"  class="form-control" id="diametroSuccionJockey"> -->
+                 <br><?php  echo $infoBombaJockey['diametroSuccion'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >DIAMETRO DE DESCARGA</label>
+                <!-- <input type="text"  class="form-control" id="diametroDescargaJockey"> -->
+                 <br><?php  echo $infoBombaJockey['diametroDescarga'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >MATERIAL DE LA TUBERIA</label>
+                <!-- <input type="text"  class="form-control" id="materialTuberiaJockey"> -->
+                 <br><?php  echo $infoBombaJockey['materialTuberia'] ?>
+            </div>
+        </div>
+        <div class="row">
+
+        
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >FUGAS</label>
+                <!-- <input type="text"  class="form-control" id="fugasJockey"> -->
+                    <br><?php  echo $infoBombaJockey['fugas'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >MANOMETRO</label>
+                <!-- <input type="text"  class="form-control" id="nanomentroJockey"> -->
+                    <br><?php  echo $infoBombaJockey['nanomentro'] ?>
+            </div>
+            
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >SELLO MECANICO</label>
+                <!-- <select name="" id="selloMecanicoJockey" class="form-control">
+                    <option value="">Sel...</option>
+                    <option value="BUENO">BUENO</option>
+                    <option value="REGULAR">REGULAR</option>
+                    <option value="MALO">MALO</option>
+                </select> -->
+                    <br><?php  echo $infoBombaJockey['selloMecanico'] ?>
+            </div>
+        </div>
+        <div class="row">
+
+        
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >MANOVACUOMETRO</label>
+                <!-- <input type="text"  class="form-control" id="manovacumetroJockey"> -->
+                        <br><?php  echo $infoBombaJockey['manovacumetro'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+            <label for="" >RODAMIENTOS DE MOTOR</label>
+            <!-- <input type="text"  class="form-control" id="rodamientosMotorJockey"> -->
+                    <br><?php  echo $infoBombaJockey['rodamientosMotor'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >EMPAQUETADURA</label>
+                <!-- <input type="text"  class="form-control" id="empaquetaduraJockey"> -->
+                        <br><?php  echo $infoBombaJockey['empaquetadura'] ?>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >COMPROBACION VENTILADOR</label>
+                <!-- <input type="text"  class="form-control" id="comprobacionVentiladorJockey"> -->
+                 <br><?php  echo $infoBombaJockey['comprobacionVentilador'] ?>
+            </div>
+            <div class="col-lg-<?php  echo $ancho; ?>">
+                <label for="" >VALVULAS DE CORTE </label>
+                <!-- <input type="text"  class="form-control" id="valvulasDeCorteJockey"> -->
+                 <br><?php  echo $infoBombaJockey['valvulasDeCorte'] ?>
+            </div>
+            
+        </div>
+    
+     </div>
+     <br>
+    <div class="row"><H3>INFORMACION PARA MANIPULACION</H3></div>
+        <div class="row form-group">
+            <label class="col-lg-9">INSTRUCCIONES DE MANIPULACION</label>
+            <div class="col-lg-3">
+                <!-- <input type="text" class="form-control" id="instrucciones"> -->
+                 <?php  echo $infoBombaJockey['instrucciones'] ?>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-lg-9">DEMARCACION DE LOS ELEMENTOS</label>
+            <div class="col-lg-3">
+                <!-- <input type="text" class="form-control" id="demarcacion"> -->
+                 <?php  echo $infoBombaJockey['demarcacion'] ?>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-lg-9">LUZ DE EMERGENCIA</label>
+            <div class="col-lg-3">
+                <!-- <input type="text" class="form-control" id="luzemergecia"> -->
+                <?php  echo $infoBombaJockey['luzemergecia'] ?>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-lg-9">AREA EN ORDEN Y ASEADA</label>
+            <div class="col-lg-3">
+                <!-- <input type="text" class="form-control" id="areaenorden"> -->
+                 <?php  echo $infoBombaJockey['areaenorden'] ?>
+            </div>
+        </div>
+    </div>
+     <?php
+    }
 
 }
