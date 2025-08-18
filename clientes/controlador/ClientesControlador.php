@@ -93,6 +93,9 @@ class ClientesControlador{
             if($_REQUEST['opcion']=='filtrarPropietariosNombre'){
                 $this->filtrarPropietariosNombre($_REQUEST);
             }
+            if($_REQUEST['opcion']=='eliminarClienteLogico'){
+                $this->modelo->eliminarClienteLogico($_REQUEST['idCliente']);
+            }
 
 
             
@@ -101,12 +104,12 @@ class ClientesControlador{
         
         
     public function pantallainicialClientes($conexion){
-        $clientes = $this->modelo->traerDatosCliente0($conexion);
+        $clientes = $this->modelo->traerDatosCliente0Activos($conexion);
         $this->vista->pantallaInicialClientesNew($clientes);
     }
 
     public function verClientes($conexion){
-        $clientes = $this->modelo->traerDatosCliente0($conexion);
+        $clientes = $this->modelo->traerDatosCliente0Activos($conexion);
         $this->vista->verClientes($clientes);
     }
     

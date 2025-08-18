@@ -41,6 +41,17 @@ class ClientesModelo extends Conexion
               $resp['datos'] = $datos;
               return $resp; 
         }
+          public function traerDatosCliente0Activos($conexion="")
+          {
+            $sql = "SELECT * FROM cliente0 where anulado = '0'  ORDER BY idcliente DESC ";
+            // $consulta = mysql_query($sql,$conexion); 
+            $consulta = mysql_query($sql,$this->connectMysql()); 
+              $filas = mysql_num_rows($consulta);
+              $datos = funciones::table_assoc($consulta);
+              $resp['filas'] = $filas;
+              $resp['datos'] = $datos;
+              return $resp; 
+        }
 
 
 
@@ -278,8 +289,14 @@ class ClientesModelo extends Conexion
       $consulta = mysql_query($sql,$this->connectMysql()); 
       $arreglo = $this->get_table_assoc($consulta); 
       return $arreglo; 
+    }
+    
+    
+    public function eliminarClienteLogico($idCliente)
+    {
+      $sql = "update cliente0  set anulado = '1'  where idcliente = '".$idCliente."'   ";
+      $consulta = mysql_query($sql,$this->connectMysql()); 
   }
-
 
 }
           
