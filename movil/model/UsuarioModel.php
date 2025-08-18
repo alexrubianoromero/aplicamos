@@ -62,6 +62,7 @@ class UsuarioModel extends Conexion
     {
         $sql = "select * from usuarios 
             where login <> 'superadmin'
+            and anulado = '0'
             order by login  ";
         $consulta = mysql_query($sql,$this->connectMysql());
         $usuarios = $this->get_table_assoc($consulta);
